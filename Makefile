@@ -81,7 +81,7 @@ $(LIBFT_NAME):
 ######################
 
 $(NAME): $(LIBFT_NAME) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_NAME) -lreadline
 
 #######################
 ###   Other rules   ###
