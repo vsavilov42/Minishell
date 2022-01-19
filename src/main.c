@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:59:59 by nortolan          #+#    #+#             */
-/*   Updated: 2021/12/14 17:51:12 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/01/19 12:10:33 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	main(void)
 		if (line && *line)
 		{
 			add_history(line);
-			printf("%s\n", line);
+			get_lines(line);
+			//printf("%s\n", line);
 		}
 		if (line == NULL)
 		{

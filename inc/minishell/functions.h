@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2021/12/10 17:11:25 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/01/19 12:12:45 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 # define FUNCTIONS_H
 
 //indique el archivo al que corresponde .c y sus funciones
+//reading.c
+void	get_lines(char *line);
 
 #endif
