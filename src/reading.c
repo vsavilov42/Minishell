@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/01/19 13:14:09 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/01/19 14:10:58 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**separate_lines(int i, int j, char **args, char *line) //separacion por ;
 	{
 		sep_check = 0;
 		count++;
-		if (line[i] == ';')
+		if (line[i] == '|')
 		{
 			args[j] = malloc(sizeof(char) * count + 1);
 			if (args[j] == NULL)
@@ -61,10 +61,10 @@ void	get_lines(char *line) //malloc principal y llamada a separacion por ;
 	count = 0;
 	while (line[++i])
 	{
-		if (line[i] == ';')
+		if (line[i] == '|')
 			count++;
 	}
-	if (line[i - 1] != ';')
+	if (line[i - 1] != '|')
 		count++;
 	args = malloc(sizeof(char *) * (count + 1));
 	if (args == NULL)
