@@ -16,8 +16,6 @@ CFLAGS = -Wall -Wextra -Werror
 
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIB_PATH)/inc
 
-CFLAGS += -O3
-
 CFLAGS += -fsanitize=address -g3
 
 #################

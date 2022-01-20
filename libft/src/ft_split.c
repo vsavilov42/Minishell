@@ -14,7 +14,7 @@
 
 static char	**singleword(char const *s, char c, char **sresult)
 {
-	size_t	i;
+	int		i;
 	size_t	len;
 
 	i = 0;

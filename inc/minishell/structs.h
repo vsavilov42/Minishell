@@ -15,4 +15,12 @@
 
 //Coloque aquí su estructura
 
+//tokens
+typedef struct s_token
+{
+	char	*data;
+	int		type;
+	struct s_token	*next;
+} t_token;
+
 #endif

@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-char	*sep_malloc(int j, int count, char **args) //puesto aqui por falta de lineas
+/*char	*sep_malloc(int j, int count, char **args) //puesto aqui por falta de lineas
 {
 	args[j] = malloc(sizeof(char) * count + 1);
 	if (args[j] == NULL)
@@ -76,4 +76,29 @@ void	get_lines(char *line) //malloc principal y llamada a separacion por ;
 	while (args[++j])
 		printf("%s\n", args[j]);
 	////////////////////
+}*/
+
+void	get_lines(char *line)
+{
+	int		i;
+	//int		status;
+	int		count;
+	char	*copy;
+	//t_token	*token;
+
+	i = -1;
+	//status = 0;
+	count = 0;
+	//token = NULL;
+	while (line[++i])
+	{
+		while (line[i] != '|' && line[i] != ' ' && line[i] != '\"' && line[i] != '\'' && line[i++])
+			count++;
+		copy = malloc(sizeof(char) * count + 1);
+		if (copy == NULL)
+			exit (2);
+		//copy = ft_substr(copy, i - count + 1, count);
+		//printf("%s\n", copy);
+		//ft_lstadd_back(&token, ft_lstnew(copy)
+	}
 }
