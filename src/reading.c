@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/01/19 14:10:58 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/01/24 13:33:50 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,40 @@ void	get_lines(char *line)
 	int		i;
 	//int		status;
 	int		count;
-	char	*copy;
-	//t_token	*token;
+	//char	*copy;
+	t_token	*token;
+	t_token	*head;
 
 	i = -1;
 	//status = 0;
 	count = 0;
-	//token = NULL;
 	while (line[++i])
 	{
-		while (line[i] != '|' && line[i] != ' ' && line[i] != '\"' && line[i] != '\'' && line[i++])
+		count = 0;
+		while (line[i] != '|' && line[i] != ' ' && line[i] != '\"' && line[i] != '\'' && line[i])
+		{
 			count++;
-		copy = malloc(sizeof(char) * count + 1);
+			i++;
+		}
+		printf("count: %d\n", count);
+		//printf("i:     %d\n", i);
+		token = malloc(sizeof(t_token));
+		if (token == NULL)
+			exit (1);
+		token->data = ft_substr(line, i - count, count);
+		token->type = 1;
+		token->next = NULL;
+		printf("i - count: %d\n", i - count);
+		if (i - count == 0)
+			head = token;
+		printf("%s\n", token->data);
+		printf("%d\n", token->type);
+		printf("aux %s\n", head->data);
+		printf("aux %d\n", head->type);
+		token = token->next;
+
+		/*copy = malloc(sizeof(char) * count + 1);
 		if (copy == NULL)
-			exit (2);
-		//copy = ft_substr(copy, i - count + 1, count);
-		//printf("%s\n", copy);
-		//ft_lstadd_back(&token, ft_lstnew(copy)
+			exit (2);*/
 	}
 }
