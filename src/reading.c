@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/01/24 13:33:50 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/01/25 13:54:38 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,45 +78,90 @@ void	get_lines(char *line) //malloc principal y llamada a separacion por ;
 	////////////////////
 }*/
 
+//TODO: no quitar todavia las comillas al tokenizar, se quitan luego
+
 void	get_lines(char *line)
 {
 	int		i;
-	//int		status;
+	int		status;
 	int		count;
-	//char	*copy;
 	t_token	*token;
 	t_token	*head;
 
-	i = -1;
-	//status = 0;
-	count = 0;
-	while (line[++i])
+	i = 0;
+	status = 0;
+	while (line[i])
 	{
-		count = 0;
-		while (line[i] != '|' && line[i] != ' ' && line[i] != '\"' && line[i] != '\'' && line[i])
+		if (status == 2)
+			status = 0;
+		if (status == 0)
+			count = 0;
+		if (line[i] != '|')
+		{
+			while (line[i] != '|' && line[i] != ' ' && line[i] != '\"' && line[i] != '\'' && line[i])
+			{
+				count++;
+				i++;
+			}
+			if (line[i] == '\"' && status == 0)
+			{
+				status = 1;
+				i++;
+			}
+			if (line[i] == '\"' && status == 1)
+			{
+				status = 2;
+				i++;
+			}
+			if (status != 1)
+			{
+				token = malloc(sizeof(t_token));
+				if (token == NULL)
+					exit (1);
+				if (status == 0)
+					token->data = ft_substr(line, i - count, count);
+				if (status == 2)
+					token->data = ft_substr(line, i - count - 2, count + 2);
+				token->type = 1;
+				token->next = NULL;
+				if (i - count == 0)
+					head = token;
+				printf("token: %s\n", token->data);
+				printf("type: %d\n\n", token->type);
+				token = token->next;
+			}
+		}
+		else
+		{
+			if (status != 1)
+			{
+				token = malloc(sizeof(t_token));
+				if (token == NULL)
+					exit (1);
+				token->data = ft_substr(line, i, 1);
+				token->type = 2;
+				token->next = NULL;
+				printf("token: %s\n", token->data);
+				printf("type: %d\n\n", token->type);
+				if (i == 0)
+					head = token;
+				token = token->next;
+			}
+			else
+				count++;
+			i++;
+		}
+		while (line[i] == ' ')
 		{
 			count++;
 			i++;
 		}
-		printf("count: %d\n", count);
-		//printf("i:     %d\n", i);
-		token = malloc(sizeof(t_token));
-		if (token == NULL)
-			exit (1);
-		token->data = ft_substr(line, i - count, count);
-		token->type = 1;
-		token->next = NULL;
-		printf("i - count: %d\n", i - count);
-		if (i - count == 0)
-			head = token;
-		printf("%s\n", token->data);
-		printf("%d\n", token->type);
-		printf("aux %s\n", head->data);
-		printf("aux %d\n", head->type);
-		token = token->next;
-
-		/*copy = malloc(sizeof(char) * count + 1);
-		if (copy == NULL)
-			exit (2);*/
+		//TODO: probar si aux tiene bien la referencia si la linea empieza por comillas;
+		//printf("head token: %s\n", head->data);
+		//printf("head type: %d\n\n", head->type);
 	}
 }
+
+		//printf("%d\n", token->type);
+		//printf("aux %s\n", head->data);
+		//printf("aux %d\n", head->type);
