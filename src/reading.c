@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/01/25 13:54:38 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/01/26 11:17:41 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,18 @@ void	get_lines(char *line)
 					token->data = ft_substr(line, i - count - 2, count + 2);
 				token->type = 1;
 				token->next = NULL;
-				if (i - count == 0)
+				if (i - count == 0 || (status == 2 && i - count - 2 == 0))
+				{
 					head = token;
+					printf("ENTRO AQUI\n");
+					write(1, "TEST\n", 5);
+				}
 				printf("token: %s\n", token->data);
 				printf("type: %d\n\n", token->type);
+				/*printf("i:     %d\n", i);
+				printf("count: %d\n\n", count);
+				printf("status:     %d\n", status);
+				printf("i - count - 2:     %d\n", i - count - 2);*/
 				token = token->next;
 			}
 		}
@@ -157,8 +165,11 @@ void	get_lines(char *line)
 			i++;
 		}
 		//TODO: probar si aux tiene bien la referencia si la linea empieza por comillas;
-		//printf("head token: %s\n", head->data);
-		//printf("head type: %d\n\n", head->type);
+		if (status != 1) //PARA TEST/////////////////////////
+		{
+			printf("head token: %s\n", head->data);
+			printf("head type: %d\n\n", head->type);
+		}
 	}
 }
 
