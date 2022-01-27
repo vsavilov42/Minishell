@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/01/26 11:17:41 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/01/27 13:27:31 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ void	get_lines(char *line) //malloc principal y llamada a separacion por ;
 	////////////////////
 }*/
 
-//TODO: no quitar todavia las comillas al tokenizar, se quitan luego
+//TODO: testear a full;
+//TODO: mirar leaks;
 
 void	get_lines(char *line)
 {
@@ -90,12 +91,17 @@ void	get_lines(char *line)
 
 	i = 0;
 	status = 0;
-	while (line[i])
+	while (line[i] || status == 1)
 	{
-		if (status == 2)
+		if (status == 2 || status == 4)
 			status = 0;
 		if (status == 0)
 			count = 0;
+		if (line[i + 1] == '\0' && status == 1 && line[i] != '\"')
+		{
+			write (2, "Quotation marks not closed\n", 27);
+			break;
+		}
 		if (line[i] != '|')
 		{
 			while (line[i] != '|' && line[i] != ' ' && line[i] != '\"' && line[i] != '\'' && line[i])
@@ -103,6 +109,8 @@ void	get_lines(char *line)
 				count++;
 				i++;
 			}
+			if (status == 3)
+				status = 4;
 			if (line[i] == '\"' && status == 0)
 			{
 				status = 1;
@@ -113,7 +121,11 @@ void	get_lines(char *line)
 				status = 2;
 				i++;
 			}
-			if (status != 1)
+			if (status == 2 && line[i] != ' ' && line[i] != '|' && line[i])
+			{
+				status = 3;
+			}
+			if (status != 1 && status != 3)
 			{
 				token = malloc(sizeof(t_token));
 				if (token == NULL)
@@ -122,6 +134,8 @@ void	get_lines(char *line)
 					token->data = ft_substr(line, i - count, count);
 				if (status == 2)
 					token->data = ft_substr(line, i - count - 2, count + 2);
+				if (status == 4)
+					token->data = ft_substr(line, i - count - 4, count + 4);
 				token->type = 1;
 				token->next = NULL;
 				if (i - count == 0 || (status == 2 && i - count - 2 == 0))
@@ -164,12 +178,11 @@ void	get_lines(char *line)
 			count++;
 			i++;
 		}
-		//TODO: probar si aux tiene bien la referencia si la linea empieza por comillas;
-		if (status != 1) //PARA TEST/////////////////////////
+		/*if (status != 1) //PARA TEST/////////////////////////
 		{
 			printf("head token: %s\n", head->data);
 			printf("head type: %d\n\n", head->type);
-		}
+		}*/
 	}
 }
 
