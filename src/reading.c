@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/01/27 13:27:31 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/02/02 13:44:43 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,25 @@ void	get_lines(char *line)
 			}
 			if (status == 3)
 				status = 4;
-			if (line[i] == '\"' && status == 0)
+			if ((line[i] == '\"' || line[i] == '\'') && status == 0)
 			{
 				status = 1;
 				i++;
 			}
-			if (line[i] == '\"' && status == 1)
+			if ((line[i] == '\"' || line[i] == '\'') && status == 1)
 			{
-				status = 2;
-				i++;
+				printf("TEST LOCO: estoy en: %c, atras hay: %c\n", line[i], line[i - count - 1]);
+				if (line[i] == line[i - count - 1] || (line[i - count - 1] != '\"' && line[i - count - 1] != '\''))
+				{
+					status = 2;
+					i++;
+				}
+				else //////////////////////TEMPORAL//////////////////////
+				{
+					//TODO: que hago aqui si se mezclan comillas;
+					printf("ALGO VA MAL\n");
+					break ;
+				}
 			}
 			if (status == 2 && line[i] != ' ' && line[i] != '|' && line[i])
 			{
@@ -132,16 +142,15 @@ void	get_lines(char *line)
 					exit (1);
 				if (status == 0)
 					token->data = ft_substr(line, i - count, count);
-				if (status == 2)
+				if (status == 2 || status == 4)
 					token->data = ft_substr(line, i - count - 2, count + 2);
-				if (status == 4)
-					token->data = ft_substr(line, i - count - 4, count + 4);
+				/*if (status == 4)
+					token->data = ft_substr(line, i - count - 2, count + 2);*/
 				token->type = 1;
 				token->next = NULL;
 				if (i - count == 0 || (status == 2 && i - count - 2 == 0))
 				{
 					head = token;
-					printf("ENTRO AQUI\n");
 					write(1, "TEST\n", 5);
 				}
 				printf("token: %s\n", token->data);
