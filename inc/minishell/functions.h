@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/02/17 11:28:37 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/02/17 11:50:55 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define FUNCTIONS_H
 
 //indique el archivo al que corresponde .c y sus funciones
+
+/* cd.c */
+
+int	cd(char **arg);
 
 /* echo.c */
 
@@ -23,6 +27,7 @@ void	write_echo(char **arg, int index, int n);
 
 /* utils.c */
 
+int	error_msg(char *str);
 char	*strtolow(char *str);
 
 //reading.c

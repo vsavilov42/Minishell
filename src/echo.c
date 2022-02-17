@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:27:11 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/02/17 11:30:31 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/02/17 11:53:34 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	echo(char **arg)
 	int	i;
 
 	i = 2;
-	if (ft_strncmp(strtolow(arg[1]), "echo", 4) == 0)
+	if (!ft_strncmp(strtolow(arg[1]), "echo", 4) && ft_strlen(arg[1]) == 4)
 	{
 		if (arg[i] != NULL)
 		{
@@ -66,17 +66,5 @@ int	echo(char **arg)
 		}
 		write(1, "\n", 1);
 	}
-	return (1);
-}
-
-char	*strtolow(char *str)
-{
-	char	*tmp;
-	int		i;
-
-	i = -1;
-	tmp = malloc(sizeof(char) * ft_strlen(str));
-	while (str[++i])
-		tmp[i] = (char)ft_tolower(str[i]);
-	return (tmp);
+	return (error_msg(ft_strjoin("ShiTTYsh: command not found: ", arg[1])));
 }

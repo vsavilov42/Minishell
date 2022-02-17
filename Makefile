@@ -35,6 +35,7 @@ LIB_PATH = libft
 ########################
 
 SRCS_NAME = main.c \
+	    utils.c \
 	    echo.c
 
 ######################
