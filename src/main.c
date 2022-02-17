@@ -3,35 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 16:59:59 by nortolan          #+#    #+#             */
-/*   Updated: 2022/01/19 12:10:33 by nortolan         ###   ########.fr       */
+/*   Created: 2022/02/14 12:18:07 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/02/16 14:11:22 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	char	*line;
-
-	while (1)
-	{
-		line = readline("test prompt>>> ");
-		if (line && *line)
-		{
-			add_history(line);
-			get_lines(line);
-			//printf("%s\n", line);
-		}
-		if (line == NULL)
-		{
-			write(STDOUT_FILENO, "exit\n", 5);
-			exit(EXIT_SUCCESS);
-		}
-		free(line);
-	}
+//	char **cmd;
+	(void)argv;
+/*	cmd = (char **)ft_calloc(1, sizeof(char *) * 3);
+	cmd[0] = (char *)ft_calloc(1, sizeof(char) * (ft_strlen("echo") + 1));
+	cmd[1] = (char *)ft_calloc(1, sizeof(char) * (ft_strlen("hola") + 1));
+	cmd[2] = (char *)ft_calloc(1, sizeof(char) * 1);
+	cmd[0] = "eChO";
+	cmd[1] = "hola";
+	cmd[2] = NULL; */
+	if (argc <= 1)
+		return(0);
+	echo(argv);
 	//printf("Hola\n");
-	return (EXIT_SUCCESS);
+	return (0);
 }

@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/02/14 12:20:09 by Vsavilov         ###   ########.fr       */
+/*   Created: 2022/02/16 20:33:54 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/02/16 20:34:35 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include <minishell.h>
 
-//Coloque aquí su estructura
-
-//built-in
-
-typedef struct s_built
+char	*strtolow(char *str)
 {
-	
-}	t_built;
+	char *tmp;
+	int i;
 
-//tokens
-typedef struct s_token
-{
-	char	*data;
-	int		type;
-	struct s_token	*next;
-} t_token;
+	i = -1;
 
-#endif
+	tmp = malloc(sizeof(char) * ft_strlen(str));
+	while (str[++i])
+		tmp[i] = (char)ft_tolower(str[i]);
+	return (tmp);
+}

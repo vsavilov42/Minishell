@@ -34,7 +34,8 @@ LIB_PATH = libft
 ###   Source items   ###
 ########################
 
-SRCS_NAME = main.c reading.c
+SRCS_NAME = main.c \
+	    echo.c
 
 ######################
 ###   Make rules   ###
