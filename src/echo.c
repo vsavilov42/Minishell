@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:27:11 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/02/17 11:53:34 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/02/17 13:37:25 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,14 @@ void	write_echo(char **arg, int index, int n)
 
 int	echo(char **arg)
 {
+	char	*tmp;
 	int	i;
 
 	i = 2;
-	if (!ft_strncmp(strtolow(arg[1]), "echo", 4) && ft_strlen(arg[1]) == 4)
+	tmp = strtolow(arg[1]);
+	if (!ft_strncmp(tmp, "echo", 4) && ft_strlen(arg[1]) == 4)
 	{
+		free(tmp);
 		if (arg[i] != NULL)
 		{
 			if (!ft_strncmp(arg[i], "-n", 2))
@@ -66,5 +69,9 @@ int	echo(char **arg)
 		}
 		write(1, "\n", 1);
 	}
-	return (error_msg(ft_strjoin("ShiTTYsh: command not found: ", arg[1])));
+	free(tmp);
+	tmp = ft_strjoin("ShiTTYsh: command not found: ", arg[1]);
+	error_msg(tmp);
+	free(tmp);
+	return (1);
 }
