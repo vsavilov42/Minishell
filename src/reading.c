@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/02/02 13:44:43 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/02/17 13:42:19 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	get_lines(char *line) //malloc principal y llamada a separacion por ;
 	////////////////////
 }*/
 
+//TODO: test fallido: echo sdf'"  df"df'sdfsdf
 //TODO: testear a full;
 //TODO: mirar leaks;
 
@@ -86,18 +87,20 @@ void	get_lines(char *line)
 	int		i;
 	int		status;
 	int		count;
+	int		aux_count;
 	t_token	*token;
 	t_token	*head;
 
 	i = 0;
 	status = 0;
+	aux_count = 0;
 	while (line[i] || status == 1)
 	{
 		if (status == 2 || status == 4)
 			status = 0;
 		if (status == 0)
 			count = 0;
-		if (line[i + 1] == '\0' && status == 1 && line[i] != '\"')
+		if (line[i + 1] == '\0' && status == 1 && (line[i] != '\"' && line[i] != '\''))
 		{
 			write (2, "Quotation marks not closed\n", 27);
 			break;
@@ -118,17 +121,46 @@ void	get_lines(char *line)
 			}
 			if ((line[i] == '\"' || line[i] == '\'') && status == 1)
 			{
-				printf("TEST LOCO: estoy en: %c, atras hay: %c\n", line[i], line[i - count - 1]);
-				if (line[i] == line[i - count - 1] || (line[i - count - 1] != '\"' && line[i - count - 1] != '\''))
+				//printf("TEST LOCO: estoy en: %c, atras hay: %c\n", line[i], line[i - count - 1]);
+				//printf("count:  %d\n", count);
+				//printf("i:      %d\n", i);
+				//printf("status: %d\n\n", status);
+				if (line[i] == line[i - count - 1]/* ||(line[i - count - 1] != '\"' && line[i - count - 1] != '\'')*/)
 				{
 					status = 2;
 					i++;
 				}
-				else //////////////////////TEMPORAL//////////////////////
+				else
 				{
-					//TODO: que hago aqui si se mezclan comillas;
-					printf("ALGO VA MAL\n");
-					break ;
+					//printf("estoy aqui lol\n");
+					//TODO: cambiar esto por un else if;
+					if (line[i - count - 1] != '\"' && line[i - count - 1] != '\'')
+					{
+						aux_count = i - count - 1;
+						while (++aux_count < i && aux_count >= 0)
+						{
+							//printf("char: %c\n", line[aux_count]);
+							if (line[aux_count] == line[i])
+							{
+								//printf("he entrado aqui\n");
+								status = 2;
+								i++;
+								aux_count = -2;
+							}
+						}
+						if (aux_count != -2)
+						{
+							i++;
+							count++;
+						}
+					}
+					else
+					{
+						i++;
+						count++;
+					}
+					/*printf("ALGO VA MAL\n");
+					break ;*/
 				}
 			}
 			if (status == 2 && line[i] != ' ' && line[i] != '|' && line[i])
@@ -155,10 +187,6 @@ void	get_lines(char *line)
 				}
 				printf("token: %s\n", token->data);
 				printf("type: %d\n\n", token->type);
-				/*printf("i:     %d\n", i);
-				printf("count: %d\n\n", count);
-				printf("status:     %d\n", status);
-				printf("i - count - 2:     %d\n", i - count - 2);*/
 				token = token->next;
 			}
 		}
@@ -194,7 +222,3 @@ void	get_lines(char *line)
 		}*/
 	}
 }
-
-		//printf("%d\n", token->type);
-		//printf("aux %s\n", head->data);
-		//printf("aux %d\n", head->type);
