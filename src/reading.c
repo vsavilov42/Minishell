@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/02/17 13:42:19 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/02/18 14:26:44 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ void	get_lines(char *line) //malloc principal y llamada a separacion por ;
 	////////////////////
 }*/
 
-//TODO: test fallido: echo sdf'"  df"df'sdfsdf
+//TODO: test fallido: tabulaciones;
+//TODO: test fallido: paco | "paco | paco" |'paco | paco ' (se come las comillas);
 //TODO: testear a full;
 //TODO: mirar leaks;
 
@@ -127,7 +128,7 @@ void	get_lines(char *line)
 				//printf("status: %d\n\n", status);
 				if (line[i] == line[i - count - 1]/* ||(line[i - count - 1] != '\"' && line[i - count - 1] != '\'')*/)
 				{
-					status = 2;
+					status = 4;
 					i++;
 				}
 				else
@@ -140,12 +141,17 @@ void	get_lines(char *line)
 						while (++aux_count < i && aux_count >= 0)
 						{
 							//printf("char: %c\n", line[aux_count]);
-							if (line[aux_count] == line[i])
+							if (line[aux_count] == '\"' || line[aux_count] == '\'')
 							{
-								//printf("he entrado aqui\n");
-								status = 2;
-								i++;
-								aux_count = -2;
+								if (line[aux_count] == line[i])
+								{
+									//printf("he entrado aqui\n");
+									status = 4;
+									//i++;
+									aux_count = -2;
+								}
+								else
+									aux_count = -2;
 							}
 						}
 						if (aux_count != -2)
@@ -163,6 +169,7 @@ void	get_lines(char *line)
 					break ;*/
 				}
 			}
+			//printf("status: %d\n", status);
 			if (status == 2 && line[i] != ' ' && line[i] != '|' && line[i])
 			{
 				status = 3;
@@ -176,8 +183,8 @@ void	get_lines(char *line)
 					token->data = ft_substr(line, i - count, count);
 				if (status == 2 || status == 4)
 					token->data = ft_substr(line, i - count - 2, count + 2);
-				/*if (status == 4)
-					token->data = ft_substr(line, i - count - 2, count + 2);*/
+				if (status == 4)
+					token->data = ft_substr(line, i - count - 1, count + 1);
 				token->type = 1;
 				token->next = NULL;
 				if (i - count == 0 || (status == 2 && i - count - 2 == 0))

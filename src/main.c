@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:59:59 by nortolan          #+#    #+#             */
-/*   Updated: 2022/01/19 12:10:33 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/02/18 11:54:52 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(void)
 
 	while (1)
 	{
-		line = readline("test prompt>>> ");
+		line = readline("ShiTTYsh: ");
 		if (line && *line)
 		{
 			add_history(line);
