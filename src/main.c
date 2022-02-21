@@ -6,33 +6,54 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:18:07 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/02/17 13:30:52 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/02/21 14:22:43 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+t_built	g_built;
 
 void	leaks()
 {
 	system("leaks -q minishell");
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-//	char **cmd;
-	(void)argv;
-	atexit(leaks);
-	printf("PID -> %d\n", getpid());
-/*	cmd = (char **)ft_calloc(1, sizeof(char *) * 3);
-	cmd[0] = (char *)ft_calloc(1, sizeof(char) * (ft_strlen("echo") + 1));
-	cmd[1] = (char *)ft_calloc(1, sizeof(char) * (ft_strlen("hola") + 1));
-	cmd[2] = (char *)ft_calloc(1, sizeof(char) * 1);
-	cmd[0] = "eChO";
-	cmd[1] = "hola";
-	cmd[2] = NULL; */
-	if (argc <= 1)
-		return(0);
-	echo(argv);
+	char	**tmp;
+	char	*line;
+
+//	atexit(leaks);
+	init_minishell();
+	while (1)
+	{
+		line = readline("ShiTTYsh: ");
+		tmp = ft_split(line, ' ');
+		if (line && *line)
+			add_history(line);
+		if (tmp[0] != NULL)
+		{
+		if (!ft_strncmp(tmp[0], "echo", 4))
+			echo(tmp);
+		if (!ft_strncmp(tmp[0], "env", 3) && ft_strlen(tmp[0]) == 3)
+			env(tmp);
+		if (!ft_strncmp(tmp[0], "cd", 2) && ft_strlen(tmp[0]) == 2)
+			cd(tmp);
+		if (!ft_strncmp(tmp[0], "pwd", 3) && ft_strlen(tmp[0]) == 3)
+			pwd(tmp);
+		if (!ft_strncmp(tmp[0], "export", 6) && ft_strlen(tmp[0]) == 6)
+			export_env(tmp);
+		if (!ft_strncmp(line, "exit", 4) && ft_strlen(tmp[0]) == 4)
+			break ;
+		free_split(tmp);
+		free(line);
+		}
+	//	else
+	//		error_command(tmp);
+	}
+	free_split(tmp);
+	free(line);
 	//printf("Hola\n");
 	return (0);
 }
