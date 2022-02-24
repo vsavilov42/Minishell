@@ -6,15 +6,15 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/02/21 19:12:57 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/02/24 14:01:07 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 //TODO: que cojones:  | "|asdsdfh"| ó  | "|asdsdfh"|
-//TODO: tabulaciones arregladas?;
-//TODO: probar si renta que a'b'c'd'e sea un solo token;
+//TODO: test fallido: a"b'c'd"e'''   (pero a"b'c'd"e"" si funciona)
+//TODO: usar un segundo q_count_aux que compruebe el numero de comillas al que se tiene que quedar q_count_aux al ir restando;
 //TODO: testear a full;
 //TODO: mirar leaks;
 
@@ -24,21 +24,37 @@ void	get_lines(char *line)
 	int		status;
 	int		count;
 	int		aux_count;
+	int		q_count;
+	int		q_count_aux;
+	int		q_check;
 	t_token	*token;
 	t_token	*head;
 
 	i = 0;
 	status = 0;
 	aux_count = 0;
+	q_count_aux = 0;
+	q_count = 0;
+	q_check = 0;
 	while (line[i] || status == 1)
 	{
-		//printf("char actual: %c\n", line[i]);
+		//printf("q_count: %d\n", q_count);
+		//printf("char actual:   %c\n", line[i]);
+		//printf("status actual: %d\n", status);
 		if (status == 2 || status == 4)
 			status = 0;
 		if (status == 0)
 			count = 0;
+		if (status == 5)
+		{
+			status = 6;
+			q_check = 1;
+		}
 		if ((line[i] == '\0' && status == 1) || (line[i + 1] == '\0' && status == 1 && ((line[i] != '\"' && line[i] != '\'') || aux_count > 0)))
 		{
+			//printf("status: %d\n", status);
+			//printf("current char: %c\n", line[i]);
+			//printf("prev char:    %c\n", line[i - 1]);
 			//printf("klk aux_count: %d\n", aux_count);
 			write (2, "Quotation marks not closed\n", 27);
 			break;
@@ -48,8 +64,10 @@ void	get_lines(char *line)
 			while (line[i] == ' ' || line[i] == '\t')
 				i++;
 		}
-		if (line[i] != '|')
+		if (line[i] != '|' || status == 6)
 		{
+			if (status == 6)
+				status = 0;
 			//printf("HoLAAAA\n");
 			while (line[i] != '|' && line[i] != ' ' && line[i] != '\t' && line[i] != '\"' && line[i] != '\'' && line[i])
 			{
@@ -57,44 +75,53 @@ void	get_lines(char *line)
 				i++;
 			}
 			if (status == 3)
-				status = 4;
+			{
+				if (line[i] != ' ' && line[i] != '\t' && line[i])
+					status = 5;
+				else
+					status = 4;
+			}
 			if ((line[i] == '\"' || line[i] == '\'') && status == 0)
 			{
+				//printf("toy aqui inicio: %c\n", line[i]);
+				q_count++;
 				status = 1;
+				count++;
 				i++;
 			}
 			if ((line[i] == '\"' || line[i] == '\'') && status == 1)
 			{
+				//printf("toy aqui final: %c\n", line[i]);
+				//printf("line[i - count]: %c\n", line[i - count]);
 				//printf("TEST LOCO: estoy en: %c, atras hay: %c\n", line[i], line[i - count - 1]);
-				//printf("count:  %d\n", count);
-				//printf("i:      %d\n", i);
-				//printf("status: %d\n\n", status);
-				if (line[i] == line[i - count - 1]/* ||(line[i - count - 1] != '\"' && line[i - count - 1] != '\'')*/)
+				q_count++;
+				if (line[i] == line[i - count]/* ||(line[i - count - 1] != '\"' && line[i - count - 1] != '\'')*/)
 				{
 					status = 2;
 					i++;
+					count++;
 				}
 				else
 				{
-					//printf("estoy aqui lol %c\n", line[i]);
 					//TODO: cambiar esto por un else if;
-					if (line[i - count - 1] != '\"' && line[i - count - 1] != '\'')
+					if (line[i - count] != '\"' && line[i - count] != '\'')
 					{
 						aux_count = i - count - 1;
-						//printf("aqui tambien XD\n");
+						q_count_aux = q_count;
 						while (++aux_count < i && aux_count >= 0)
 						{
-							//printf("char: %c\n", line[aux_count]);
 							if (line[aux_count] == '\"' || line[aux_count] == '\'')
 							{
-								if (line[aux_count] == line[i])
+								q_count_aux--;
+								if (line[aux_count] == line[i] || q_count_aux <= 2)
 								{
-									//printf("he entrado aqui\n");
 									status = 2;
 									i++;
+									count++;
+									//printf("i++\n");
 									aux_count = -2;
 								}
-								else
+								else if (q_count_aux <= 2)
 								{
 									i++;
 									count++;
@@ -102,7 +129,8 @@ void	get_lines(char *line)
 								}
 							}
 						}
-						if (aux_count != -2)
+						//printf("aux_count: %d\n", aux_count);
+						if (aux_count != -1)
 						{
 							i++;
 							count++;
@@ -114,25 +142,23 @@ void	get_lines(char *line)
 						count++;
 						aux_count = -2;
 					}
-					/*printf("ALGO VA MAL\n");
-					break ;*/
 				}
 			}
+			//printf("pre char:   %c\n", line[i]);
 			if (status == 2 && line[i] != ' ' && line[i] != '\t' && line[i] != '|' && line[i])
 			{
 				status = 3;
 			}
-			if (status != 1 && status != 3)
+			//printf("count:  %d\n", count);
+			//printf("i:      %d\n", i);
+			//printf("status: %d\n", status);
+			//printf("char:   %c\n", line[i]);
+			if (status != 1 && status != 3 && status != 5)
 			{
 				token = malloc(sizeof(t_token));
 				if (token == NULL)
 					exit (1);
-				if (status == 0)
-					token->data = ft_substr(line, i - count, count);
-				if (status == 2 || status == 4)
-					token->data = ft_substr(line, i - count - 2, count + 2);
-				/*if (status == 4)
-					token->data = ft_substr(line, i - count - 2, count + 2);*/
+				token->data = ft_substr(line, i - count, count);
 				token->type = 1;
 				token->next = NULL;
 				if (i - count == 0 || (status == 2 && i - count - 2 == 0))
@@ -165,8 +191,11 @@ void	get_lines(char *line)
 				count++;
 			i++;
 		}
+		//printf("status: %d\n", status);
+		//printf("pre char: %c\n", line[i - 1]);
 		while (line[i] == ' ' || line[i] == '\t')
 		{
+			//printf("dentro, status = %d\n", status);
 			count++;
 			i++;
 		}
