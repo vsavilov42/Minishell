@@ -6,15 +6,13 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/02/28 14:39:20 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:14:45 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <minishell.h>
 
-//TODO: que cojones:  | "|asdsdfh"| ó  | "|asdsdfh"|
-//TODO: test fallido: a"b'c'd"e ""'' a"b'c'd"e ""''
-//TODO: usar un segundo q_count_aux que compruebe el numero de comillas al que se tiene que quedar q_count_aux al ir restando;
+//TODO: test fallido: '"'"' ó "'"'" (deberia poner que no está cerrado);
+//TODO: test fallido: a"b'c'd"e ""'' a"b'c'd"e ""'' (está arreglado en el borrador 2, pero creo que mal);
 //TODO: testear a full;
 //TODO: mirar leaks;
 
@@ -41,10 +39,10 @@ void	get_lines(char *line)
 	while (line[i] || status == 1)
 	{
 		//printf("char actual:   %c\n", line[i]);
-		//printf("q_check: %d\n", q_check);
+		printf("+q_check: %d\n", q_check);
 		//if (i >= 1)
 		//	printf("pre char actual:   %c\n", line[i - 1]);
-		//printf("status actual: %d\n", status);
+		printf("+status pre todo: %d\n", status);
 		if (status == 2 || status == 4)
 			status = 0;
 		if (status == 0)
@@ -90,6 +88,7 @@ void	get_lines(char *line)
 				else
 					status = 4;
 			}
+			printf("status pre comillas: %d\n", status);
 			if ((line[i] == '\"' || line[i] == '\'') && status == 0)
 			{
 				//printf("toy aqui inicio: %c\n", line[i]);
@@ -103,11 +102,12 @@ void	get_lines(char *line)
 			{
 				//printf("toy aqui final: %c\n", line[i]);
 				//printf("line[i - count]: %c\n", line[i - count]);
-				//printf("TEST LOCO: estoy en: %c, atras hay: %c\n", line[i], line[i - count]);
+				printf("i:	%d\ncount:	%d\n", i , count);
+				printf("TEST LOCO: estoy en: %c, atras hay: %c\n", line[i], line[i - count]);
 				q_count++;
 				q_count_aux_2++;
 				//printf("q_count: %d\n", q_count);
-				if (line[i] == line[i - count]/* ||(line[i - count - 1] != '\"' && line[i - count - 1] != '\'')*/)
+				if (line[i] == line[i - count] && q_check == 0/* ||(line[i - count - 1] != '\"' && line[i - count - 1] != '\'')*/)
 				{
 					status = 2;
 					i++;
@@ -118,36 +118,38 @@ void	get_lines(char *line)
 					//TODO: cambiar esto por un else if;
 					if ((line[i - count] != '\"' && line[i - count] != '\'') || q_check == 1)
 					{
-						//printf("entro en el else\n");
+						printf("entro en el else\n");
 						aux_count = i - count - 1;
 						q_count_aux = q_count;
 						while (++aux_count < i && aux_count >= 0)
 						{
+							printf("entro en el whiiile\n");
 							while (q_count_aux > q_count_aux_2)
 							{
-								aux_count--;
+								printf("y vuelvo a entraaar\n");
 								if (line[aux_count] == '\"' || line[aux_count] == '\'')
 									q_count_aux--;
+								aux_count++;
 							}
-							if (line[aux_count] == '\"' || line[aux_count] == '\'')
+							if (line[aux_count] == '\"' || line[aux_count] == '\'' || q_check == 1)
 							{
 								q_count_aux--;
 								if ((line[aux_count] == line[i]) || (q_count_aux <= q_count_aux_2 && q_check == 1))
 								{
-									//printf("entro en el if\n");
-									//printf("-aux_count:	%d\n", aux_count);
-									//printf("-aux char:	%c\n", line[aux_count]);
-									//printf("-i:			%d\n", i);
-									//printf("-i char:		%c\n", line[i]);
-									//printf("-q_count_aux: %d\n", q_count_aux);
-									//printf("-q_count_aux_2: %d\n", q_count_aux_2);
+									printf("entro en el if\n");
+									printf("-aux_count:	%d\n", aux_count);
+									printf("-aux char:	%c\n", line[aux_count]);
+									printf("-i:			%d\n", i);
+									printf("-i char:		%c\n", line[i]);
+									printf("-q_count_aux: %d\n", q_count_aux);
+									printf("-q_count_aux_2: %d\n", q_count_aux_2);
 									status = 2;
 									i++;
 									count++;
 									//printf("i++\n");
 									aux_count = -2;
 								}
-								else if (q_count_aux <= 2) // <= q_count_aux_2 ??
+								else if (q_count_aux <= q_count_aux_2) // <= 2 ??
 								{
 									//printf("entro otra vez?\n");
 									i++;
