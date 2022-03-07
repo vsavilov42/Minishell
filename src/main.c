@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:18:07 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/02/21 14:22:43 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/03/03 18:50:41 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,19 @@ int	main(void)
 			add_history(line);
 		if (tmp[0] != NULL)
 		{
-		if (!ft_strncmp(tmp[0], "echo", 4))
+		if (!same_strcmp(tmp[0], "echo"))
 			echo(tmp);
-		if (!ft_strncmp(tmp[0], "env", 3) && ft_strlen(tmp[0]) == 3)
+		if (!same_strcmp(tmp[0], "env"))
 			env(tmp);
-		if (!ft_strncmp(tmp[0], "cd", 2) && ft_strlen(tmp[0]) == 2)
+		if (!same_strcmp(tmp[0], "cd"))
 			cd(tmp);
-		if (!ft_strncmp(tmp[0], "pwd", 3) && ft_strlen(tmp[0]) == 3)
+		if (!same_strcmp(tmp[0], "pwd"))
 			pwd(tmp);
-		if (!ft_strncmp(tmp[0], "export", 6) && ft_strlen(tmp[0]) == 6)
+		if (!same_strcmp(tmp[0], "export"))
 			export_env(tmp);
-		if (!ft_strncmp(line, "exit", 4) && ft_strlen(tmp[0]) == 4)
+		if (!same_strcmp(tmp[0], "unset"))
+			unset(tmp);
+		if (!same_strcmp(line, "exit"))
 			break ;
 		free_split(tmp);
 		free(line);

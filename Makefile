@@ -39,7 +39,10 @@ SRCS_NAME = main.c \
 	    cd.c \
 	    pwd.c \
 	    env.c \
+	    unset.c \
+	    utils_unset.c \
 	    export.c \
+	    utils_export.c \
 	    error.c \
 	    utils.c \
 	    utils_list.c \

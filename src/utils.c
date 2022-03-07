@@ -6,15 +6,33 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 20:33:54 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/02/19 19:21:35 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/02/24 23:46:58 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+int	bad_str(char *str)
+{
+	if ((*str >= 0x41 && *str <= 0x5a) || (*str >= 0x61 && *str <= 0x7a))
+		return (0);
+	ft_putstr_fd("ShiTTYsh: export: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(" not an invalid identifier\n", 2);
+	return (1);
+}
+
 int	error_msg(char *str)
 {
 	ft_putstr_fd(str, 1);
+	return (1);
+}
+
+int	same_strcmp(char *str1, char *str2)
+{
+	if (!ft_strncmp(str1, str2, ft_strlen(str1))
+			&& ft_strlen(str1) == ft_strlen(str2))
+		return (0);
 	return (1);
 }
 

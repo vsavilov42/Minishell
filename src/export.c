@@ -2,28 +2,21 @@
 
 int	export_env(char **arg)
 {
-	t_envlst	*lst;
 	int	i;
 
 	i = 0;
-	lst = g_built.env;
-	while (arg[++i])
-	{
-		if (!contain_equal_cont(arg[i]))
-			envlst_add_back(&lst, new_envlst(arg[i]));
-		if (!contain_equal(arg[i]))
-			envlst_add_back(&lst, new_envlst_equal(arg[i]));
-		if (contain_equal_cont(arg[i]) && contain_equal(arg[i]))
-			envlst_add_back(&lst, new_envlst_only_name(arg[i]));
-	}
-	g_built.env = lst;
-	if (!ft_strncmp(arg[0], "export", 6) && arg[1] == NULL)
-		while (lst)
+	if (!same_strcmp(arg[i], "export") && arg[1] == NULL)
+		print_lst();
+	else
+		while (arg[++i])
 		{
-			printf(" NAME = [%s]\n", lst->name);
-			if (lst->value != NULL)
-				printf(" VALUE = %s\n", lst->value);
-			lst = lst->next;
+			if (!bad_str(arg[i]))
+			{
+				if (!compare_lst(arg[i]))
+					replace_environ(arg[i]);
+				else
+					add_environ(arg[i]);
+			}
 		}
 	return (1);
 }

@@ -34,7 +34,7 @@ t_envlst	*new_envlst_equal(char *env)
 	if (lst == NULL)
 		return (NULL);
 	lst->name = ft_substr(env, 0, strlen_env(env));
-	lst->value = "\"\"";
+	lst->value = "";
 	lst->next = NULL;
 	return (lst);
 }

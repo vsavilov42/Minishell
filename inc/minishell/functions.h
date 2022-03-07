@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/02/21 10:55:50 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/03/01 10:44:18 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,26 @@
 
 //indique el archivo al que corresponde .c y sus funciones
 
+/* unset.c */
+
+int	unset(char **arg);
+
+/* utils_unset.c */
+
+void	remove_lst(char *name);
+
 /* export.c */
 
 int	export_env(char **arg);
 int	contain_equal(char *arg);
 int	contain_equal_cont(char *arg);
+
+/* utils_export.c */
+
+void	add_environ(char *arg);
+void	replace_environ(char *arg);
+void	print_lst(void);
+int	compare_lst(char *arg);
 
 /* env */
 
@@ -46,9 +61,12 @@ int	error_command(char **cmd);
 /* utils.c */
 
 int	error_msg(char *str);
+int	same_strcmp(char *str1, char *str2);
 char	*strtolow(char *str);
 int	strlen_env(char *env);
 void	free_split(char **split);
+int	bad_str(char *arg);
+
 
 /* utils_list.c */
 
