@@ -6,16 +6,22 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:59:59 by nortolan          #+#    #+#             */
-/*   Updated: 2022/02/18 11:54:52 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/03/10 17:06:58 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+/*void	leaks(void)
+{
+	system("leaks -q minishell");
+}*/
+
 int	main(void)
 {
 	char	*line;
 
+//	atexit(leaks);
 	while (1)
 	{
 		line = readline("ShiTTYsh: ");
@@ -23,7 +29,6 @@ int	main(void)
 		{
 			add_history(line);
 			get_lines(line);
-			//printf("%s\n", line);
 		}
 		if (line == NULL)
 		{
@@ -32,6 +37,5 @@ int	main(void)
 		}
 		free(line);
 	}
-	//printf("Hola\n");
 	return (EXIT_SUCCESS);
 }
