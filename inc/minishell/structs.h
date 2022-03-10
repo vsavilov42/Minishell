@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/10 16:58:01 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/03/10 21:01:28 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_reading
 	int				q_check;
 	struct s_token	*token;
 	struct s_token	*head;
+	struct s_token	*temp;
 }	t_reading;
 
 #endif
