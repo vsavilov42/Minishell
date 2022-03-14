@@ -28,6 +28,7 @@ typedef struct s_reading
 	int				status;
 	int				count;
 	int				aux_count;
+	int				space_count;
 	int				q_count;
 	int				q_count_aux;
 	int				q_count_aux_2;

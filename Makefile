@@ -6,6 +6,12 @@ NAME = minishell
 
 LIBFT_NAME = libft.a
 
+##############
+###   OS   ###
+##############
+
+UNAME_S := $(shell uname -s)
+
 ##############################
 ###   Compiler and flags   ###
 ##############################
@@ -80,6 +86,17 @@ $(LIBFT_NAME):
 
 $(NAME): $(LIBFT_NAME) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_NAME) -lreadline
+
+############################
+###   Sanitize (Linux)   ###
+############################
+ifeq ($(UNAME_S),Linux)
+sanitize: CFLAGS += -pedantic -g3 -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=bounds -fsanitize=null
+endif
+ifeq ($(UNAME_S),Darwin)
+sanitize: CFLAGS += -pedantic -g3 -fsanitize=address
+endif
+sanitize: $(NAME)
 
 #######################
 ###   Other rules   ###
