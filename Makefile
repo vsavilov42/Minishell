@@ -40,7 +40,7 @@ LIB_PATH = libft
 ###   Source items   ###
 ########################
 
-SRCS_NAME = main.c reading.c
+SRCS_NAME = main.c reading.c quote_handling.c reading_utils.c
 
 ######################
 ###   Make rules   ###

@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:59:59 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/10 17:06:58 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/03/15 11:07:28 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 {
 	system("leaks -q minishell");
 }*/
+/*	atexit(leaks);*/
 
 int	main(void)
 {
 	char	*line;
 
-//	atexit(leaks);
 	while (1)
 	{
 		line = readline("ShiTTYsh: ");
