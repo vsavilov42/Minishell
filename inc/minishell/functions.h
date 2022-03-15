@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/01 10:44:18 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/03/08 13:13:47 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define FUNCTIONS_H
 
 //indique el archivo al que corresponde .c y sus funciones
+
+/* builtin.c */
+
+void	add_bt(t_bt_lst *bt, char *name, int (*f)(char **));
+void	builtin(char **arg);
+char	**builtin_cmd(void);
+void	call_built(char **cmd);
 
 /* unset.c */
 
@@ -25,7 +32,7 @@ void	remove_lst(char *name);
 
 /* export.c */
 
-int	export_env(char **arg);
+int	export(char **arg);
 int	contain_equal(char *arg);
 int	contain_equal_cont(char *arg);
 
@@ -35,6 +42,10 @@ void	add_environ(char *arg);
 void	replace_environ(char *arg);
 void	print_lst(void);
 int	compare_lst(char *arg);
+
+/* exit */
+
+int	bt_exit(char **arg);
 
 /* env */
 
@@ -70,6 +81,7 @@ int	bad_str(char *arg);
 
 /* utils_list.c */
 
+void		free_lst();
 t_envlst	*new_envlst(char *env);
 t_envlst	*new_envlst_equal(char *env);
 t_envlst	*new_envlst_only_name(char *env);
@@ -80,6 +92,7 @@ void		envlst_add_back(t_envlst **lst, t_envlst *new);
 
 void	init_minishell(void);
 void	get_env(void);
+void	get_cmds(void);
 
 //reading.c
 void	get_lines(char *line);

@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-int	export_env(char **arg)
+int	export(char **arg)
 {
 	int	i;
 

@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIB_PATH)/inc
 
-CFLAGS += -fsanitize=address -g3
+#CFLAGS += -fsanitize=address -g3
 
 #################
 ###   Paths   ###
@@ -36,10 +36,12 @@ LIB_PATH = libft
 
 SRCS_NAME = main.c \
 	    init_shell.c \
+	    builtin.c \
 	    cd.c \
 	    pwd.c \
 	    env.c \
 	    unset.c \
+	    exit.c \
 	    utils_unset.c \
 	    export.c \
 	    utils_export.c \

@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 11:36:16 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/02/17 21:00:09 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/03/07 11:54:02 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@ int	cd(char **arg)
 	if (ft_strncmp(tmp, "cd", 2))
 		return(0);
 	if (arg[1] != NULL)
-		chdir(arg[1]);
+		if (chdir(arg[1]))
+		{
+			write(2, "ShiTTYsh: cd: ", 14);
+			write(2, arg[1], ft_strlen(arg[1]));
+			write(2, ": No such file or directory\n", 28);
+		}
 	free(tmp);
 	return (1);
 }
