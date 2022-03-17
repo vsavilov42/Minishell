@@ -6,13 +6,13 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:18:07 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/03/08 13:19:14 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:59:08 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_built	g_built;
+t_sh	g_sh;
 
 void	leaks()
 {

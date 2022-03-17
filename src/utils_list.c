@@ -52,13 +52,10 @@ void	envlst_add_back(t_envlst **lst, t_envlst *new)
 void	free_lst()
 {
 	t_bt_lst	*lst;
-	t_bt_lst	*tmp;
 
-	lst = g_built.bt;
-	tmp = lst;
+	lst = g_sh.bt;
 	while (lst)
 	{
-		printf("patata");
 		free(lst->cmd);
 		lst = lst->next;
 	}

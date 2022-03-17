@@ -46,3 +46,19 @@ int	contain_equal_cont(char *arg)
 	}
 	return (1);
 }
+
+char	*return_value(char *name)
+{
+	t_envlst	*lst;
+
+	if (!g_sh.env)
+		return (NULL);
+	lst = g_sh.env;
+	while (lst)
+	{
+		if (same_strcmp(name, lst->name))
+			return (lst->value);
+		lst = lst->next;
+	}
+	return (NULL);
+}

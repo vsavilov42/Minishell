@@ -2,11 +2,9 @@
 
 int	env(char **arg)
 {
-	int	i;
 	t_envlst	*envlst;
 
-	i = -1;
-	envlst = g_built.env;
+	envlst = g_sh.env;
 	if (arg[1] != NULL)
 		return (1);
 	while (envlst)

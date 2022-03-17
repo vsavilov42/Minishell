@@ -18,7 +18,7 @@ void	get_cmds(void)
 	add_bt(bt, "export", export);
 	add_bt(bt, "unset", unset);
 	add_bt(bt, "exit", bt_exit);
-	g_built.bt = bt;
+	g_sh.bt = bt;
 }
 
 void	get_env(void)
@@ -39,5 +39,5 @@ void	get_env(void)
 		envlst->value = getcwd(pwd, PATH_MAX);
 	}
 	free(pwd);
-	g_built.env = envlst;
+	g_sh.env = envlst;
 }

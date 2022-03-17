@@ -6,9 +6,9 @@ void	remove_lst(char *name)
 	t_envlst *current;
 	t_envlst *tmp;
 
-	if (!g_built.env)
+	if (!g_sh.env)
 		return ;
-	last = g_built.env;
+	last = g_sh.env;
 	if (!same_strcmp(last->name, name))
 	{
 		tmp = last;
@@ -16,7 +16,7 @@ void	remove_lst(char *name)
 		free(tmp->name);
 		free(tmp->value);
 		free(tmp);
-		g_built.env = last;
+		g_sh.env = last;
 		return ;
 	}
 	current = last->next;

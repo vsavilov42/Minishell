@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/08 13:13:47 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:04:01 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	remove_lst(char *name);
 int	export(char **arg);
 int	contain_equal(char *arg);
 int	contain_equal_cont(char *arg);
-
+char	*return_value(char *name);
 /* utils_export.c */
 
 void	add_environ(char *arg);

@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/07 14:25:55 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:51:01 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ typedef struct s_bt_lst
 	struct s_bt_lst *next;
 }	t_bt_lst;
 
-typedef struct s_built
+typedef struct s_sh
 {
 	t_envlst	*env;
 	t_bt_lst	*bt;
-}	t_built;
+}	t_sh;
 
-extern	t_built	g_built;
+extern	t_sh	g_sh;
 
 #endif
