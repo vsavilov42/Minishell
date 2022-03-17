@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/17 13:09:54 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:01:04 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <minishell.h>
@@ -45,6 +45,9 @@ int	tok_status_check(t_reading *vars, char *line, int i)
 
 void	normal_token(t_reading *vars, char *line, int i)
 {
+	t_token	*temp;
+
+	temp = NULL;
 	if (vars->tok_status == 2 && line[i] != ' ' && line[i]
 		!= '\t' && line[i] != '|' && line[i])
 		vars->tok_status = 3;
@@ -53,14 +56,14 @@ void	normal_token(t_reading *vars, char *line, int i)
 		if (vars->token)
 		{
 			vars->token = last_token(vars->token);
-			vars->temp = vars->token;
+			temp = vars->token;
 			vars->token = vars->token->next;
 		}
 		vars->token = malloc(sizeof(t_token));
 		if (vars->token == NULL)
 			exit (1);
-		if (vars->temp)
-			vars->temp->next = vars->token;
+		if (temp)
+			temp->next = vars->token;
 		if (i - vars->count - vars->space_count == 0)
 			vars->head = vars->token;
 		vars->token->data = ft_substr(line, i - vars->count, vars->count);
@@ -69,21 +72,24 @@ void	normal_token(t_reading *vars, char *line, int i)
 	}
 }
 
-int	pipe_token(t_reading *vars, char *line, int i)
+void	pipe_token(t_reading *vars, char *line, int i)
 {
+	t_token	*temp;
+
+	temp = NULL;
 	if (vars->tok_status != 1)
 	{
 		if (vars->token)
 		{
 			vars->token = last_token(vars->token);
-			vars->temp = vars->token;
+			temp = vars->token;
 			vars->token = vars->token->next;
 		}
 		vars->token = malloc(sizeof(t_token));
 		if (vars->token == NULL)
 			exit (1);
-		if (vars->temp)
-			vars->temp->next = vars->token;
+		if (temp)
+			temp->next = vars->token;
 		if (i - vars->space_count == 0)
 			vars->head = vars->token;
 		vars->token->data = ft_substr(line, i, 1);
@@ -93,8 +99,6 @@ int	pipe_token(t_reading *vars, char *line, int i)
 	}
 	else
 		vars->count++;
-	i++;
-	return (i);
 }
 
 int	line_handler(t_reading *vars, char *line, int i)
@@ -113,7 +117,7 @@ int	line_handler(t_reading *vars, char *line, int i)
 		normal_token(vars, line, i);
 	}
 	else
-		i = pipe_token(vars, line, i);
+		pipe_token(vars, line, i++);
 	while (line[i] == ' ' || line[i] == '\t')
 	{
 		vars->count++;

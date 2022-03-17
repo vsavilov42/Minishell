@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 11:07:53 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/17 12:58:45 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:02:36 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	reading_struct_init(t_reading *vars)
 	vars->space_count = 0;
 	vars->token = NULL;
 	vars->head = NULL;
-	vars->temp = NULL;
 }
 
 t_token	*last_token(t_token *lst)
@@ -42,6 +41,7 @@ void	token_clear(t_reading *vars)
 {
 	t_token	*temp;
 
+	temp = NULL;
 	vars->token = vars->head;
 	if (vars->token == NULL)
 		return ;

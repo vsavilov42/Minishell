@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/17 12:57:56 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:03:24 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_reading
 	char			**env;
 	struct s_token	*token;
 	struct s_token	*head;
-	struct s_token	*temp;
 }	t_reading;
 
 #endif
