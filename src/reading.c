@@ -6,19 +6,20 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/15 11:23:51 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:09:54 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <minishell.h>
 
+//TODO: "\""  ?????
 //TODO: testear a full;
 //TODO: no leaks;
 
-int	status_check(t_reading *vars, char *line, int i)
+int	tok_status_check(t_reading *vars, char *line, int i)
 {
-	if (vars->status == 2 || vars->status == 4)
-		vars->status = 0;
-	if (vars->status == 0)
+	if (vars->tok_status == 2 || vars->tok_status == 4)
+		vars->tok_status = 0;
+	if (vars->tok_status == 0)
 	{
 		vars->space_count = 0;
 		if (vars->q_check == 1)
@@ -26,14 +27,14 @@ int	status_check(t_reading *vars, char *line, int i)
 		vars->q_count_aux_2 = 0;
 		vars->count = 0;
 	}
-	if (vars->status == 5)
+	if (vars->tok_status == 5)
 	{
 		vars->q_count_aux_2 = 0;
-		vars->status = 6;
+		vars->tok_status = 6;
 		vars->q_check = 1;
 	}
-	if ((line[i] == '\0' && vars->status == 1)
-		|| (line[i + 1] == '\0' && vars->status == 1
+	if ((line[i] == '\0' && vars->tok_status == 1)
+		|| (line[i + 1] == '\0' && vars->tok_status == 1
 			&& ((line[i] != '\"' && line[i] != '\'') || vars->aux_count > 0)))
 	{
 		write (2, "Quotation marks not closed\n", 27);
@@ -44,10 +45,10 @@ int	status_check(t_reading *vars, char *line, int i)
 
 void	normal_token(t_reading *vars, char *line, int i)
 {
-	if (vars->status == 2 && line[i] != ' ' && line[i]
+	if (vars->tok_status == 2 && line[i] != ' ' && line[i]
 		!= '\t' && line[i] != '|' && line[i])
-		vars->status = 3;
-	if (vars->status != 1 && vars->status != 3 && vars->status != 5)
+		vars->tok_status = 3;
+	if (vars->tok_status != 1 && vars->tok_status != 3 && vars->tok_status != 5)
 	{
 		if (vars->token)
 		{
@@ -70,7 +71,7 @@ void	normal_token(t_reading *vars, char *line, int i)
 
 int	pipe_token(t_reading *vars, char *line, int i)
 {
-	if (vars->status != 1)
+	if (vars->tok_status != 1)
 	{
 		if (vars->token)
 		{
@@ -105,7 +106,7 @@ int	line_handler(t_reading *vars, char *line, int i)
 		vars->space_count = i;
 	}
 	vars->token = vars->head;
-	if (line[i] != '|' || vars->status == 6)
+	if (line[i] != '|' || vars->tok_status == 6)
 	{
 		i = skip_chars(vars, line, i);
 		i = quote_handling(vars, line, i);
@@ -128,17 +129,20 @@ void	get_lines(char *line)
 
 	i = 0;
 	reading_struct_init(&vars);
-	while (line[i] || vars.status == 1)
+	while (line[i] || vars.tok_status == 1)
 	{
-		if (status_check(&vars, line, i))
-			break ;
+		if (tok_status_check(&vars, line, i))
+			break ; //TODO: evitar que el programa siga;
 		i = line_handler(&vars, line, i);
 	}
-	token_clear(&vars);
+	//token_clear(&vars); //TODO: esto va al final;
+	//TEST ANTES DE EXPANSION////////////////////
+	vars.token = vars.head;
+	while (vars.token)
+	{
+		printf("test pre exp: %s\n", vars.token->data);
+		vars.token = vars.token->next;
+	}
+	/////////////////////////////////////////////
+	tok_expand(&vars);
 }
-
-/*while (vars.head)
-{
-	printf("head test: %s\n", vars.head->data);
-	vars.head = vars.head->next;
-}*/

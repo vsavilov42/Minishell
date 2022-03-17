@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/15 11:22:52 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/03/17 11:35:12 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,8 @@ int		quote_handling(t_reading *vars, char *line, int i);
 void	reading_struct_init(t_reading *vars);
 t_token	*last_token(t_token *lst);
 void	token_clear(t_reading *vars);
+
+//expansions.c
+void	tok_expand(t_reading *vars);
 
 #endif

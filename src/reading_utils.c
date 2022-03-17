@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 11:07:53 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/15 11:15:15 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:58:45 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	reading_struct_init(t_reading *vars)
 {
-	vars->status = 0;
+	extern char	**environ;
+
+	vars->env = environ;
+	vars->tok_status = 0;
 	vars->aux_count = 0;
 	vars->q_count_aux = 0;
 	vars->q_count_aux_2 = 0;

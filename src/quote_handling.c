@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 11:17:12 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/15 11:19:09 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/03/17 11:33:53 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 int	skip_chars(t_reading *vars, char *line, int i)
 {
-	if (vars->status == 6)
-		vars->status = 0;
+	if (vars->tok_status == 6)
+		vars->tok_status = 0;
 	while (line[i] != '|' && line[i] != ' ' && line[i] != '\t'
 		&& line[i] != '\"' && line[i] != '\'' && line[i])
 	{
 		vars->count++;
 		i++;
 	}
-	if (vars->status == 3)
+	if (vars->tok_status == 3)
 	{
 		if (line[i] != ' ' && line[i] != '\t' && line[i])
-			vars->status = 5;
+			vars->tok_status = 5;
 		else
-			vars->status = 4;
+			vars->tok_status = 4;
 	}
-	if ((line[i] == '\"' || line[i] == '\'') && vars->status == 0)
+	if ((line[i] == '\"' || line[i] == '\'') && vars->tok_status == 0)
 	{
 		vars->q_count++;
 		vars->q_count_aux_2++;
-		vars->status = 1;
+		vars->tok_status = 1;
 		vars->count++;
 		i++;
 	}
@@ -46,7 +46,7 @@ void	back_quote_check(t_reading *vars, char *line, int i)
 			|| (--vars->q_count_aux <= vars->q_count_aux_2
 				&& vars->q_check == 1)))
 	{
-		vars->status = 2;
+		vars->tok_status = 2;
 		vars->count++;
 		vars->aux_count = -2;
 	}
@@ -78,13 +78,13 @@ int	aux_count_loop(t_reading *vars, char *line, int i)
 
 int	quote_handling(t_reading *vars, char *line, int i)
 {
-	if ((line[i] == '\"' || line[i] == '\'') && vars->status == 1)
+	if ((line[i] == '\"' || line[i] == '\'') && vars->tok_status == 1)
 	{
 		vars->q_count++;
 		vars->q_count_aux_2++;
 		if (line[i] == line[i - vars->count] && vars->q_check == 0)
 		{
-			vars->status = 2;
+			vars->tok_status = 2;
 			vars->count++;
 		}
 		else if ((line[i - vars->count] != '\"'
