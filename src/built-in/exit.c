@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-int	bt_exit(char **arg)
+int	ft_exit(char **arg)
 {
 	(void)arg;
 	return(1);

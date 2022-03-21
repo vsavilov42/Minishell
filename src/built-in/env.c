@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-int	env(char **arg)
+int	ft_env(char **arg)
 {
 	t_envlst	*envlst;
 

@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-int pwd(char **arg)
+int	ft_pwd(char **arg)
 {
 	(void)arg;
 	char	*pwd;

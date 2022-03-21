@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/17 12:51:01 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:41:17 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 # define STRUCTS_H
 
 //Coloque aquí su estructura
-
-//built-in
-
-
-typedef struct s_envlst
-{
-	char	*name;
-	char	*value;
-	struct s_envlst *next;
-}	t_envlst;
 
 //tokens
 typedef struct s_token
@@ -33,6 +23,28 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_reading
+{
+	int				tok_status;
+	int				count;
+	int				aux_count;
+	int				space_count;
+	int				q_count;
+	int				q_count_aux;
+	int				q_count_aux_2;
+	int				q_check;
+	struct s_token	*token;
+	struct s_token	*head;
+}	t_reading;
+
+//built-in
+typedef struct s_envlst
+{
+	char	*name;
+	char	*value;
+	struct s_envlst *next;
+}	t_envlst;
+
 typedef struct s_bt_lst
 {
 	char	*cmd;
@@ -40,8 +52,10 @@ typedef struct s_bt_lst
 	struct s_bt_lst *next;
 }	t_bt_lst;
 
+//global
 typedef struct s_sh
 {
+	int		status;
 	t_envlst	*env;
 	t_bt_lst	*bt;
 }	t_sh;

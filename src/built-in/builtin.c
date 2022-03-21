@@ -40,19 +40,19 @@ void	builtin(char **arg)
 void	call_built(char **cmd)
 {
 	if (!same_strcmp(cmd[0], "echo"))
-		echo(cmd);
-	if (!same_strcmp(cmd[0], "env"))
-		env(cmd);
+		ft_echo(cmd);
 	if (!same_strcmp(cmd[0], "cd"))
-		cd(cmd);
+		ft_cd(cmd);
 	if (!same_strcmp(cmd[0], "pwd"))
-		pwd(cmd);
+		ft_pwd(cmd);
 	if (!same_strcmp(cmd[0], "export"))
-		export(cmd);
+		ft_export(cmd);
 	if (!same_strcmp(cmd[0], "unset"))
-		unset(cmd);
+		ft_unset(cmd);
+	if (!same_strcmp(cmd[0], "env"))
+		ft_env(cmd);
 	if (!same_strcmp(cmd[0], "exit"))
-		bt_exit(cmd);
+		ft_exit(cmd);
 }
 
 char	**builtin_cmd(void)

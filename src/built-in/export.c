@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-int	export(char **arg)
+int	ft_export(char **arg)
 {
 	int	i;
 

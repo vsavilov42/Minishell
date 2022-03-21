@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-int	unset(char **arg)
+int	ft_unset(char **arg)
 {
 	int	i;
 

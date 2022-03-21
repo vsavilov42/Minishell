@@ -6,13 +6,13 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 11:36:16 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/03/07 11:54:02 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:02:56 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	cd(char **arg)
+int	ft_cd(char **arg)
 {
 	char	*tmp;
 

@@ -11,13 +11,13 @@ void	get_cmds(void)
 	t_bt_lst	*bt;
 
 	bt = (t_bt_lst *)malloc(sizeof(t_bt_lst));
-	add_bt(bt, "echo", echo);
-	add_bt(bt, "env", env);
-	add_bt(bt, "cd", cd);
-	add_bt(bt, "pwd", pwd);
-	add_bt(bt, "export", export);
-	add_bt(bt, "unset", unset);
-	add_bt(bt, "exit", bt_exit);
+	add_bt(bt, "echo", ft_echo);
+	add_bt(bt, "cd", ft_cd);
+	add_bt(bt, "pwd", ft_pwd);
+	add_bt(bt, "export", ft_export);
+	add_bt(bt, "unset", ft_unset);
+	add_bt(bt, "env", ft_env);
+	add_bt(bt, "exit", ft_exit);
 	g_sh.bt = bt;
 }
 

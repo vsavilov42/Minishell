@@ -6,64 +6,29 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/17 13:04:01 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 
-//indique el archivo al que corresponde .c y sus funciones
+/* quote_handlin.c */
 
-/* builtin.c */
+int	skip_chars(t_reading *vars, char *line, int i);
+void	back_quote_check(t_reading *vars, char *line, int i);
+int	aux_count_loop(t_reading *vars, char *line, int i);
+int	quote_handling(t_reading *vars, char *line, int i);
 
-void	add_bt(t_bt_lst *bt, char *name, int (*f)(char **));
-void	builtin(char **arg);
-char	**builtin_cmd(void);
-void	call_built(char **cmd);
+/* expansions.c */
 
-/* unset.c */
+void	tok_expand(t_reading *vars);
 
-int	unset(char **arg);
+/* reading_utils.c */
 
-/* utils_unset.c */
-
-void	remove_lst(char *name);
-
-/* export.c */
-
-int	export(char **arg);
-int	contain_equal(char *arg);
-int	contain_equal_cont(char *arg);
-char	*return_value(char *name);
-/* utils_export.c */
-
-void	add_environ(char *arg);
-void	replace_environ(char *arg);
-void	print_lst(void);
-int	compare_lst(char *arg);
-
-/* exit */
-
-int	bt_exit(char **arg);
-
-/* env */
-
-int	env(char **arg);
-
-/* pwd.c */
-
-int	pwd(char **arg);
-
-/* cd.c */
-
-int	cd(char **arg);
-
-/* echo.c */
-
-int	echo(char **str);
-int	verify_echo(char *str);
-void	write_echo(char **arg, int index, int n);
+void	reading_struct_init(t_reading *vars);
+t_token	*last_token(t_token *lst);
+void	token_clean(t_reading *vars);
 
 /* error.c */
 
@@ -77,7 +42,6 @@ char	*strtolow(char *str);
 int	strlen_env(char *env);
 void	free_split(char **split);
 int	bad_str(char *arg);
-
 
 /* utils_list.c */
 

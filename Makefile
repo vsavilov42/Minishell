@@ -23,20 +23,30 @@ CFLAGS += -I ./$(INC_PATH) -I ./$(LIB_PATH)/inc
 #################
 
 SRC_PATH = src
-
 OBJ_PATH = obj
-
 INC_PATH = inc
-
 LIB_PATH = libft
+
+##################
+###   Source   ###
+##################
+
+SRC_DIR_BUILTIN = built_in
+SRC_DIR_PARSE = parse
+
+
+ALL_SRC = $(SRC_DIR_BUILTIN) \
+	  $(SRC_DIR_PARSE)
+
+OBJ_DIR = $(addprefix $(OBJ_PATH)/, $(ALL_SRC))
 
 ########################
 ###   Source items   ###
 ########################
 
-SRCS_NAME = main.c \
-	    init_shell.c \
-	    builtin.c \
+SRC_MAIN = main.c
+
+SRCS_BUILTIN = builtin.c \
 	    cd.c \
 	    pwd.c \
 	    env.c \
@@ -48,7 +58,19 @@ SRCS_NAME = main.c \
 	    error.c \
 	    utils.c \
 	    utils_list.c \
+	    init_shell.c \
 	    echo.c
+
+SRCS_PARSE = expansions.c \
+	     quote_handling.c \
+	     reading.c \
+	     reading_utils.c
+
+
+SRCS_NAME = $(SRC_MAIN) \
+	    $(ALL_SRC)
+	   # $(addprefix $(SRC_DIR_BUILTIN)/, $(SRCS_BUILTIN)) \
+	    #$(addprefix $(SRC_DIR_PARSE)/, $(SRCS_PARSE))
 
 ######################
 ###   Make rules   ###
@@ -72,13 +94,14 @@ OBJS = $(addprefix $(OBJ_PATH)/, $(OBJS_NAME))
 
 all: $(NAME)
 
-## Object dir
-
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_DIR)
 		$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_PATH):
 	mkdir -p $(OBJ_PATH) 2> /dev/null
+
+$(OBJ_DIR): | $(OBJ_PATH)
+	mkdir -p $(OBJ_DIR)
 
 ########################
 ###   Compile libs   ###
