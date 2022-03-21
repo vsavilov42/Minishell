@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 11:22:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/17 14:10:10 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/03/21 13:53:10 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,28 @@
 //TODO; tests importantes con variables que no existen: "'$aaa'"/"$aa'a'a"/ "$aaa"/'$aaa'
 //TODO: un dollar suelto se imprime tal cual
 
+/*char	*return_value(char *name)
+{
+	t_envlst	*lst;
+
+	if (!g_sh.env)
+		return (NULL);
+	lst = g_sh.env;
+	while (lst)
+	{
+		if (same_strcmp(name, lst->name))
+			return (lst->value);
+		lst = lst->next;
+	}
+	return (NULL);
+}*/
+
 void	get_variable(t_reading *vars, int i)
 {
 	int		l;
 	char	*name;
+	//char	*value;
+	//char	*temp;
 
 	l = 0;
 	name = NULL;
@@ -33,6 +51,18 @@ void	get_variable(t_reading *vars, int i)
 		i++;
 	}
 	printf("length: %d\n", l);
+	if (l != 0)
+	{
+		//name = malloc(sizeof(char) * (l + 1));
+		//if (name == NULL)
+		//	exit (1);
+		//temp = ft_strdup(vars->token->data); //esto hace falta?
+		name = ft_substr(vars->token->data, i - l, l);
+		//free(temp);
+		printf("name: %s\n", name);
+		//value = ft_strdup(return_value(name));
+		free(name);
+	}
 	//TODO: tener en cuenta si lenght = 0 porque es un dollar suelto;
 	//TODO: malloc aqui al name para copiarlo y conseguir luego el value
 }

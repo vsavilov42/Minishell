@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/17 14:06:19 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/03/21 13:31:01 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <minishell.h>
@@ -139,7 +139,6 @@ void	get_lines(char *line)
 			break ; //TODO: evitar que el programa siga;
 		i = line_handler(&vars, line, i);
 	}
-	//token_clear(&vars); //TODO: esto va al final;
 	//TEST ANTES DE EXPANSION////////////////////
 	vars.token = vars.head;
 	while (vars.token)
@@ -149,4 +148,5 @@ void	get_lines(char *line)
 	}
 	/////////////////////////////////////////////
 	tok_expand(&vars);
+	token_clear(&vars); //TODO: esto va al final;
 }
