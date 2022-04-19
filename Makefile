@@ -11,10 +11,9 @@ LIBFT_NAME = libft.a
 ##############################
 
 CC = gcc
-
 CFLAGS = -Wall -Wextra -Werror
-
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIB_PATH)/inc
+LIBS = -lreadline
 
 #CFLAGS += -fsanitize=address -g3
 
@@ -31,14 +30,17 @@ LIB_PATH = libft
 ###   Source   ###
 ##################
 
-SRC_DIR_BUILTIN = built_in
+SRC_DIR_BUILT = built-in
 SRC_DIR_PARSE = parse
+SRC_DIR_INIT = init
 
+SUBSRC_DIR_NAME = $(SRC_DIR_BUILT) \
+		  $(SRC_DIR_INIT) \
+		  $(SRC_DIR_PARSE)
 
-ALL_SRC = $(SRC_DIR_BUILTIN) \
-	  $(SRC_DIR_PARSE)
+SRC_DIR_NAME = $(addprefix $(SRC_PATH)/, $(SUBSRC_DIR_NAME))
 
-OBJ_DIR = $(addprefix $(OBJ_PATH)/, $(ALL_SRC))
+OBJ_DIR_NAME = $(addprefix $(OBJ_PATH)/, $(SUBSRC_DIR_NAME))
 
 ########################
 ###   Source items   ###
@@ -58,7 +60,6 @@ SRCS_BUILTIN = builtin.c \
 	    error.c \
 	    utils.c \
 	    utils_list.c \
-	    init_shell.c \
 	    echo.c
 
 SRCS_PARSE = expansions.c \
@@ -66,11 +67,12 @@ SRCS_PARSE = expansions.c \
 	     reading.c \
 	     reading_utils.c
 
+SRCS_INIT = init_shell.c
 
-SRCS_NAME = $(SRC_MAIN) \
-	    $(ALL_SRC)
-	   # $(addprefix $(SRC_DIR_BUILTIN)/, $(SRCS_BUILTIN)) \
-	    #$(addprefix $(SRC_DIR_PARSE)/, $(SRCS_PARSE))
+SRC_NAME = $(SRC_MAIN) \
+	   $(addprefix $(SRC_DIR_BUILT)/, $(SRCS_BUILTIN)) \
+	   $(addprefix $(SRC_DIR_INIT)/, $(SRCS_INIT)) \
+	   $(addprefix $(SRC_DIR_PARSE)/, $(SRCS_PARSE))
 
 ######################
 ###   Make rules   ###
@@ -82,26 +84,33 @@ MAKE = make
 ###   Create objects   ###
 ##########################
 
-OBJS_NAME = $(SRCS_NAME:%.c=%.o)
+OBJ_NAME = $(SRC_NAME:%.c=%.o)
 
-SRCS = $(addprefix $(SRC_PATH)/, $(SRCS_NAME))
+SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
 
-OBJS = $(addprefix $(OBJ_PATH)/, $(OBJS_NAME))
+OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 
-#################################
-###   Rules can be executed   ###
-#################################
+################
+###   Name   ###
+################
 
 all: $(NAME)
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_DIR)
-		$(CC) $(CFLAGS) -c $< -o $@
+$(NAME): $(OBJ) $(LIBFT_NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT_NAME) -o $@ $(LIBS)
+
+##########################
+###   Create folders   ###
+##########################
+
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_DIR_NAME)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR_NAME): | $(OBJ_PATH)
+	mkdir -p $(OBJ_DIR_NAME)
 
 $(OBJ_PATH):
-	mkdir -p $(OBJ_PATH) 2> /dev/null
-
-$(OBJ_DIR): | $(OBJ_PATH)
-	mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_PATH)
 
 ########################
 ###   Compile libs   ###
@@ -110,13 +119,6 @@ $(OBJ_DIR): | $(OBJ_PATH)
 $(LIBFT_NAME):
 	$(MAKE) all -sC $(LIB_PATH)
 	cp -r $(addprefix $(LIB_PATH)/, $(LIBFT_NAME)) $(LIBFT_NAME)
-
-######################
-###   Compile .o   ###
-######################
-
-$(NAME): $(LIBFT_NAME) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_NAME) -lreadline
 
 #######################
 ###   Other rules   ###
@@ -127,8 +129,8 @@ clean:
 
 fclean: clean
 	$(MAKE) fclean -sC $(LIB_PATH)
-	rm $(NAME)
 	rm $(LIBFT_NAME)
+	rm $(NAME)
 
 re: fclean all
 
