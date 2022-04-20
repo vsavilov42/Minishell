@@ -36,11 +36,41 @@ INC_PATH = inc
 
 LIB_PATH = libft
 
+#######################
+###   Directories   ###
+#######################
+
+SRC_DIR_LEXER =	lexer
+SRC_DIR_PARSER = parser
+SRC_DIR_BUILTIN =	built-in
+
+OBJ_DIR_ALL =	$(SRC_DIR_LEXER)										\
+				$(SRC_DIR_PARSER)										\
+				$(SRC_DIR_BUILTIN)
+
+OBJ_DIR = $(addprefix $(OBJ_PATH)/, $(OBJ_DIR_ALL))
+
 ########################
 ###   Source items   ###
 ########################
 
-SRCS_NAME = main.c reading.c quote_handling.c reading_utils.c expansions.c
+SRCS_MAIN =		main.c
+
+SRCS_LEXER =	reading.c			reading_utils.c		quote_handling.c\
+				expansions.c
+
+SRCS_PARSER =	parse.c				remove_quotes.c
+
+SRCS_BUILTIN =	builtin.c			cd.c				pwd.c			\
+				env.c				unset.c				exit.c			\
+				utils_unset.c		export.c			utils_export.c	\
+				error.c				utils.c				utils_list.c	\
+				init_shell.c		echo.c
+
+SRCS_NAME =	$(SRCS_MAIN)												\
+			$(addprefix $(SRC_DIR_LEXER)/, $(SRCS_LEXER))				\
+			$(addprefix $(SRC_DIR_PARSER)/, $(SRCS_PARSER))				\
+			$(addprefix $(SRC_DIR_BUILTIN)/, $(SRCS_BUILTIN))
 
 ######################
 ###   Make rules   ###
@@ -66,8 +96,11 @@ all: $(NAME)
 
 ## Object dir
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_PATH)
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_DIR)
 		$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR): | $(OBJ_PATH)
+	mkdir -p $(OBJ_DIR)
 
 $(OBJ_PATH):
 	mkdir -p $(OBJ_PATH) 2> /dev/null

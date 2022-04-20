@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 11:17:12 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/17 11:33:53 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/04/05 18:13:31 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	skip_chars(t_reading *vars, char *line, int i)
 {
 	if (vars->tok_status == 6)
 		vars->tok_status = 0;
-	while (line[i] != '|' && line[i] != ' ' && line[i] != '\t'
+	while (line[i] != '|' && line[i] != '>' && line[i]
+		!= '<' && line[i] != ' ' && line[i] != '\t'
 		&& line[i] != '\"' && line[i] != '\'' && line[i])
 	{
 		vars->count++;

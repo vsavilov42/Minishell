@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/21 13:31:01 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/04/20 20:14:44 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <minishell.h>
@@ -49,7 +49,7 @@ void	normal_token(t_reading *vars, char *line, int i)
 
 	temp = NULL;
 	if (vars->tok_status == 2 && line[i] != ' ' && line[i]
-		!= '\t' && line[i] != '|' && line[i])
+		!= '\t' && line[i] != '|' && line[i] != '>' && line[i] != '<' && line[i])
 		vars->tok_status = 3;
 	if (vars->tok_status != 1 && vars->tok_status != 3 && vars->tok_status != 5)
 	{
@@ -72,11 +72,13 @@ void	normal_token(t_reading *vars, char *line, int i)
 	}
 }
 
-void	pipe_token(t_reading *vars, char *line, int i)
+int	other_token(t_reading *vars, char *line, int i)
 {
+	int		check;
 	t_token	*temp;
 
 	temp = NULL;
+	check = 0;
 	if (vars->tok_status != 1)
 	{
 		if (vars->token)
@@ -92,15 +94,37 @@ void	pipe_token(t_reading *vars, char *line, int i)
 			temp->next = vars->token;
 		if (i - vars->space_count == 0)
 			vars->head = vars->token;
-		vars->token->data = ft_substr(line, i, 1);
-		vars->token->type = 2;
+		if ((line[i] == '>' && line[i + 1] == '>') || (line[i] == '<' && line[i + 1] == '<'))
+		{
+			vars->token->data = ft_substr(line, i, 2);
+			check = 1;
+		}
+		else
+			vars->token->data = ft_substr(line, i, 1);
+		if (line[i] == '|')
+			vars->token->type = 2;
+		if (line[i] == '>')
+		{
+			vars->token->type = 3;
+			if (line[i] == line[i + 1])
+				vars->token->type = 5;
+		}
+		if (line[i] == '<')
+		{
+			vars->token->type = 4;
+			if (line[i] == line[i + 1])
+				vars->token->type = 6;
+		}
 		vars->token->next = NULL;
 		vars->token = vars->token->next;
 	}
 	else
 		vars->count++;
+	return (check);
 }
 
+//TODO: test >>>  a ver que hace;
+//TOKEN TYPES: normal = 1; pipe = 2; > = 3, < = 4; >> = 5; << = 6;
 int	line_handler(t_reading *vars, char *line, int i)
 {
 	if (i == 0)
@@ -110,14 +134,17 @@ int	line_handler(t_reading *vars, char *line, int i)
 		vars->space_count = i;
 	}
 	vars->token = vars->head;
-	if (line[i] != '|' || vars->tok_status == 6)
+	if ((line[i] != '|' && line[i] != '<' && line[i] != '>') || vars->tok_status == 6)
 	{
 		i = skip_chars(vars, line, i);
 		i = quote_handling(vars, line, i);
 		normal_token(vars, line, i);
 	}
 	else
-		pipe_token(vars, line, i++);
+	{
+		if (other_token(vars, line, i++))
+			i++;
+	}
 	while (line[i] == ' ' || line[i] == '\t')
 	{
 		vars->count++;
@@ -136,17 +163,28 @@ void	get_lines(char *line)
 	while (line[i] || vars.tok_status == 1)
 	{
 		if (tok_status_check(&vars, line, i))
-			break ; //TODO: evitar que el programa siga;
+			break ;//TODO: evitar que el programa siga;
 		i = line_handler(&vars, line, i);
 	}
-	//TEST ANTES DE EXPANSION////////////////////
+	/*//TEST ANTES DE EXPANSION////////////////////
 	vars.token = vars.head;
 	while (vars.token)
 	{
 		printf("test pre exp: %s\n", vars.token->data);
 		vars.token = vars.token->next;
 	}
-	/////////////////////////////////////////////
+	/////////////////////////////////////////////*/
 	tok_expand(&vars);
-	token_clear(&vars); //TODO: esto va al final;
+	/*//TEST DESPUES DE EXPANSION////////////////////
+	vars.token = vars.head;
+	while (vars.token)
+	{
+		printf("test post exp: %s\n", vars.token->data);
+		printf("type: %d\n", vars.token->type);
+		vars.token = vars.token->next;
+	}
+	printf("---------------------------------\n");
+	/////////////////////////////////////////////*/
+	parse(&vars);
+	token_clear(&vars);
 }
