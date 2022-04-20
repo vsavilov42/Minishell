@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:44:27 by nortolan          #+#    #+#             */
-/*   Updated: 2022/04/20 21:06:25 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/04/20 21:39:28 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void	cmds_clear(t_parse *parse)
 	parse->cmds = parse->head_cmd;
 	if (parse->cmds == NULL)
 		return ;
-	printf("funciono!\n");
 	while (parse->cmds)
 	{
 		free_args(parse->cmds->argv);
 		temp = parse->cmds;
+		free(parse->cmds->type_arr);
 		parse->cmds = parse->cmds->next;
 		free(temp);
 	}
@@ -61,7 +61,7 @@ void	create_cmd(t_reading *vars, t_parse *parse)
 {
 	int		i;
 	t_cmd	*temp_cmd;
-	t_token	*temp_token; //leaks?
+	t_token	*temp_token;
 
 	i = -1;
 	temp_cmd = NULL;
@@ -80,6 +80,9 @@ void	create_cmd(t_reading *vars, t_parse *parse)
 	parse->cmds->argv = malloc(sizeof(char *) * (parse->wc + 1));
 	if (parse->cmds->argv == NULL)
 		exit (1);
+	parse->cmds->type_arr = malloc(sizeof(int) * parse->wc);
+	if (parse->cmds->type_arr == NULL)
+		exit (1);
 	if (temp_cmd == NULL)
 		parse->head_cmd = parse->cmds;
 	while (++i < parse->wc_aux)
@@ -91,7 +94,9 @@ void	create_cmd(t_reading *vars, t_parse *parse)
 	i = -1;
 	while (++i < parse->wc)
 	{
-		parse->cmds->argv[i] = ft_strdup(temp_token->data); //leaks?
+		parse->cmds->argv[i] = ft_strdup(temp_token->data);
+		parse->cmds->type_arr[i] = temp_token->type;
+		parse->cmds->pos = 1;
 		temp_token = temp_token->next;
 	}
 	parse->cmds->argv[i] = NULL;
@@ -101,6 +106,8 @@ void	create_cmd(t_reading *vars, t_parse *parse)
 	while (++i < parse->wc)
 	{
 		printf("cmds: %s\n", parse->cmds->argv[i]);
+		printf("type: %d\n", parse->cmds->type_arr[i]);
+		printf("pos:  %d\n", parse->cmds->pos);
 //		printf("cmds: %p\n", parse->cmds->argv[i]);
 	}
 	printf("cmds: %s\n", parse->cmds->argv[i]);
@@ -123,6 +130,17 @@ void	get_cmd(t_reading *vars, t_parse *parse)
 		parse->wc++;
 		vars->token = vars->token->next;
 	}
+	parse->head_cmd->pos = 0;
+	if (parse->cmds->pos != 0)
+		parse->cmds->pos = 2;
+	///////////TESTING////////////////////////////
+	parse->cmds = parse->head_cmd;
+	while (parse->cmds)
+	{
+		printf("pos: %d\n", parse->cmds->pos);
+		parse->cmds = parse->cmds->next;
+	}
+	//////////////////////////////////////////////
 }
 
 void	parse(t_reading *vars)

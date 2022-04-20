@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/04/05 21:08:04 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/04/20 21:26:00 by nortolan         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:41:17 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -20,9 +20,10 @@
 typedef struct s_cmd
 {
 	char			**argv;
-//	char			*input;
-//	char			*output;
+	int				*type_arr;
+	int				pos;
 	struct s_cmd	*next;
+
 }	t_cmd;
 
 typedef struct s_parse
