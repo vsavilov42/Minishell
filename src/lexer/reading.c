@@ -156,14 +156,19 @@ int	line_handler(t_reading *vars, char *line, int i)
 void	get_lines(char *line)
 {
 	int			i;
+	int			break_check;
 	t_reading	vars;
 
 	i = 0;
+	break_check = 0;
 	reading_struct_init(&vars);
 	while (line[i] || vars.tok_status == 1)
 	{
 		if (tok_status_check(&vars, line, i))
-			break ;//TODO: evitar que el programa siga;
+		{
+			break_check = 1;
+			break ;
+		}
 		i = line_handler(&vars, line, i);
 	}
 	/*//TEST ANTES DE EXPANSION////////////////////
@@ -174,17 +179,10 @@ void	get_lines(char *line)
 		vars.token = vars.token->next;
 	}
 	/////////////////////////////////////////////*/
-	tok_expand(&vars);
-	/*//TEST DESPUES DE EXPANSION////////////////////
-	vars.token = vars.head;
-	while (vars.token)
+	if (!break_check)
 	{
-		printf("test post exp: %s\n", vars.token->data);
-		printf("type: %d\n", vars.token->type);
-		vars.token = vars.token->next;
+		tok_expand(&vars);
+		parse(&vars);
 	}
-	printf("---------------------------------\n");
-	/////////////////////////////////////////////*/
-	parse(&vars);
 	token_clear(&vars);
 }
