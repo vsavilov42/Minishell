@@ -137,11 +137,11 @@ sanitize: $(NAME)
 
 clean:
 	rm -rf $(OBJ_PATH)
+	rm -rf $(LIBFT_NAME)
 
 fclean: clean
 	$(MAKE) fclean -sC $(LIB_PATH)
-	rm $(NAME)
-	rm $(LIBFT_NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 

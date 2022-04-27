@@ -57,15 +57,8 @@ void	cmds_clear(t_parse *parse)
 	}
 }
 
-void	create_cmd(t_reading *vars, t_parse *parse)
+void	cmd_checks(t_cmd *temp_cmd, t_parse *parse)
 {
-	int		i;
-	t_cmd	*temp_cmd;
-	t_token	*temp_token;
-
-	i = -1;
-	temp_cmd = NULL;
-	temp_token = vars->head;
 	if (parse->cmds)
 	{
 		parse->cmds = last_cmd(parse->cmds);
@@ -85,6 +78,18 @@ void	create_cmd(t_reading *vars, t_parse *parse)
 		exit (1);
 	if (temp_cmd == NULL)
 		parse->head_cmd = parse->cmds;
+}
+
+void	create_cmd(t_reading *vars, t_parse *parse)
+{
+	int		i;
+	t_cmd	*temp_cmd;
+	t_token	*temp_token;
+
+	i = -1;
+	temp_cmd = NULL;
+	temp_token = vars->head;
+	cmd_checks(temp_cmd, parse);
 	while (++i < parse->wc_aux)
 	{
 		temp_token = temp_token->next;
@@ -115,7 +120,6 @@ void	create_cmd(t_reading *vars, t_parse *parse)
 	///////////TESTING//////////////
 }
 
-//TODO: añadir los types al array de integers;
 void	get_cmd(t_reading *vars, t_parse *parse)
 {
 	vars->token = vars->head;
