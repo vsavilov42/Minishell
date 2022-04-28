@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 11:07:53 by nortolan          #+#    #+#             */
-/*   Updated: 2022/04/28 12:36:53 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/04/28 13:17:24 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,31 @@ int	tok_status_check(t_reading *vars, char *line, int i)
 	{
 		write (2, "Quotation marks not closed\n", 27);
 		return (1);
+	}
+	return (0);
+}
+
+int	check_pipes(t_reading *vars)
+{
+	int	checker;
+
+	checker = 0;
+	vars->token = vars->head;
+	while (vars->token)
+	{
+		if (vars->token->type == 2)
+		{
+			if (checker == 1)
+			{
+				write (2, "Syntax error near unexpected token `|'\n", 39);
+				return (1);
+			}
+			else
+				checker = 1;
+		}
+		else
+			checker = 0;
+		vars->token = vars->token->next;
 	}
 	return (0);
 }

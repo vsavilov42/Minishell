@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/04/28 12:37:01 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/04/28 13:17:23 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <minishell.h>
@@ -159,6 +159,7 @@ void	get_lines(char *line)
 		vars.token = vars.token->next;
 	}
 	/////////////////////////////////////////////*/
+	break_check = check_pipes(&vars);
 	if (!break_check)
 	{
 		tok_expand(&vars);

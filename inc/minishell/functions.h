@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/04/28 12:37:32 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/04/28 13:14:53 by nortolan         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -74,6 +74,7 @@ void	reading_struct_init(t_reading *vars);
 t_token	*last_token(t_token *lst);
 void	token_clear(t_reading *vars);
 int	tok_status_check(t_reading *vars, char *line, int i);
+int	check_pipes(t_reading *vars);
 
 //expansions.c
 void	tok_expand(t_reading *vars);
