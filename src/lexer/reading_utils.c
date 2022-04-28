@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 11:07:53 by nortolan          #+#    #+#             */
-/*   Updated: 2022/04/05 20:59:58 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:36:53 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,32 @@ void	token_clear(t_reading *vars)
 		vars->token = vars->token->next;
 		free(temp);
 	}
+}
+
+int	tok_status_check(t_reading *vars, char *line, int i)
+{
+	if (vars->tok_status == 2 || vars->tok_status == 4)
+		vars->tok_status = 0;
+	if (vars->tok_status == 0)
+	{
+		vars->space_count = 0;
+		if (vars->q_check == 1)
+			vars->q_check = 0;
+		vars->q_count_aux_2 = 0;
+		vars->count = 0;
+	}
+	if (vars->tok_status == 5)
+	{
+		vars->q_count_aux_2 = 0;
+		vars->tok_status = 6;
+		vars->q_check = 1;
+	}
+	if ((line[i] == '\0' && vars->tok_status == 1)
+		|| (line[i + 1] == '\0' && vars->tok_status == 1
+			&& ((line[i] != '\"' && line[i] != '\'') || vars->aux_count > 0)))
+	{
+		write (2, "Quotation marks not closed\n", 27);
+		return (1);
+	}
+	return (0);
 }

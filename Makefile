@@ -59,7 +59,7 @@ SRCS_MAIN =		main.c
 SRCS_LEXER =	reading.c			reading_utils.c		quote_handling.c\
 				expansions.c
 
-SRCS_PARSER =	parse.c				remove_quotes.c
+SRCS_PARSER =	parse.c				remove_quotes.c		parse_utils.c
 
 SRCS_BUILTIN =	builtin.c			cd.c				pwd.c			\
 				env.c				unset.c				exit.c			\
