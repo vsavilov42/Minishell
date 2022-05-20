@@ -41,11 +41,13 @@ LIB_PATH = libft
 #######################
 
 SRC_DIR_LEXER =	lexer
+SRC_DIR_EXEC =	exec
 SRC_DIR_PARSER = parser
 SRC_DIR_BUILTIN =	built-in
 
 OBJ_DIR_ALL =	$(SRC_DIR_LEXER)										\
 				$(SRC_DIR_PARSER)										\
+				$(SRC_DIR_EXEC)										\
 				$(SRC_DIR_BUILTIN)
 
 OBJ_DIR = $(addprefix $(OBJ_PATH)/, $(OBJ_DIR_ALL))
@@ -55,6 +57,8 @@ OBJ_DIR = $(addprefix $(OBJ_PATH)/, $(OBJ_DIR_ALL))
 ########################
 
 SRCS_MAIN =		main.c
+
+SRCS_EXEC =		command_analyze.c
 
 SRCS_LEXER =	reading.c			reading_utils.c		quote_handling.c\
 				expansions.c
@@ -69,6 +73,7 @@ SRCS_BUILTIN =	builtin.c			cd.c				pwd.c			\
 
 SRCS_NAME =	$(SRCS_MAIN)												\
 			$(addprefix $(SRC_DIR_LEXER)/, $(SRCS_LEXER))				\
+			$(addprefix $(SRC_DIR_EXEC)/, $(SRCS_EXEC))				\
 			$(addprefix $(SRC_DIR_PARSER)/, $(SRCS_PARSER))				\
 			$(addprefix $(SRC_DIR_BUILTIN)/, $(SRCS_BUILTIN))
 

@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:44:27 by nortolan          #+#    #+#             */
-/*   Updated: 2022/05/20 12:24:48 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/05/20 13:18:38 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void	parse(t_reading *vars)
 	/////////////////////////////////////////////*/
 	parse_init(&parse);
 	get_cmd(vars, &parse);
-	builtin(parse.cmds->argv);
+	command_analyze(parse.cmds);
+	//builtin(parse.cmds->argv);
 	cmds_clear(&parse);
 }
