@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:44:27 by nortolan          #+#    #+#             */
-/*   Updated: 2022/04/28 12:24:50 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/05/20 12:24:48 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	create_cmd(t_reading *vars, t_parse *parse)
 	}
 	parse->cmds->argv[i] = NULL;
 	parse->cmds->next = NULL;
-	////////////TESTING//////////////
+	/*////////////TESTING//////////////
 	i = -1;
 	while (++i < parse->wc)
 	{
@@ -72,7 +72,7 @@ void	create_cmd(t_reading *vars, t_parse *parse)
 	}
 	printf("cmds: %s\n", parse->cmds->argv[i]);
 	printf(">>>>>>>>>>>><<<<<<<<<<<<<\n");
-	///////////TESTING//////////////
+	///////////TESTING//////////////*/
 }
 
 void	get_cmd(t_reading *vars, t_parse *parse)
@@ -93,14 +93,14 @@ void	get_cmd(t_reading *vars, t_parse *parse)
 	parse->head_cmd->pos = 0;
 	if (parse->cmds->pos != 0)
 		parse->cmds->pos = 2;
-	///////////TESTING////////////////////////////
+	/*///////////TESTING////////////////////////////
 	parse->cmds = parse->head_cmd;
 	while (parse->cmds)
 	{
 		printf("pos: %d\n", parse->cmds->pos);
 		parse->cmds = parse->cmds->next;
 	}
-	//////////////////////////////////////////////
+	//////////////////////////////////////////////*/
 }
 
 void	parse(t_reading *vars)
@@ -108,7 +108,7 @@ void	parse(t_reading *vars)
 	t_parse	parse;
 
 	remove_quotes(vars);
-	//TEST DESPUES DE COMILLAS////////////////////
+	/*//TEST DESPUES DE COMILLAS////////////////////
 	vars->token = vars->head;
 	while (vars->token)
 	{
@@ -117,8 +117,9 @@ void	parse(t_reading *vars)
 		vars->token = vars->token->next;
 	}
 	printf("---------------------------------\n");
-	/////////////////////////////////////////////
+	/////////////////////////////////////////////*/
 	parse_init(&parse);
 	get_cmd(vars, &parse);
+	builtin(parse.cmds->argv);
 	cmds_clear(&parse);
 }
