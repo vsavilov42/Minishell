@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/04/28 13:14:53 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/05/20 13:27:28 by nortolan         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -14,6 +14,10 @@
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 # include "structs.h"
+
+/* command_analyze.c */
+
+void	command_analyze(t_cmd *cmds);
 
 /* quote_handlin.c */
 

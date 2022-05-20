@@ -40,13 +40,15 @@ LIB_PATH = libft
 ###   Directories   ###
 #######################
 
-SRC_DIR_LEXER =	lexer
-SRC_DIR_PARSER = parser
+SRC_DIR_LEXER =		lexer
+SRC_DIR_PARSER =	parser
 SRC_DIR_BUILTIN =	built-in
+SRC_DIR_EXEC =		exec
 
 OBJ_DIR_ALL =	$(SRC_DIR_LEXER)										\
 				$(SRC_DIR_PARSER)										\
-				$(SRC_DIR_BUILTIN)
+				$(SRC_DIR_BUILTIN)										\
+				$(SRC_DIR_EXEC)
 
 OBJ_DIR = $(addprefix $(OBJ_PATH)/, $(OBJ_DIR_ALL))
 
@@ -67,10 +69,13 @@ SRCS_BUILTIN =	builtin.c			cd.c				pwd.c			\
 				error.c				utils.c				utils_list.c	\
 				init_shell.c		echo.c
 
+SRCS_EXEC =		command_analyze.c
+
 SRCS_NAME =	$(SRCS_MAIN)												\
 			$(addprefix $(SRC_DIR_LEXER)/, $(SRCS_LEXER))				\
 			$(addprefix $(SRC_DIR_PARSER)/, $(SRCS_PARSER))				\
-			$(addprefix $(SRC_DIR_BUILTIN)/, $(SRCS_BUILTIN))
+			$(addprefix $(SRC_DIR_BUILTIN)/, $(SRCS_BUILTIN))			\
+			$(addprefix $(SRC_DIR_EXEC)/, $(SRCS_EXEC))
 
 ######################
 ###   Make rules   ###
