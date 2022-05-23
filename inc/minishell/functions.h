@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/05/20 13:27:28 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/05/23 13:25:04 by nortolan         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -17,7 +17,7 @@
 
 /* command_analyze.c */
 
-void	command_analyze(t_cmd *cmds);
+void	command_analyze(t_cmd *cmds, t_cmd *head_cmd);
 
 /* quote_handlin.c */
 
@@ -92,6 +92,7 @@ void	parse(t_reading *vars);
 //parse_utils.c
 void	parse_init(t_parse *parse);
 t_cmd	*last_cmd(t_cmd *lst);
+void	free_args(char **argv);
 void	cmds_clear(t_parse *parse);
 
 #endif

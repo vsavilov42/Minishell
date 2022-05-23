@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 13:26:51 by nortolan          #+#    #+#             */
-/*   Updated: 2022/05/20 14:26:00 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/05/23 13:25:58 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,51 @@ void	syntax_check(t_cmd *cmds)
 	}
 }
 
-void	command_analyze(t_cmd *cmds)
+void	here_doc(t_cmd *cmds)
+{
+	int		i;
+//	int		aux;
+	int		count;
+	char	**dels;
+
+	count = 0;
+	while (cmds)
+	{
+		i = -1;
+//		aux = 0;
+		while (cmds->argv[++i])
+		{
+			if (cmds->type_arr[i] == 6)
+				count++;
+		}
+		dels = malloc(sizeof(char *) * (count + 1));
+		if (dels == NULL)
+			exit (1);
+		i = -1;
+		count = 0;
+		while (cmds->argv[++i])
+		{
+			if (cmds->type_arr[i] == 6)
+			{
+				dels[count++] = ft_strdup(cmds->argv[i + 1]);
+			}
+		}
+		dels[count] = NULL;
+		//////////TESTTTTTT/////////////
+		count = -1;
+		while (dels[++count])
+			printf("dels: %s\n", dels[count]);
+		printf("-------------------------\n");
+		////////////////////////////////
+		free_args(dels);
+		cmds = cmds->next;
+	}
+}
+
+void	command_analyze(t_cmd *cmds, t_cmd *head_cmd)
 {
 	syntax_check(cmds);
+	cmds = head_cmd;
+	here_doc(cmds);
 	builtin(cmds->argv);
 }
