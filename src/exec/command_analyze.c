@@ -6,11 +6,13 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 13:26:51 by nortolan          #+#    #+#             */
-/*   Updated: 2022/05/23 13:25:58 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:33:42 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+//TODO: "<<" solo falla;
 
 void	syntax_check(t_cmd *cmds)
 {
@@ -45,17 +47,16 @@ void	syntax_check(t_cmd *cmds)
 }
 
 void	here_doc(t_cmd *cmds)
-{
+ {
 	int		i;
-//	int		aux;
 	int		count;
+	char	*line;
 	char	**dels;
 
 	count = 0;
 	while (cmds)
 	{
 		i = -1;
-//		aux = 0;
 		while (cmds->argv[++i])
 		{
 			if (cmds->type_arr[i] == 6)
@@ -69,17 +70,27 @@ void	here_doc(t_cmd *cmds)
 		while (cmds->argv[++i])
 		{
 			if (cmds->type_arr[i] == 6)
-			{
 				dels[count++] = ft_strdup(cmds->argv[i + 1]);
-			}
 		}
 		dels[count] = NULL;
 		//////////TESTTTTTT/////////////
 		count = -1;
 		while (dels[++count])
 			printf("dels: %s\n", dels[count]);
+		printf("dels: %s\n", dels[count]);
 		printf("-------------------------\n");
 		////////////////////////////////
+		count = 0;
+		while (dels[count])
+		{
+			line = readline("> ");
+			if (line == NULL)
+				break ;
+			if (ft_strncmp(line, dels[count], ft_strlen(dels[count])) == 0
+				&& ft_strlen(line) == ft_strlen(dels[count]))
+				count++;
+			free(line);
+		}
 		free_args(dels);
 		cmds = cmds->next;
 	}
