@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 13:26:51 by nortolan          #+#    #+#             */
-/*   Updated: 2022/05/24 20:33:42 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:55:35 by nicolike         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,42 @@ void	syntax_check(t_cmd *cmds)
 	}
 }
 
+void	here_loop(int count, char **dels, t_cmd *cmds)
+{
+	int		i;
+//	int		fd;
+//	int		loop_fd;
+	char	*line;
+
+	count = 0;
+	i = -1;
+	while (cmds->argv[++i])
+	{
+		printf("test2: %s\n", cmds->argv[i]);
+		while (cmds->type_arr[i] == 6)
+		{
+			line = readline("> ");
+			if (line == NULL)
+				break ;
+			printf("testDELS: %s\n", dels[count]);
+			printf("testLINE: %s\n", line);
+			if (ft_strncmp(line, dels[count], ft_strlen(dels[count])) == 0
+				&& ft_strlen(line) == ft_strlen(dels[count]))
+				{
+					i++;
+					count++;
+				}
+			free(line);
+		}
+	}
+}
+
 void	here_doc(t_cmd *cmds)
  {
 	int		i;
 	int		count;
-	char	*line;
+//	int		fd;
+//	int		loop_fd;
 	char	**dels;
 
 	count = 0;
@@ -80,17 +111,7 @@ void	here_doc(t_cmd *cmds)
 		printf("dels: %s\n", dels[count]);
 		printf("-------------------------\n");
 		////////////////////////////////
-		count = 0;
-		while (dels[count])
-		{
-			line = readline("> ");
-			if (line == NULL)
-				break ;
-			if (ft_strncmp(line, dels[count], ft_strlen(dels[count])) == 0
-				&& ft_strlen(line) == ft_strlen(dels[count]))
-				count++;
-			free(line);
-		}
+		here_loop(count, dels, cmds);
 		free_args(dels);
 		cmds = cmds->next;
 	}
