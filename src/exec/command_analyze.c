@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 13:26:51 by nortolan          #+#    #+#             */
-/*   Updated: 2022/05/25 13:55:35 by nicolike         ###   ########.fr       */
+/*   Updated: 2022/05/30 12:32:52 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	here_loop(int count, char **dels, t_cmd *cmds)
 			line = readline("> ");
 			if (line == NULL)
 				break ;
-			printf("testDELS: %s\n", dels[count]);
-			printf("testLINE: %s\n", line);
+			//printf("testDELS: %s\n", dels[count]);
+			//printf("testLINE: %s\n", line);
 			if (ft_strncmp(line, dels[count], ft_strlen(dels[count])) == 0
 				&& ft_strlen(line) == ft_strlen(dels[count]))
 				{
