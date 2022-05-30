@@ -6,13 +6,16 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 13:26:51 by nortolan          #+#    #+#             */
-/*   Updated: 2022/05/30 12:32:52 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/05/30 14:23:16 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 //TODO: "<<" solo falla;
+//TODO: por cada heredoc, abres un archivo (temp1, temp2, etc por ejemplo),
+//		escribes en el lo que haya en el heredoc y lo cierras, el exec tendrá
+//		que acceder a ellos mas adelante. cada uno tiene su file descriptor
 
 void	syntax_check(t_cmd *cmds)
 {
