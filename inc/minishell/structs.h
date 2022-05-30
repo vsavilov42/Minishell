@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/04/20 21:26:00 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/05/23 11:53:25 by Vsavilov         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:41:17 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -75,12 +75,20 @@ typedef struct s_bt_lst
 	struct s_bt_lst *next;
 }	t_bt_lst;
 
+//exec
+typedef struct s_exec
+{
+	int	fd_io[2];
+	int	pipe_fd[2];
+	pid_t	pid;
+}	t_exec;
 //global
 typedef struct s_sh
 {
 	int		status;
 	t_envlst	*env;
 	t_bt_lst	*bt;
+	t_exec		*exec;
 }	t_sh;
 
 extern	t_sh	g_sh;

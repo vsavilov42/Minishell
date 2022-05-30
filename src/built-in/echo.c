@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:27:11 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/05/20 14:26:52 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/05/23 11:58:43 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	ft_echo(char **arg)
 
 	i = 1;
 	tmp = strtolow(arg[0]);
-	printf("%s\n", tmp);
 	if (!same_strcmp(tmp, "echo"))
 	{
 		free(tmp);
