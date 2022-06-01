@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/04/20 21:26:00 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/06/01 13:34:54 by nortolan         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:41:17 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -33,6 +33,12 @@ typedef struct s_parse
 	struct s_cmd	*cmds;
 	struct	s_cmd	*head_cmd;
 }	t_parse;
+
+typedef struct s_here
+{
+	int	file_num;
+	int	free_check;
+}	t_here;
 
 //tokens
 typedef struct s_token
