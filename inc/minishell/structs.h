@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/06/01 13:34:54 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:08:16 by nortolan         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:41:17 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -36,8 +36,13 @@ typedef struct s_parse
 
 typedef struct s_here
 {
-	int	file_num;
-	int	free_check;
+	int		file_num;
+	int		free_check;
+	int		count;
+	char	*file;
+	char	*line;
+	char	**dels;
+
 }	t_here;
 
 //tokens
