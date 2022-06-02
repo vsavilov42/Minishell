@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/05/30 13:27:25 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/05/30 14:28:44 by Vsavilov         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -22,7 +22,7 @@ void	command_analyze(t_cmd *cmds);
 void	command_exec(t_cmd *cmds);
 void	standard_command(char **arg);
 void	exec_one_command(t_cmd *cmds);
-void	exec_one_cmd_no_builtin(char **cmd);
+void	exec_one_cmd_no_builtin(t_cmd *cmd);
 char	**env_pointer(void);
 
 /* quote_handlin.c */

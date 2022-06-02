@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:56:20 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/05/30 13:29:40 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/05/31 14:08:17 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,51 @@ char	**env_pointer(void)
 	return (env);
 }
 
-void	exec_one_cmd_no_builtin(char **cmd)
+void	command_path(t_cmd *cmd, char *path_line)
 {
-	char **env;
+	char	**envtmp;
+	char	*tmp;
+	int	i;
+
+	envtmp = ft_split(path_line, ':');
+	tmp = ft_strjoin("/", *cmd->argv);
+	i = -1;
+	while (envtmp[++i])
+		if (access(ft_strjoin(envtmp[i], tmp), X_OK))
+			cmd->cmd_path = ft_strjoin(envtmp[i], tmp);
+	if (!cmd->cmd_path)
+		ft_putstr_fd("Error: Command not found\n", 2);
+}
+
+void	exec_one_cmd_no_builtin(t_cmd *cmd)
+{
+	char	**env;
+	char	*path_line;
+	int	i;
 
 	env = env_pointer();
-	printf("%s\n", *env);
+	i = -1;
+	g_sh.cmd->env = env;
+	if (**cmd->argv == '/' || **cmd->argv == '.' || access(*cmd->argv, X_OK) == 0)
+		cmd->cmd_path = *cmd->argv;
+	else
+	{
+		while (env[++i])
+		{
+			if (!same_strcmp("PATH=", env[i]))
+				path_line = ft_substr(env[i], 5, ft_strlen(env[i]));
+			if (!path_line)
+				{
+					ft_putstr_fd("Error: Path not found\n", 2);
+					return ;
+				}
+		}
+		command_path(cmd, path_line);
+	}
+	if (cmd->cmd_path)
+		printf("%s\n", cmd->cmd_path);
+	execve(cmd->cmd_path, cmd->argv, env);
 	free_split(env);
-	(void)cmd;
 }
 
 void	exec_one_command(t_cmd *cmds)
@@ -104,7 +141,7 @@ void	exec_one_command(t_cmd *cmds)
 		builtin(cmds->argv);
 	//else if (!is_heredoc(cmds->argv))
 	else
-		exec_one_cmd_no_builtin(cmds->argv);
+		exec_one_cmd_no_builtin(cmds);
 }
 
 void	command_exec(t_cmd *cmds)
@@ -128,6 +165,7 @@ void	command_exec(t_cmd *cmds)
 
 void	command_analyze(t_cmd *cmds)
 {
+	g_sh.cmd = cmds;
 	command_exec(cmds);
 }
 
