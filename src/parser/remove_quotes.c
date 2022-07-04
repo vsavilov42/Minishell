@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:06:37 by nortolan          #+#    #+#             */
-/*   Updated: 2022/04/05 18:44:00 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/07/04 18:29:00 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,8 @@ int	remover_status(t_reading *vars, int i, int l)
 	else if (vars->token->data[i] == '\'' && vars->quote_type == 1
 		&& ++l)
 		vars->quote_type = 0;
-	else
-	{
-		if (vars->quote_type != 0)
-			l++;
-	}
+	else if (vars->quote_type != 0)
+		l++;
 	return (l);
 }
 
