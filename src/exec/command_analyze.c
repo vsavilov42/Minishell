@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:56:20 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/05/31 14:08:17 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/04 13:32:25 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	**env_pointer(void)
 	if (!g_sh.env)
 		return (NULL);
 	envlst = g_sh.env;
-	env = (char **)malloc(sizeof(char *) * count_env(envlst));
+	env = (char **)malloc(sizeof(char *) * count_env(envlst) + 1);
 	i = 0;
 	while (envlst)
 	{
@@ -85,6 +85,7 @@ char	**env_pointer(void)
 		free(tmp);
 		envlst = envlst->next;
 	}
+	env[i] = NULL;
 	return (env);
 }
 
@@ -113,24 +114,30 @@ void	exec_one_cmd_no_builtin(t_cmd *cmd)
 	env = env_pointer();
 	i = -1;
 	g_sh.cmd->env = env;
+	path_line = NULL;
 	if (**cmd->argv == '/' || **cmd->argv == '.' || access(*cmd->argv, X_OK) == 0)
 		cmd->cmd_path = *cmd->argv;
 	else
 	{
 		while (env[++i])
 		{
-			if (!same_strcmp("PATH=", env[i]))
+			//printf("%s\n", env[i]);
+			if (!ft_strncmp("PATH=", env[i], 5))
+			{
 				path_line = ft_substr(env[i], 5, ft_strlen(env[i]));
-			if (!path_line)
-				{
-					ft_putstr_fd("Error: Path not found\n", 2);
-					return ;
-				}
+				break ;
+			}
+		}
+		if (!path_line)
+		{
+			ft_putstr_fd("Error: Path not found\n", 2);
+			return ;
 		}
 		command_path(cmd, path_line);
 	}
 	if (cmd->cmd_path)
 		printf("%s\n", cmd->cmd_path);
+	free(path_line);
 	execve(cmd->cmd_path, cmd->argv, env);
 	free_split(env);
 }
