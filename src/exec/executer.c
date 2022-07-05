@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/05 18:54:11 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/05 19:01:03 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,9 @@ void	create_process(t_cmd *cmd, t_exec *prev)
 	own->pid = fork();
 	if (own->pid < 0)
 		perror("Fail to do fork\n");
-//	builtin(cmd->argv);
+	else if (own->pid == 0)
+		//hijo volver a llamar crear proceso
+	else
+		//padre cambiar in out luego ejecutar
+	//	builtin(cmd->argv);
 }
