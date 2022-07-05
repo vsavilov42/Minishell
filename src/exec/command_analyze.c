@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:56:20 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/04 13:32:25 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/05 16:28:47 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,8 @@ void	command_exec(t_cmd *cmds)
 void	command_analyze(t_cmd *cmds)
 {
 	g_sh.cmd = cmds;
-	command_exec(cmds);
+	//command_exec(cmds);
+	executer(cmds);
 }
 
 // | exec the last command without saving fd

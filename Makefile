@@ -58,7 +58,7 @@ OBJ_DIR = $(addprefix $(OBJ_PATH)/, $(OBJ_DIR_ALL))
 
 SRCS_MAIN =		main.c
 
-SRCS_EXEC =		command_analyze.c
+SRCS_EXEC =		command_analyze.c	executer.c
 
 SRCS_LEXER =	reading.c			reading_utils.c		quote_handling.c\
 				expansions.c

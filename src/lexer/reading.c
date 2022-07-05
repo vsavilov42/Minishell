@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/04/28 13:17:23 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/07/05 14:17:41 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <minishell.h>
@@ -164,6 +164,7 @@ void	get_lines(char *line)
 	{
 		tok_expand(&vars);
 		parse(&vars);
+		//executer(g_sh.cmd);
 	}
 	token_clear(&vars);
 }

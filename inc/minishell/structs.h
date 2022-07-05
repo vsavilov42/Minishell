@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/05/30 14:08:59 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/05 16:26:40 by dexposit         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:41:17 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -19,11 +19,11 @@
 //commands
 typedef struct s_cmd
 {
-	char		**argv;
-	char		*cmd_path;
-	char		**env;
-	int		*type_arr;
-	int		pos;
+	char			**argv;
+	char			*cmd_path;
+	char			**env;
+	int				*type_arr;
+	int				pos;
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -64,30 +64,30 @@ typedef struct s_reading
 //built-in
 typedef struct s_envlst
 {
-	char	*name;
-	char	*value;
-	struct s_envlst *next;
+	char			*name;
+	char			*value;
+	struct s_envlst	*next;
 }	t_envlst;
 
 typedef struct s_bt_lst
 {
-	char	*cmd;
-	int	(*f)(char **);
+	char			*cmd;
+	int				(*f)(char **);
 	struct s_bt_lst *next;
 }	t_bt_lst;
 
 //exec
 typedef struct s_exec
 {
-	int	fd_io[2];
-	int	pipe_fd[2];
+	int		fd_io[2];
+	int		pipe_fd[2];
 	pid_t	pid;
 }	t_exec;
 
 //global
 typedef struct s_sh
 {
-	int		status;
+	int			status;
 	t_envlst	*env;
 	t_bt_lst	*bt;
 	t_exec		*exec;
