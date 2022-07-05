@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:44:27 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/04 12:25:19 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/05 18:05:19 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,18 @@ void	create_cmd(t_reading *vars, t_parse *parse)
 	}
 	parse->cmds->argv[i] = NULL;
 	parse->cmds->next = NULL;
-	/*////////////TESTING//////////////
+/*	////////////TESTING//////////////
 	i = -1;
 	while (++i < parse->wc)
 	{
 		printf("cmds: %s\n", parse->cmds->argv[i]);
 		printf("type: %d\n", parse->cmds->type_arr[i]);
-		//printf("pos:  %d\n", parse->cmds->pos);
-//		printf("cmds: %p\n", parse->cmds->argv[i]);
+		printf("pos:  %d\n", parse->cmds->pos);
+		printf("cmds: %p\n", parse->cmds->argv[i]);
 	}
 	printf("cmds: %s\n", parse->cmds->argv[i]);
 	printf(">>>>>>>>>>>><<<<<<<<<<<<<\n");
-	///////////TESTING//////////////*/
+	///////////TESTING////////////// */
 }
 
 void	get_cmd(t_reading *vars, t_parse *parse)
@@ -120,7 +120,8 @@ void	parse(t_reading *vars)
 	/////////////////////////////////////////////*/
 	parse_init(&parse);
 	get_cmd(vars, &parse);
-	command_analyze(parse.cmds);
+	executer(&parse);
+	//command_analyze(parse.cmds);
 	//builtin(parse.cmds->argv);
 	cmds_clear(&parse);
 }

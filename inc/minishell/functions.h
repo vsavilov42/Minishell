@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/05 16:25:04 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/05 18:05:43 by dexposit         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -27,7 +27,7 @@ char	**env_pointer(void);
 
 /* executer.c */
 
-void	executer(t_cmd *cmd);
+void	executer(t_parse *cmd);
 void	create_process(t_cmd *cmd);
 
 /* quote_handlin.c */
