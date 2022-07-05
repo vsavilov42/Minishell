@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/05 18:09:11 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/05 18:22:01 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ void	executer(t_parse *cmd)
 	t_cmd	*aux;
 
 	aux = cmd->head_cmd;
-	//aux = cmd;
 	while (aux)
 	{
+		//create_process(g_sh.cmd);
 		printf("%s\n", *(aux->argv));
 		aux = aux->next;
 	}
-	//create_process(g_sh.cmd);
 	exit(0);
 }
 
