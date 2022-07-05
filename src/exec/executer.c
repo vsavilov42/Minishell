@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/05 18:22:01 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/05 18:54:11 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,15 @@ void	executer(t_parse *cmd)
 	exit(0);
 }
 
-void	create_process(t_cmd *cmd)
+void	create_process(t_cmd *cmd, t_exec *prev)
 {
-	builtin(cmd->argv);
+	t_exec	*own;
+
+	if (!cmd || !prev)
+		return ;
+	own = (t_exec *) malloc(sizeof (t_exec *));
+	own->pid = fork();
+	if (own->pid < 0)
+		perror("Fail to do fork\n");
+//	builtin(cmd->argv);
 }
