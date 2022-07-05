@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:44:27 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/05 18:05:19 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/05 18:17:31 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	create_cmd(t_reading *vars, t_parse *parse)
 	{
 		printf("cmds: %s\n", parse->cmds->argv[i]);
 		printf("type: %d\n", parse->cmds->type_arr[i]);
-		printf("pos:  %d\n", parse->cmds->pos);
-		printf("cmds: %p\n", parse->cmds->argv[i]);
+		//printf("pos:  %d\n", parse->cmds->pos);
+		//printf("cmds: %p\n", parse->cmds->argv[i]);
 	}
 	printf("cmds: %s\n", parse->cmds->argv[i]);
 	printf(">>>>>>>>>>>><<<<<<<<<<<<<\n");
