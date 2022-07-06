@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/05 14:17:41 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/06 16:49:12 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <minishell.h>
@@ -103,7 +103,7 @@ int	other_token(t_reading *vars, char *line, int i)
 }
 
 //TODO: test >>>  a ver que hace;
-//TOKEN TYPES: normal = 1; pipe = 2; > = 3, < = 4; >> = 5; << = 6;
+//TOKEN TYPES: normal = 1; pipe = 2; > = 3, < = 4; >> = 5; << = 6; in_out_file = 7; arg_cmd = 8;
 int	line_handler(t_reading *vars, char *line, int i)
 {
 	if (i == 0)
