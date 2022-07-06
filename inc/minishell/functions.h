@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/06 14:58:09 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/06 16:50:24 by dexposit         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -104,5 +104,7 @@ void	parse(t_reading *vars);
 void	parse_init(t_parse *parse);
 t_cmd	*last_cmd(t_cmd *lst);
 void	cmds_clear(t_parse *parse);
+void	set_token_type_7(int *src);
+void	set_token_type_8(int *src);
 
 #endif
