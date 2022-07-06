@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/05 18:10:37 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/06 14:58:12 by dexposit         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:41:17 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -82,6 +82,7 @@ typedef struct s_exec
 	int		fd_io[2];
 	int		pipe_fd[2];
 	pid_t	pid;
+	int		status;
 }	t_exec;
 
 //global
