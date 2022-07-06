@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/06 14:58:04 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/06 15:41:03 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	initialize_exec_struct(t_cmd *cmd, t_exec *prev)
 {
 	t_exec	*res;
 
+	if (!prev)
+		return ;
 	res = (t_exec *) malloc(sizeof(t_exec *));
 	if (!res)
 		perror("Fail to reserve memory\n");
