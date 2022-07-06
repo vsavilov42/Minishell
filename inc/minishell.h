@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:10:23 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/17 14:23:51 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/06 23:53:49 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdlib.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 # include <readline/readline.h>
 # include <readline/history.h>
