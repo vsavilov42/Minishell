@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/07 14:32:50 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/07 18:14:53 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,23 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 {
 	t_exec	*own;
 
-	//own = (t_exec *) malloc(sizeof (t_exec *));
 	own = initialize_exec_struct(cmd);
 	if (!own)
 		return (-1);
-	//rellenar structura own
-/*	if (cmd->next)
-		own->pid = fork();
-	if (own->pid < 0)
-	perror("Fail to do fork\n");*/
 	else if (own->pid == 0 && cmd->next)
 		create_process(cmd->next, own);
 	else if (own->pid == 0 && !cmd->next)
+		//dup entrada a pipe prev
 		printf("ultimo hijo: %s\n", *(cmd->argv));
 	else if (prev)
+		//dup entrada a pipe prev y salida a pipe own
 		printf("process padre hijo  of the command: %s\n", *(cmd->argv));
 	else
+		//dup salida a pipe own
 		printf("1processo cmd %s\n", *(cmd->argv));
 //	if (prev)
 //		waitpid(prev->pid, &prev->status, 0);
+	//modify_in_out_cmd(cmd, prev, own);
 	// modificar stdin stdout of the command: by pipes < > >> <<
 		//identificar que tipo es
 		//comprobar los diferentes permisos dependiendoo del caso
