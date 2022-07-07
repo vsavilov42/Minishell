@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/06 15:41:03 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/07 14:32:50 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,15 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 {
 	t_exec	*own;
 
-	own = (t_exec *) malloc(sizeof (t_exec *));
+	//own = (t_exec *) malloc(sizeof (t_exec *));
+	own = initialize_exec_struct(cmd);
+	if (!own)
+		return (-1);
 	//rellenar structura own
-	if (cmd->next)
+/*	if (cmd->next)
 		own->pid = fork();
 	if (own->pid < 0)
-		perror("Fail to do fork\n");
+	perror("Fail to do fork\n");*/
 	else if (own->pid == 0 && cmd->next)
 		create_process(cmd->next, own);
 	else if (own->pid == 0 && !cmd->next)
@@ -62,18 +65,33 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 		printf("1processo cmd %s\n", *(cmd->argv));
 //	if (prev)
 //		waitpid(prev->pid, &prev->status, 0);
+	// modificar stdin stdout of the command: by pipes < > >> <<
+		//identificar que tipo es
+		//comprobar los diferentes permisos dependiendoo del caso
+		//en caso de heredoc crearlo con un archivo temporal
+	//	PREGUNTAR SI ESTE ES EL ORDEN CORRECTO DE BASH O NO
+		// 1 pipes 2 infile 3 outfile
+	// recortar comando con argumentos: ls -la
+		//comprobar si es ruta absoluta o relativa
+		//prepar arg para execve y ejecutar
 	return (own->pid);
 }
 
-void	initialize_exec_struct(t_cmd *cmd, t_exec *prev)
+t_exec	*initialize_exec_struct(t_cmd *cmd)
 {
 	t_exec	*res;
 
-	if (!prev)
-		return ;
 	res = (t_exec *) malloc(sizeof(t_exec *));
 	if (!res)
-		perror("Fail to reserve memory\n");
+		return (perror("Fail to reserve memory\n"), NULL);
 	if (cmd->next)
+	{
 		pipe(res->pipe_fd);
+		if (!new_fork(res))
+		{
+			free(res);
+			res = NULL;
+		}
+	}
+	return (res);
 }
