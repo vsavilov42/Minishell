@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/06 16:50:24 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/07 14:11:07 by dexposit         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -17,52 +17,57 @@
 
 /* command_analyze.c */
 
-int	is_builtin(char **cmd);
-void	command_analyze(t_cmd *cmds);
-void	command_exec(t_cmd *cmds);
-void	standard_command(char **arg);
-void	exec_one_command(t_cmd *cmds);
-void	exec_one_cmd_no_builtin(t_cmd *cmd);
-char	**env_pointer(void);
+int			is_builtin(char **cmd);
+void		command_analyze(t_cmd *cmds);
+void		command_exec(t_cmd *cmds);
+void		standard_command(char **arg);
+void		exec_one_command(t_cmd *cmds);
+void		exec_one_cmd_no_builtin(t_cmd *cmd);
+char		**env_pointer(void);
 
 /* executer.c */
 
-void	executer(t_parse *cmd);
-pid_t	create_process(t_cmd *cmd, t_exec *prev);
+void		executer(t_parse *cmd);
+pid_t		create_process(t_cmd *cmd, t_exec *prev);
+t_exec		*initialize_exec_struct(t_cmd *cmd);
+
+/* executer_utils.c */
+
+int			new_fork(t_exec *exe);
 
 /* quote_handlin.c */
 
-int	skip_chars(t_reading *vars, char *line, int i);
-void	back_quote_check(t_reading *vars, char *line, int i);
-int	aux_count_loop(t_reading *vars, char *line, int i);
-int	quote_handling(t_reading *vars, char *line, int i);
+int			skip_chars(t_reading *vars, char *line, int i);
+void		back_quote_check(t_reading *vars, char *line, int i);
+int			aux_count_loop(t_reading *vars, char *line, int i);
+int			quote_handling(t_reading *vars, char *line, int i);
 
 /* expansions.c */
 
-void	tok_expand(t_reading *vars);
+void		tok_expand(t_reading *vars);
 
 /* reading_utils.c */
 
-void	reading_struct_init(t_reading *vars);
-t_token	*last_token(t_token *lst);
-void	token_clean(t_reading *vars);
+void		reading_struct_init(t_reading *vars);
+t_token		*last_token(t_token *lst);
+void		token_clean(t_reading *vars);
 
 /* error.c */
 
-int	error_command(char **cmd);
+int			error_command(char **cmd);
 
 /* utils.c */
 
-int	error_msg(char *str);
-int	same_strcmp(char *str1, char *str2);
-char	*strtolow(char *str);
-int	strlen_env(char *env);
-void	free_split(char **split);
-int	bad_str(char *arg);
+int			error_msg(char *str);
+int			same_strcmp(char *str1, char *str2);
+char		*strtolow(char *str);
+int			strlen_env(char *env);
+void		free_split(char **split);
+int			bad_str(char *arg);
 
 /* utils_list.c */
 
-void		free_lst();
+void		free_lst(void);
 t_envlst	*new_envlst(char *env);
 t_envlst	*new_envlst_equal(char *env);
 t_envlst	*new_envlst_only_name(char *env);
@@ -71,40 +76,40 @@ void		envlst_add_back(t_envlst **lst, t_envlst *new);
 
 /* init_shell.c */
 
-void	init_minishell(void);
-void	get_env(void);
-void	get_cmds(void);
+void		init_minishell(void);
+void		get_env(void);
+void		get_cmds(void);
 
 //reading.c
-void	get_lines(char *line);
+void		get_lines(char *line);
 
 //quote_handling.c
-int		skip_chars(t_reading *vars, char *line, int i);
-void	back_quote_check(t_reading *vars, char *line, int i);
-int		aux_count_loop(t_reading *vars, char *line, int i);
-int		quote_handling(t_reading *vars, char *line, int i);
+int			skip_chars(t_reading *vars, char *line, int i);
+void		back_quote_check(t_reading *vars, char *line, int i);
+int			aux_count_loop(t_reading *vars, char *line, int i);
+int			quote_handling(t_reading *vars, char *line, int i);
 
 //reading_utils.c
-void	reading_struct_init(t_reading *vars);
-t_token	*last_token(t_token *lst);
-void	token_clear(t_reading *vars);
-int	tok_status_check(t_reading *vars, char *line, int i);
-int	check_pipes(t_reading *vars);
+void		reading_struct_init(t_reading *vars);
+t_token		*last_token(t_token *lst);
+void		token_clear(t_reading *vars);
+int			tok_status_check(t_reading *vars, char *line, int i);
+int			check_pipes(t_reading *vars);
 
 //expansions.c
-void	tok_expand(t_reading *vars);
+void		tok_expand(t_reading *vars);
 
 //remove_quotes.c
-void	remove_quotes(t_reading *vars);
+void		remove_quotes(t_reading *vars);
 
 //parse.c
-void	parse(t_reading *vars);
+void		parse(t_reading *vars);
 
 //parse_utils.c
-void	parse_init(t_parse *parse);
-t_cmd	*last_cmd(t_cmd *lst);
-void	cmds_clear(t_parse *parse);
-void	set_token_type_7(int *src);
-void	set_token_type_8(int *src);
+void		parse_init(t_parse *parse);
+t_cmd		*last_cmd(t_cmd *lst);
+void		cmds_clear(t_parse *parse);
+void		set_token_type_7(int *src);
+void		set_token_type_8(int *src);
 
 #endif

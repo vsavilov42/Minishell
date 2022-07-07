@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/06 14:58:12 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/07 14:15:22 by dexposit         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:41:17 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -32,7 +32,7 @@ typedef struct s_parse
 	int				wc;
 	int				wc_aux;
 	struct s_cmd	*cmds;
-	struct	s_cmd	*head_cmd;
+	struct s_cmd	*head_cmd;
 }	t_parse;
 
 //tokens
@@ -73,7 +73,7 @@ typedef struct s_bt_lst
 {
 	char			*cmd;
 	int				(*f)(char **);
-	struct s_bt_lst *next;
+	struct s_bt_lst	*next;
 }	t_bt_lst;
 
 //exec
@@ -95,6 +95,6 @@ typedef struct s_sh
 	t_cmd		*cmd;
 }	t_sh;
 
-extern	t_sh	g_sh;
+extern t_sh	g_sh;
 
 #endif
