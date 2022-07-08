@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/07 18:07:56 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/08 14:45:55 by dexposit         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -30,11 +30,14 @@ char		**env_pointer(void);
 void		executer(t_parse *cmd);
 pid_t		create_process(t_cmd *cmd, t_exec *prev);
 t_exec		*initialize_exec_struct(t_cmd *cmd);
+void		execute_cmd(t_cmd *cmd);
 
 /* executer_utils.c */
 
 int			new_fork(t_exec *exe);
 void		modify_in_out_cmd(t_cmd *cmd, t_exec *prev, t_exec *own);
+char		**save_cmd_with_arguments(t_cmd *cmd);
+int			count_cmd_arg(t_cmd *cmd);
 
 /* quote_handlin.c */
 
