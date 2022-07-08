@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:56:20 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/05 18:14:20 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/08 17:43:01 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	**env_pointer(void)
 	return (env);
 }
 
-void	command_path(t_cmd *cmd, char *path_line)
+/*void	command_path(t_cmd *cmd, char *path_line)
 {
 	char	**envtmp;
 	char	*tmp;
@@ -103,7 +103,7 @@ void	command_path(t_cmd *cmd, char *path_line)
 			cmd->cmd_path = ft_strjoin(envtmp[i], tmp);
 	if (!cmd->cmd_path)
 		ft_putstr_fd("Error: Command not found\n", 2);
-}
+}*/
 
 void	exec_one_cmd_no_builtin(t_cmd *cmd)
 {

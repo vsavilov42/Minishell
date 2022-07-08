@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 12:11:36 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/06 16:53:35 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/08 17:59:07 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	set_token_type_8(int *src)
 	int	*aux;
 
 	cnt_type1 = 0;
+	aux = (int *)malloc(sizeof(int *) * 10);
 	aux = src;
 	while (*aux)
 	{

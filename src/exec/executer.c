@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/08 14:59:12 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/08 17:56:10 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,58 @@ t_exec	*initialize_exec_struct(t_cmd *cmd)
 
 void	execute_cmd(t_cmd *cmd)
 {
-	char **split_cmd;
+//	char **split_cmd;
 
+	if (!is_builtin(cmd->argv))
+		return (builtin(cmd->argv));
+	//printf("split_cmd\n");
+//	split_cmd = save_cmd_with_arguments(cmd);
+	//printf("----------------------\n");
+//	cmd->env = create_path(cmd);
+//	command_path(cmd, );
+	//printf("cmd path: %s\n", cmd->cmd_path);	
+//	execve(cmd->cmd_path, split_cmd, cmd->env);
 	//guardar commando con argumentos doble puntero nulo al final
-	printf("split_cmd\n");
-	split_cmd = save_cmd_with_arguments(cmd);
-	printf("----------------------\n");
+}
+char	**create_path(t_cmd *cmd)
+{
+	char	**env;
+	char	*path_line;
+	int	i;
+
+	env = env_pointer();
+	i = -1;
+	if (**cmd->argv == '/' || **cmd->argv == '.' || access(*cmd->argv, X_OK) == 0)
+		cmd->cmd_path = *cmd->argv;
+	else
+	{
+		while (env[++i])
+		{
+			if (!same_strcmp("PATH=", env[i]))
+				path_line = ft_substr(env[i], 5, ft_strlen(env[i]));
+			if (!path_line)
+				{
+					ft_putstr_fd("Error: Path not found\n", 2);
+					return (NULL);
+				}
+		}
+		command_path(cmd, path_line);
+	}
+	return (env);
+}
+
+void	command_path(t_cmd *cmd, char *path_line)
+{
+	char	**envtmp;
+	char	*tmp;
+	int	i;
+
+	envtmp = ft_split(path_line, ':');
+	tmp = ft_strjoin("/", *cmd->argv);
+	i = -1;
+	while (envtmp[++i])
+		if (access(ft_strjoin(envtmp[i], tmp), X_OK))
+			cmd->cmd_path = ft_strjoin(envtmp[i], tmp);
+	if (!cmd->cmd_path)
+		ft_putstr_fd("Error: Command not found\n", 2);
 }

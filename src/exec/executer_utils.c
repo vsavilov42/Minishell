@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:35:18 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/08 14:42:14 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/08 16:23:23 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ char	**save_cmd_with_arguments(t_cmd *cmd)
 			res[data_save++] = cmd->argv[i]; 
 	}
 	i = -1;
-	while (res[++i])
-		printf("cmd %d: %s\n", i, res[i]);
+//	while (res[++i])
+//		printf("cmd %d: %s\n", i, res[i]);
 	return (res);
 }
 
