@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:56:20 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/05/31 14:08:17 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/08 17:36:44 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	command_path(t_cmd *cmd, char *path_line)
 		ft_putstr_fd("Error: Command not found\n", 2);
 }
 
-void	exec_one_cmd_no_builtin(t_cmd *cmd)
+char	**create_path(t_cmd *cmd)
 {
 	char	**env;
 	char	*path_line;
@@ -112,7 +112,6 @@ void	exec_one_cmd_no_builtin(t_cmd *cmd)
 
 	env = env_pointer();
 	i = -1;
-	g_sh.cmd->env = env;
 	if (**cmd->argv == '/' || **cmd->argv == '.' || access(*cmd->argv, X_OK) == 0)
 		cmd->cmd_path = *cmd->argv;
 	else
@@ -124,15 +123,12 @@ void	exec_one_cmd_no_builtin(t_cmd *cmd)
 			if (!path_line)
 				{
 					ft_putstr_fd("Error: Path not found\n", 2);
-					return ;
+					return (NULL);
 				}
 		}
 		command_path(cmd, path_line);
 	}
-	if (cmd->cmd_path)
-		printf("%s\n", cmd->cmd_path);
-	execve(cmd->cmd_path, cmd->argv, env);
-	free_split(env);
+	return (env);
 }
 
 void	exec_one_command(t_cmd *cmds)
