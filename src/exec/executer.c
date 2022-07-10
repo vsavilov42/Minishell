@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/10 16:48:26 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/10 18:34:19 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,12 @@ t_exec	*initialize_exec_struct(t_cmd *cmd)
 
 void	execute_cmd(t_cmd *cmd)
 {
-//	char **split_cmd;
+	char **split_cmd;
 
 	if (!is_builtin(cmd->argv))
 		return (builtin(cmd->argv));
 	//printf("split_cmd\n");
-//	split_cmd = save_cmd_with_arguments(cmd);
+	split_cmd = save_cmd_with_arguments(cmd);
 	//printf("----------------------\n");
 
 
