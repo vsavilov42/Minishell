@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:44:27 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/08 18:03:02 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/10 16:29:08 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void	create_cmd(t_reading *vars, t_parse *parse)
 	{
 		parse->cmds->argv[i] = ft_strdup(temp_token->data);
 		parse->cmds->type_arr[i] = temp_token->type;
-		set_token_type_7(&parse->cmds->type_arr[i]);
+//		set_token_type_7(&parse->cmds->type_arr[i]);
 		parse->cmds->pos = 1;
 		temp_token = temp_token->next;
 	}
-	set_token_type_8((parse->cmds->type_arr));
+//	set_token_type_8((parse->cmds->type_arr));
 	parse->cmds->argv[i] = NULL;
 	parse->cmds->next = NULL;
 	////////////TESTING//////////////
