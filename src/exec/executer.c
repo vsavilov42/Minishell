@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/08 17:56:10 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/10 16:48:26 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_exec	*initialize_exec_struct(t_cmd *cmd)
 {
 	t_exec	*res;
 
-	res = (t_exec *) malloc(sizeof(t_exec *));
+	res = (t_exec *) malloc(sizeof(t_exec));
 	if (!res)
 		return (perror("Fail to reserve memory\n"), NULL);
 	if (cmd->next)
@@ -99,6 +99,10 @@ t_exec	*initialize_exec_struct(t_cmd *cmd)
 	}
 	return (res);
 }
+/*	1  crea el char ** para execve y 2 rellena el cmd->path con la ruta del commando que es.
+ */
+//	cmd->env = create_path(cmd);
+//	command_path(cmd, );
 
 void	execute_cmd(t_cmd *cmd)
 {
@@ -109,8 +113,8 @@ void	execute_cmd(t_cmd *cmd)
 	//printf("split_cmd\n");
 //	split_cmd = save_cmd_with_arguments(cmd);
 	//printf("----------------------\n");
-//	cmd->env = create_path(cmd);
-//	command_path(cmd, );
+
+
 	//printf("cmd path: %s\n", cmd->cmd_path);	
 //	execve(cmd->cmd_path, split_cmd, cmd->env);
 	//guardar commando con argumentos doble puntero nulo al final
