@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:56:20 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/08 17:43:01 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:49:04 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,15 @@ char	**env_pointer(void)
 	if (!g_sh.env)
 		return (NULL);
 	envlst = g_sh.env;
-	env = (char **)malloc(sizeof(char *) * count_env(envlst) + 1);
+	env = (char **) malloc(sizeof(char *) * (count_env(envlst) + 1));
 	i = 0;
 	while (envlst)
 	{
+		printf("%d\n", i);
 		tmp = ft_strjoin(envlst->name, "=");
+		printf("%d\n", i);
 		env[i] = ft_strjoin(tmp, envlst->value);
+		printf("%d\n", i);
 		i++;
 		free(tmp);
 		envlst = envlst->next;

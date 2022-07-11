@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/11 15:33:42 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:52:15 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,14 @@ int	execute_cmd(t_cmd *cmd)
 		return (builtin(cmd->argv), 0);
 	else
 	{
+	cmd->env = create_path(cmd);
 	printf("split_cmd\n");
 	split_cmd = save_cmd_with_arguments(cmd);
 	printf("----------------------\n");
+	printf("cmd path: %s\n", cmd->cmd_path);	
 	}
 
 
-	//printf("cmd path: %s\n", cmd->cmd_path);	
 //	execve(cmd->cmd_path, split_cmd, cmd->env);
 	//guardar commando con argumentos doble puntero nulo al final
 	return (1);
