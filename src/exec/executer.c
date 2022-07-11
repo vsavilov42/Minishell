@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/11 14:44:45 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/11 15:33:42 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_exec	*initialize_exec_struct(t_cmd *cmd)
 	res = (t_exec *) malloc(sizeof(t_exec));
 	if (!res)
 		return (perror("Fail to reserve memory\n"), NULL);
-	if (cmd->next)
+	if (cmd->next || (cmd->pos == 1))
 	{
 		pipe(res->pipe_fd);
 		if (!new_fork(res))
@@ -104,20 +104,24 @@ t_exec	*initialize_exec_struct(t_cmd *cmd)
 //	cmd->env = create_path(cmd);
 //	command_path(cmd, );
 
-void	execute_cmd(t_cmd *cmd)
+int	execute_cmd(t_cmd *cmd)
 {
 	char **split_cmd;
 
 	if (!is_builtin(cmd->argv))
-		return (builtin(cmd->argv));
+		return (builtin(cmd->argv), 0);
+	else
+	{
 	printf("split_cmd\n");
 	split_cmd = save_cmd_with_arguments(cmd);
 	printf("----------------------\n");
+	}
 
 
 	//printf("cmd path: %s\n", cmd->cmd_path);	
 //	execve(cmd->cmd_path, split_cmd, cmd->env);
 	//guardar commando con argumentos doble puntero nulo al final
+	return (1);
 }
 char	**create_path(t_cmd *cmd)
 {
