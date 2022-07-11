@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:35:18 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/10 18:35:13 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/11 15:07:53 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,17 @@ char	**save_cmd_with_arguments(t_cmd *cmd)
 	data_save = 0;
 	i = -1;
 	cca = count_cmd_arg(cmd);
+	printf("cuenta de cmd + argumentos: %d\n", cca);
 	res = (char **) malloc(sizeof(char *) * (cca + 1));
 	res[cca] = NULL;
 	while (cmd->argv[++i])
-	{
-		if (cmd->type_arr[i] == 1)
+		if (is_cmd(cmd->type_arr, i))
 			res[data_save++] = cmd->argv[i];
-		else if (cmd->type_arr[i] == 8)
-			res[data_save++] = cmd->argv[i]; 
-	}
+/////PRINT RES TO TEST/////////
 	i = -1;
 	while (res[++i])
 		printf("cmd %d: %s\n", i, res[i]);
+//////////////////////////////
 	return (res);
 }
 
@@ -51,13 +50,16 @@ int	count_cmd_arg(t_cmd *cmd)
 	int	res;
 
 	res = 0;
-	i = -1;
-	while (cmd->argv[++i])
-	{
-		if (cmd->type_arr[i] == 1 || cmd->type_arr[i] == 8)
-			res++;
-	}
+	i = 0;
+	while (cmd->argv[i])
+		res += is_cmd(cmd->type_arr, i++);
 	return (res);
+}
+
+int	is_cmd(int	*line, int i)
+{
+	return ((i == 0 && line[i] == 1)
+	|| ((i > 0) && (line[i] == 1) && (line[i - 1] == 1)));
 }
 
 /*

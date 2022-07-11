@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/10 18:34:19 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/11 14:44:45 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ void	execute_cmd(t_cmd *cmd)
 
 	if (!is_builtin(cmd->argv))
 		return (builtin(cmd->argv));
-	//printf("split_cmd\n");
+	printf("split_cmd\n");
 	split_cmd = save_cmd_with_arguments(cmd);
-	//printf("----------------------\n");
+	printf("----------------------\n");
 
 
 	//printf("cmd path: %s\n", cmd->cmd_path);	

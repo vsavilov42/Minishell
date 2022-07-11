@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 18:44:27 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/10 16:29:08 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/11 14:58:40 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	create_cmd(t_reading *vars, t_parse *parse)
 //	set_token_type_8((parse->cmds->type_arr));
 	parse->cmds->argv[i] = NULL;
 	parse->cmds->next = NULL;
-	////////////TESTING//////////////
+/*	////////////TESTING//////////////
 	i = -1;
 	while (++i < parse->wc)
 	{
@@ -74,8 +74,9 @@ void	create_cmd(t_reading *vars, t_parse *parse)
 	}
 	printf("cmds: %s\n", parse->cmds->argv[i]);
 	printf(">>>>>>>>>>>><<<<<<<<<<<<<\n");
-	///////////TESTING////////////// 
+	///////////TESTING//////////////  */
 }
+
 
 void	get_cmd(t_reading *vars, t_parse *parse)
 {
