@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/12 20:09:54 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/12 20:23:51 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 	else if (own->pid == 0 && !cmd->next)
 	{
 		g_sh.lst_id = own->pid;
-		execute_cmd(cmd);
+	//	execute_cmd(cmd);
 	}
 		//dup entrada a pipe prev
 	//	printf("ultimo hijo: %s\n", *(cmd->argv));
@@ -61,8 +61,8 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 		//dup entrada a pipe prev y salida a pipe own
 		execute_cmd(cmd);
 		//printf("process padre hijo  of the command: %s\n", *(cmd->argv));
-//	else
-//		execute_cmd(cmd);
+	else
+		execute_cmd(cmd);
 	return (own->pid);
 }
 
@@ -95,8 +95,6 @@ int	execute_cmd(t_cmd *cmd)
 
 	if (!is_builtin(cmd->argv))
 		return (builtin(cmd->argv), 0);
-	else
-	{
 //	cmd->env = create_path(cmd);
 	cmd->env = env_pointer();
 /*	///////TEST CREATE_PATH//////
@@ -114,7 +112,6 @@ int	execute_cmd(t_cmd *cmd)
 //	printf("no se ejecuta\n");
 //	printf("----------------------\n");
 //	printf("cmd path: %s\n", cmd->cmd_path);	
-	}
 //	execve(cmd->cmd_path, split_cmd, cmd->env);
 	return (1);
 }
