@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/12 17:53:03 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/12 20:09:54 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,8 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 		//dup entrada a pipe prev y salida a pipe own
 		execute_cmd(cmd);
 		//printf("process padre hijo  of the command: %s\n", *(cmd->argv));
-	else
-		//dup salida a pipe own
-		execute_cmd(cmd);
-		//printf("1processo cmd %s\n", *(cmd->argv));
-		//
-//	if (prev)
-//		waitpid(prev->pid, &prev->status, 0);
-	//modify_in_out_cmd(cmd, prev, own);
-	// modificar stdin stdout of the command: by pipes < > >> <<
-		//identificar que tipo es
-		//comprobar los diferentes permisos dependiendoo del caso
-		//en caso de heredoc crearlo con un archivo temporal
-	//	PREGUNTAR SI ESTE ES EL ORDEN CORRECTO DE BASH O NO
-		// 1 pipes 2 infile 3 outfile
-	// recortar comando con argumentos: ls -la
-		//comprobar si es ruta absoluta o relativa
-		//prepar arg para execve y ejecutar
+//	else
+//		execute_cmd(cmd);
 	return (own->pid);
 }
 
@@ -88,7 +73,7 @@ t_exec	*initialize_exec_struct(t_cmd *cmd)
 	res = (t_exec *) malloc(sizeof(t_exec));
 	if (!res)
 		return (perror("Fail to reserve memory\n"), NULL);
-	if (cmd->next || (cmd->pos == 1))
+	if (cmd->next || (cmd->pos == 0))
 	{
 		pipe(res->pipe_fd);
 		if (!new_fork(res))
@@ -123,6 +108,10 @@ int	execute_cmd(t_cmd *cmd)
 	split_cmd = save_cmd_with_arguments(cmd);
 //	printf("cmd???	%s\n", split_cmd[0]);
 	cmd->cmd_path = fill_cmd_path(cmd->env, split_cmd[0]);
+//	printf("CMD PAHT: %s\n", cmd->cmd_path);
+	if (cmd->cmd_path)
+		execve(cmd->cmd_path, split_cmd, cmd->env);
+//	printf("no se ejecuta\n");
 //	printf("----------------------\n");
 //	printf("cmd path: %s\n", cmd->cmd_path);	
 	}
@@ -142,15 +131,24 @@ char	*fill_cmd_path(char **env, char *cmd)
 {
 	char	*res;
 	int		i;
-
+	char	*aux_path;
+	char	**path;
 	i = -1;
 	res = NULL;
-	printf("en %s Hay / %s hay . %s\n",cmd,  ft_strchr(cmd, '/'), ft_strchr(cmd, '.'));
-	if (ft_strchr(cmd, '/') != NULL || ft_strchr(cmd , '.') != NULL)
+	if (ft_strchr(cmd, '/') != NULL )
 		return (res);
-	//si no contiene una posible ruta absoluta
 	while (env[++i] && ft_strncmp(env[i], "PATH=", 5));
-	printf("	%s\n", env[i]);
+	aux_path = ft_substr(env[i], 5, ft_strlen(env[i]) - 5);
+	path = ft_split(aux_path, ':');
+	free(aux_path);
+/*/////TEST FT_SPLIT////
+	i = -1;
+	while (path[++i])
+		printf("%d-->%s\n", i, path[i]);
+*/
+	i = -1;
+	while (!res && path[++i])
+		res = access_path_with_cmd(path[i], cmd);
 	return (res);
 }
 
