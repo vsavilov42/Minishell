@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:35:18 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/12 16:01:32 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:19:42 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,22 @@ int	is_cmd(int	*line, int i)
 	|| ((i > 0) && (line[i] == 1) && (line[i - 1] == 1)));
 }
 
+char	*access_path_with_cmd(char *path, char *cmd)
+{
+	char	*aux;
+	char	*res;
+
+	aux = ft_strjoin(path, "/");
+	free(path);
+	res = ft_strjoin(aux, cmd);
+	free(aux);
+	if (access(res, X_OK))
+	{
+		free(res);
+		res = NULL;
+	}
+	return (res);
+}
 /*
 void	modify_in_out_cmd(t_cmd *cmd, t_exec *prev, t_exec *own)
 {
