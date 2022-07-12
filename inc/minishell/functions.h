@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/11 15:31:53 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/12 17:27:25 by dexposit         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -34,6 +34,7 @@ int			execute_cmd(t_cmd *cmd);
 char		**create_path(t_cmd *cmd);
 void		command_path(t_cmd *cmd, char *path_line);
 int			is_cmd(int *line, int i);
+char		*fill_cmd_path(char **env, char *cmd);
 
 /* executer_utils.c */
 
