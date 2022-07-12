@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/12 17:27:25 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:19:54 by dexposit         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -42,6 +42,7 @@ int			new_fork(t_exec *exe);
 void		modify_in_out_cmd(t_cmd *cmd, t_exec *prev, t_exec *own);
 char		**save_cmd_with_arguments(t_cmd *cmd);
 int			count_cmd_arg(t_cmd *cmd);
+char		*access_path_with_cmd(char *path, char *cmd);
 
 /* quote_handlin.c */
 
