@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/12 16:08:03 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/12 17:53:03 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,47 @@ int	execute_cmd(t_cmd *cmd)
 	else
 	{
 //	cmd->env = create_path(cmd);
+	cmd->env = env_pointer();
+/*	///////TEST CREATE_PATH//////
+	int i=-1;
+	while (cmd->env[++i])
+		printf("linea %d del env:\n%s\n", i, cmd->env[i]);
+*/
 //	printf("split_cmd\n");
 	split_cmd = save_cmd_with_arguments(cmd);
+//	printf("cmd???	%s\n", split_cmd[0]);
+	cmd->cmd_path = fill_cmd_path(cmd->env, split_cmd[0]);
 //	printf("----------------------\n");
 //	printf("cmd path: %s\n", cmd->cmd_path);	
 	}
 //	execve(cmd->cmd_path, split_cmd, cmd->env);
 	return (1);
 }
+
+/*	
+ *	fill_cmd_path
+ *	recortar la línea paht del env
+ *	splitear esta línea por : sin la parte del inicio
+ *	comprobar con access( ejecución) de cada ruta de nuestro enviroment junto al cmd pasado como argumento.
+ 	- si el cmd introducido ya es una ruta esta funcion retornará 0
+	- en otro caso devolverá el cmd con su ruta en un solo string
+ */
+char	*fill_cmd_path(char **env, char *cmd)
+{
+	char	*res;
+	int		i;
+
+	i = -1;
+	res = NULL;
+	printf("en %s Hay / %s hay . %s\n",cmd,  ft_strchr(cmd, '/'), ft_strchr(cmd, '.'));
+	if (ft_strchr(cmd, '/') != NULL || ft_strchr(cmd , '.') != NULL)
+		return (res);
+	//si no contiene una posible ruta absoluta
+	while (env[++i] && ft_strncmp(env[i], "PATH=", 5));
+	printf("	%s\n", env[i]);
+	return (res);
+}
+
 char	**create_path(t_cmd *cmd)
 {
 	char	**env;
@@ -155,7 +188,12 @@ void	command_path(t_cmd *cmd, char *path_line)
 	int	i;
 
 //////DEBUG/////
-	printf("path line: %s\n", path_line);
+	if (!path_line)
+	{
+		printf("NO ARGUMENT PATH_LINE WTF\n");
+		return ;
+	}
+		printf("path line: %s\n", path_line);
 ///////////////
 	envtmp = ft_split(path_line, ':');
 	tmp = ft_strjoin("/", *cmd->argv);
