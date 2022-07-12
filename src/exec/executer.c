@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/12 20:23:51 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/12 20:28:08 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void	executer(t_parse *cmd)
 //	exit(status);
 }
 
+/*
+ * REVISAR COMO DEBEN ESPERARSE LOS PROCESOS
+ */
 pid_t	create_process(t_cmd *cmd, t_exec *prev)
 {
 	t_exec	*own;
