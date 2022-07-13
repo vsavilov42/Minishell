@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 12:11:36 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/08 17:59:07 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:21:23 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	cmds_clear(t_parse *parse)
 	}
 }
 
+/*	THIS FUNCTION ARE ACTUALLY UNUSED	*/
 void	set_token_type_7(int *src)
 {
 	if (*src == 1 && (src - 1) && (*(src - 1) == 3

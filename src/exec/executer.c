@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/13 13:28:18 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:18:09 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 		g_sh.lst_id = own->pid;
 		//execute_cmd(cmd);
 	}
-
 		//dup entrada a pipe prev
 	//	printf("ultimo hijo: %s\n", *(cmd->argv));
 	else if (prev)
