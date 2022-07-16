@@ -37,6 +37,5 @@ void	remove_lst(char *name);
 void	builtin(char **arg);
 void	call_built(char **cmd);
 char	**builtin_cmd(void);
-void	add_bt(t_bt_lst *bt, char *name, int (*f)(char **));
 
 #endif

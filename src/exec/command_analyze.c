@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:56:20 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/08 17:36:44 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/16 22:40:15 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	**env_pointer(void)
 
 	if (!g_sh.env)
 		return (NULL);
-	envlst = g_sh.env;
+	envlst = *g_sh.env;
 	env = (char **)malloc(sizeof(char *) * count_env(envlst));
 	i = 0;
 	while (envlst)
@@ -136,8 +136,6 @@ void	exec_one_command(t_cmd *cmds)
 	if (!is_builtin(cmds->argv))
 		builtin(cmds->argv);
 	//else if (!is_heredoc(cmds->argv))
-	else
-		exec_one_cmd_no_builtin(cmds);
 }
 
 void	command_exec(t_cmd *cmds)

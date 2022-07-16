@@ -1,43 +1,48 @@
 #include <minishell.h>
 
+static void start_env(char *shell_lvl, char *pwd);
+
 void	init_minishell(void)
 {
 	get_env();
-//	get_cmds();
-}
-
-void	get_cmds(void)
-{
-	t_bt_lst	*bt;
-
-	bt = (t_bt_lst *)malloc(sizeof(t_bt_lst));
-	add_bt(bt, "echo", ft_echo);
-	add_bt(bt, "cd", ft_cd);
-	add_bt(bt, "pwd", ft_pwd);
-	add_bt(bt, "export", ft_export);
-	add_bt(bt, "unset", ft_unset);
-	add_bt(bt, "env", ft_env);
-	add_bt(bt, "exit", ft_exit);
-	g_sh.bt = bt;
 }
 
 void	get_env(void)
 {
-	extern char **environ;
+	extern char	**environ;
 	int		i;
 	char		*pwd;
+	char		*shell_lvl;
 
-	t_envlst	*envlst;
-	pwd = malloc(sizeof(char) * PATH_MAX);
 	i = -1;
-	envlst = NULL;
-	while (environ[++i])
-		envlst_add_back(&envlst, new_envlst(environ[i]));
-	if (envlst == NULL)
+	g_sh.env = (t_envlst **)ft_calloc(1, (sizeof(t_envlst *) * 10));
+	pwd = malloc(sizeof(char) * PATH_MAX);
+	if (!g_sh.env || !pwd)
+		return ;
+	shell_lvl = ft_strdup("SHLVL=1");
+	if (*environ)
 	{
-		envlst = new_envlst_only_name("PWD");
-		envlst->value = getcwd(pwd, PATH_MAX);
+		while (environ[++i])
+			envlst_add_back(g_sh.env, new_envlst(environ[i]));
+		envlst_add_back(g_sh.env, new_envlst(shell_lvl));
+		//shell_lvl
 	}
+	else
+		start_env(shell_lvl, pwd);
 	free(pwd);
-	g_sh.env = envlst;
+	free(shell_lvl);
+}
+
+static void start_env(char *shell_lvl, char *pwd)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	if (getcwd(pwd, PATH_MAX))
+	{
+		tmp = ft_strjoin("PWD=", pwd);
+		envlst_add_back(g_sh.env, new_envlst(tmp));
+	}
+	envlst_add_back(g_sh.env, new_envlst(shell_lvl));
+	free(tmp);
 }

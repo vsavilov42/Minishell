@@ -22,7 +22,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIB_PATH)/inc
 
-#CFLAGS += -fsanitize=address -g3
+CFLAGS += -fsanitize=address -g3
 
 #################
 ###   Paths   ###
@@ -67,7 +67,7 @@ SRCS_PARSER =	parse.c				remove_quotes.c		parse_utils.c
 
 SRCS_BUILTIN =	builtin.c			cd.c				pwd.c			\
 				env.c				unset.c				exit.c			\
-				utils_unset.c		export.c			utils_export.c	\
+				unset_utils.c		export.c			export_utils.c	\
 				error.c				utils.c				utils_list.c	\
 				init_shell.c		echo.c
 

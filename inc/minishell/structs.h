@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/05/30 14:08:59 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/16 22:24:54 by Vsavilov         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:41:17 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -69,13 +69,6 @@ typedef struct s_envlst
 	struct s_envlst *next;
 }	t_envlst;
 
-typedef struct s_bt_lst
-{
-	char	*cmd;
-	int	(*f)(char **);
-	struct s_bt_lst *next;
-}	t_bt_lst;
-
 //exec
 typedef struct s_exec
 {
@@ -88,8 +81,7 @@ typedef struct s_exec
 typedef struct s_sh
 {
 	int		status;
-	t_envlst	*env;
-	t_bt_lst	*bt;
+	t_envlst	**env;
 	t_exec		*exec;
 	t_cmd		*cmd;
 }	t_sh;

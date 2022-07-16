@@ -5,7 +5,7 @@ void	replace_environ(char *arg)
 	char		*name;
 	t_envlst	*lst;
 
-	lst = g_sh.env;
+	lst = *g_sh.env;
 	name = ft_substr(arg, 0, strlen_env(arg));
 	while (lst)
 	{
@@ -20,14 +20,13 @@ void	add_environ(char *arg)
 {
 	t_envlst	*lst;
 
-	lst = g_sh.env;
+	lst = *g_sh.env;
 	if (!contain_equal_cont(arg))
 		envlst_add_back(&lst, new_envlst(arg));
 	if (!contain_equal(arg))
 		envlst_add_back(&lst, new_envlst_equal(arg));
 	if (contain_equal_cont(arg) && contain_equal(arg))
 		envlst_add_back(&lst, new_envlst_only_name(arg));
-	g_sh.env = lst;
 }
 
 int	compare_lst(char *arg)
@@ -35,7 +34,7 @@ int	compare_lst(char *arg)
 	char		*tmp;
 	t_envlst	*lst;
 
-	lst = g_sh.env;
+	lst = *g_sh.env;
 	tmp = ft_substr(arg, 0, strlen_env(arg));
 	while (lst)
 	{
@@ -54,9 +53,10 @@ void	print_lst(void)
 {
 	t_envlst *lst;
 
-	lst = g_sh.env;
+	lst = *g_sh.env;
 	if (lst == NULL)
 		return ;
+	printf("%s\n", lst->name);
 	while (lst)
 	{
 		ft_putstr_fd(lst->name, 1);
@@ -69,4 +69,5 @@ void	print_lst(void)
 		write(1, "\n", 1);
 		lst = lst->next;
 	}
+	free(lst);
 }

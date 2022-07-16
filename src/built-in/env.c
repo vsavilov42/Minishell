@@ -4,7 +4,7 @@ int	ft_env(char **arg)
 {
 	t_envlst	*envlst;
 
-	envlst = g_sh.env;
+	envlst = *g_sh.env;
 	if (arg[1] != NULL)
 		return (1);
 	while (envlst)

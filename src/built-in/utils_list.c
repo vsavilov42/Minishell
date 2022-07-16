@@ -49,18 +49,6 @@ void	envlst_add_back(t_envlst **lst, t_envlst *new)
 		*lst = new;
 }
 
-void	free_lst()
-{
-	t_bt_lst	*lst;
-
-	lst = g_sh.bt;
-	while (lst)
-	{
-		free(lst->cmd);
-		lst = lst->next;
-	}
-}
-
 t_envlst	*envlst_last(t_envlst *lst)
 {
 	if (!lst)

@@ -1,27 +1,5 @@
 #include <minishell.h>
 
-void	add_bt(t_bt_lst *bt, char *name, int (*f)(char **))
-{
-	t_bt_lst	*new;
-	t_bt_lst	*tmp;
-
-	new = (t_bt_lst *)malloc(sizeof(t_bt_lst));
-	if (!new)
-		return ;
-	new->cmd = name;
-	new->f = f;
-	new->next = NULL;
-	if (!bt)
-	{
-		tmp = bt;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
-	else
-		bt = new;
-}
-
 void	builtin(char **arg)
 {
 	int	i;

@@ -53,12 +53,13 @@ char	*return_value(char *name)
 
 	if (!g_sh.env)
 		return (NULL);
-	lst = g_sh.env;
+	lst = *g_sh.env;
 	while (lst)
 	{
 		if (!same_strcmp(name, lst->name))
 			return (lst->value);
 		lst = lst->next;
 	}
+	free(lst);
 	return (NULL);
 }
