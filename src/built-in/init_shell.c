@@ -1,10 +1,46 @@
 #include <minishell.h>
 
 static void start_env(char *shell_lvl, char *pwd);
+static void	update_shlvl();
+static char	*ft_cplusic(char *num);
 
 void	init_minishell(void)
 {
 	get_env();
+}
+
+static char	*ft_cplusic(char *num)
+{
+	int	i;
+	int	n;
+	char	*tmp;
+
+	i = -1;
+	if (!num)
+		return (NULL);
+	while (num[++i])
+		if (!ft_isdigit(num[i]))
+			return ("1");
+	n = ft_atoi(num);
+	n += 1;
+	tmp = ft_itoa(n);
+	return (tmp);
+}
+
+static void	update_shlvl()
+{
+	t_envlst	*lst;
+
+	lst = *g_sh.env;
+	while (lst)
+	{
+		if (!same_strcmp(lst->name, "SHLVL"))
+		{
+			lst->value = ft_cplusic(lst->value);
+			//convert char to int, calcule number and back to char
+		}
+		lst = lst->next;
+	}
 }
 
 void	get_env(void)
@@ -15,7 +51,7 @@ void	get_env(void)
 	char		*shell_lvl;
 
 	i = -1;
-	g_sh.env = (t_envlst **)ft_calloc(1, (sizeof(t_envlst *) * 10));
+	g_sh.env = (t_envlst **)ft_calloc(1, (sizeof(t_envlst *)));
 	pwd = malloc(sizeof(char) * PATH_MAX);
 	if (!g_sh.env || !pwd)
 		return ;
@@ -24,8 +60,8 @@ void	get_env(void)
 	{
 		while (environ[++i])
 			envlst_add_back(g_sh.env, new_envlst(environ[i]));
-		envlst_add_back(g_sh.env, new_envlst(shell_lvl));
-		//shell_lvl
+		update_shlvl();
+		//update shell_lvl
 	}
 	else
 		start_env(shell_lvl, pwd);
