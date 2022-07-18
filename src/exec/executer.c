@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/13 16:18:09 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/18 18:12:27 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,26 @@
 void	executer(t_parse *cmd)
 {
 	t_cmd	*aux;
-	int		status;
+//	int		status;
 
 	aux = cmd->head_cmd;
-	create_process(aux, NULL);
-/*	while (aux)
+	if (aux->next || (!aux->next && is_builtin(aux->argv)))
+		create_process(aux, NULL);
+	else
+	{
+		printf("builtin\n");
+		builtin(aux->argv);
+	}
+/*
+	status = 0;
+	while (aux)
 	{
 		//create_process(g_sh.cmd);
-		printf("%s\n", *(aux->argv));
+		printf("%s %d\n", *(aux->argv), status++);
 		aux = aux->next;
-	}*/
-	waitpid(g_sh.lst_id, &status, 0);
+	}
+*/
+//	waitpid(g_sh.lst_id, &status, 0);
 //	exit(status);
 }
 /*
@@ -158,6 +167,9 @@ char	*fill_cmd_path(char **env, char *cmd)
 	return (res);
 }
 
+/*
+ * UNUSED FUNCTIONS
+ */
 char	**create_path(t_cmd *cmd)
 {
 	char	**env;
