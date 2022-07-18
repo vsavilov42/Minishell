@@ -56,7 +56,6 @@ void	print_lst(void)
 	lst = *g_sh.env;
 	if (lst == NULL)
 		return ;
-	printf("%s\n", lst->name);
 	while (lst)
 	{
 		ft_putstr_fd(lst->name, 1);

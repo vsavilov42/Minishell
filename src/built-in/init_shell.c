@@ -35,10 +35,7 @@ static void	update_shlvl()
 	while (lst)
 	{
 		if (!same_strcmp(lst->name, "SHLVL"))
-		{
 			lst->value = ft_cplusic(lst->value);
-			//convert char to int, calcule number and back to char
-		}
 		lst = lst->next;
 	}
 }
