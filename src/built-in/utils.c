@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 20:33:54 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/12 17:22:16 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/03/23 10:54:57 by nortolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@ int	error_msg(char *str)
 
 int	same_strcmp(char *str1, char *str2)
 {
-	/*if (!ft_strncmp(str1, str2, ft_strlen(str1))
+	if (!ft_strncmp(str1, str2, ft_strlen(str1))
 			&& ft_strlen(str1) == ft_strlen(str2))
 		return (0);
-	return (1);*/
-	return (!((ft_strlen(str1) == ft_strlen(str2)) && !ft_strncmp(str1, str2, ft_strlen(str1))));
+	return (1);
 }
 
 char	*strtolow(char *str)
@@ -43,6 +42,7 @@ char	*strtolow(char *str)
 	int i;
 
 	i = -1;
+
 	tmp = malloc(sizeof(char) * ft_strlen(str));
 	while (str[++i])
 		tmp[i] = (char)ft_tolower(str[i]);
