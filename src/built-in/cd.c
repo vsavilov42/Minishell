@@ -6,13 +6,14 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 11:36:16 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/18 23:01:05 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/18 23:13:21 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 static void	ft_oldpwd(void);
+static void	ft_home(void);
 
 static void	ft_oldpwd(void)
 {
@@ -36,11 +37,29 @@ static void	ft_oldpwd(void)
 	envlst_add_back(g_sh.env, new_envlst(tmp));
 }
 
+static void	ft_home(void)
+{
+	t_envlst	*lst;
+	char		*home;
+
+	lst = *g_sh.env;
+	home = NULL;
+	while (lst)
+	{
+		if (!same_strcmp("HOME", lst->name))
+			home = lst->value;
+		lst = lst->next;
+	}
+	if (chdir(home))
+		write(2, "ShiTTYsh: cd: HOME not set\n", 27);
+}
 int	ft_cd(char **arg)
 {
 	char	*tmp;
 
 	ft_oldpwd();
+	if (!arg[1])
+		ft_home();
 	//comprobar si es cd solo
 	//sino ver si es - / ~
 	//- regresa a oldowd
