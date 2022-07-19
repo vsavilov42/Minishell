@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 11:36:16 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/19 17:11:32 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/19 17:23:27 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	ft_oldpwd(void);
 static void	cd_home(void);
 static void	cd_last(void);
+static void	cd_fromhome(char *arg);
 
 static void	ft_oldpwd(void)
 {
@@ -95,23 +96,31 @@ void	update_pwd()
 	free(pwd);
 }
 
+void	cd_fromhome(char *arg)
+{
+	if (chdir(arg))
+	{
+		write(2, "ShiTTYsh: cd: ", 14);
+		write(2, arg, ft_strlen(arg));
+		write(2, ": No such file or directory\n", 28);	
+	}
+}
+
 int	ft_cd(char **arg)
 {
 	ft_oldpwd();
-	if (arg[1] && chdir(arg[1]) && same_strcmp(arg[1], "-"))
+	if (!arg[1])
+		cd_home();
+	else if (arg[1] && chdir(arg[1]) && same_strcmp(arg[1], "-"))
 	{
 		write(2, "ShiTTYsh: cd: ", 14);
 		write(2, arg[1], ft_strlen(arg[1]));
 		write(2, ": No such file or directory\n", 28);
 	}
-	if (!arg[1])
-		cd_home();
-	if (!same_strcmp(arg[1], "-"))
+	else if (!same_strcmp(arg[1], "-"))
 		cd_last();
-	//comprobar si es cd solo
-	//sino ver si es - ~
-	//- regresa a oldowd
-	//sino carpeta origen
+	else if (!same_strcmp(arg[1], "~"))
+		cd_fromhome(arg[1]);
 	update_pwd();
 	return (1);
 }
