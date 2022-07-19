@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/18 18:12:27 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/19 18:50:27 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 void	executer(t_parse *cmd)
 {
 	t_cmd	*aux;
-//	int		status;
+	int		status;
 
 	aux = cmd->head_cmd;
 	if (aux->next || (!aux->next && is_builtin(aux->argv)))
@@ -36,6 +36,7 @@ void	executer(t_parse *cmd)
 	{
 		printf("builtin\n");
 		builtin(aux->argv);
+		return ;
 	}
 /*
 	status = 0;
@@ -46,7 +47,7 @@ void	executer(t_parse *cmd)
 		aux = aux->next;
 	}
 */
-//	waitpid(g_sh.lst_id, &status, 0);
+	while (wait(&status) > 0);
 //	exit(status);
 }
 /*
@@ -66,27 +67,39 @@ void	executer(t_parse *cmd)
  */
 pid_t	create_process(t_cmd *cmd, t_exec *prev)
 {
+
 	t_exec	*own;
 
+	if (!prev)
+		printf("no pipe prev\n");
+	if (!cmd)
+		return (1);
 	own = initialize_exec_struct(cmd);
 	if (!own)
-		return (-1);
-	else if (own->pid == 0 && cmd->next)
+		return (1);
+	else if (own->pid == 0)
 		create_process(cmd->next, own);
-	else if (own->pid == 0 && !cmd->next)
-	{
-		g_sh.lst_id = own->pid;
-		//execute_cmd(cmd);
-	}
+//	else if (own->pid == 0 && !cmd->next)
+//	{
+//		g_sh.lst_id = own->pid;
+//		execute_cmd(cmd);
+//	}
 		//dup entrada a pipe prev
 	//	printf("ultimo hijo: %s\n", *(cmd->argv));
-	else if (prev)
+//	else if (own->pid != 0 && prev)
 		//dup entrada a pipe prev y salida a pipe own
-		execute_cmd(cmd);
+//		execute_cmd(cmd);
 		//printf("process padre hijo  of the command: %s\n", *(cmd->argv));
+	else if (!prev)
+		printf("primer hijo\n");
+	else if (prev && cmd->next)
+		printf("padre e hijo");
+		//execute_cmd(cmd);
 	else
-		execute_cmd(cmd);
+		printf("last hijo");
+	//execute_cmd(cmd);
 	return (own->pid);
+
 }
 
 t_exec	*initialize_exec_struct(t_cmd *cmd)
@@ -96,6 +109,15 @@ t_exec	*initialize_exec_struct(t_cmd *cmd)
 	res = (t_exec *) malloc(sizeof(t_exec));
 	if (!res)
 		return (perror("Fail to reserve memory\n"), free(res), NULL);
+	if (cmd->next)
+		pipe(res->pipe_fd);
+	if (!new_fork(res))
+	{
+		free(res);
+		res = NULL;
+	}
+
+/*
 	if (cmd->next || (cmd->pos == 0))
 	{
 		pipe(res->pipe_fd);
@@ -105,6 +127,7 @@ t_exec	*initialize_exec_struct(t_cmd *cmd)
 			res = NULL;
 		}
 	}
+*/
 	return (res);
 }
 /*	1  crea el char ** para execve y 2 rellena el cmd->path con la ruta del commando que es.
