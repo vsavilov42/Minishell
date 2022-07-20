@@ -60,7 +60,8 @@ SRCS_MAIN =		main.c
 
 SRCS_EXEC =		command_analyze.c	\
 				executer.c			\
-				executer_utils.c
+				executer_utils.c	\
+				process.c
 
 SRCS_LEXER =	reading.c			reading_utils.c		quote_handling.c\
 				expansions.c
