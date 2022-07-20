@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/20 14:35:52 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/20 18:31:10 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,21 @@ void	executer(t_parse *cmd)
 		//ejecutar un builtin normal
 	else
 	{
+		g_sh.pid = create_pid_str(aux);
 		id = fork();
+		g_sh.pid[0] = id;
 		if (id < 0)
 			perror("Fail doing fork.\n");
 		else if (id == 0)	
 			create_process(aux, NULL);
 		else
+		{
+	int i=-1;
+	while(g_sh.pid[++i])
+		printf("id %d del proceso %d\n", g_sh.pid[i], i);
 			waitpid(0, &status, 0);
+		}
+			// Aquí tenemos usar waitpid para todos los id de cada proceso
 //			while (wait(&status) > 0);
 	}
 /*
