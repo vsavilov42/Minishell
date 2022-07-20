@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/20 18:31:10 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/20 20:06:09 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	executer(t_parse *cmd)
 		else
 		{
 	int i=-1;
+	//segfault in this line
 	while(g_sh.pid[++i])
 		printf("id %d del proceso %d\n", g_sh.pid[i], i);
 			waitpid(0, &status, 0);
