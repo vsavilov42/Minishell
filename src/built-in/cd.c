@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 11:36:16 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/19 17:23:27 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/19 19:49:47 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static void	cd_home(void)
 	}
 	if (chdir(home))
 		write(2, "ShiTTYsh: cd: HOME not set\n", 27);
-	free(home);
 }
 
 static void	cd_last(void)
@@ -98,11 +97,30 @@ void	update_pwd()
 
 void	cd_fromhome(char *arg)
 {
-	if (chdir(arg))
+	char		*tmp;
+	char		*dir;
+	t_envlst	*lst;
+
+	tmp = NULL;
+	lst = *g_sh.env;
+	if (!same_strcmp(arg, "~"))
+		cd_home();
+	else
 	{
-		write(2, "ShiTTYsh: cd: ", 14);
-		write(2, arg, ft_strlen(arg));
-		write(2, ": No such file or directory\n", 28);	
+		tmp = ft_substr(arg, 1, ft_strlen(arg));
+		while (lst)
+		{
+			if (!same_strcmp("HOME", lst->name))
+				dir = ft_strjoin(lst->value, tmp);	
+			lst = lst->next;
+		}
+		if (chdir(dir))
+		{
+			write(2, "ShiTTYsh: cd: ", 14);
+			write(2, arg, ft_strlen(arg));
+			write(2, ": No such file or directory\n", 28);
+		}
+		free(tmp);
 	}
 }
 
@@ -111,7 +129,8 @@ int	ft_cd(char **arg)
 	ft_oldpwd();
 	if (!arg[1])
 		cd_home();
-	else if (arg[1] && chdir(arg[1]) && same_strcmp(arg[1], "-"))
+	else if (arg[1] && chdir(arg[1]) && same_strcmp("-", arg[1])
+		&& ft_strncmp("~", arg[1], 1))
 	{
 		write(2, "ShiTTYsh: cd: ", 14);
 		write(2, arg[1], ft_strlen(arg[1]));
@@ -119,7 +138,7 @@ int	ft_cd(char **arg)
 	}
 	else if (!same_strcmp(arg[1], "-"))
 		cd_last();
-	else if (!same_strcmp(arg[1], "~"))
+	else if (!ft_strncmp(arg[1], "~", 1))
 		cd_fromhome(arg[1]);
 	update_pwd();
 	return (1);
