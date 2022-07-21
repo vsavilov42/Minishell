@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/16 22:24:54 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/21 13:07:31 by Vsavilov         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:41:17 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -81,6 +81,7 @@ typedef struct s_exec
 typedef struct s_sh
 {
 	int		status;
+	char		*line;
 	t_envlst	**env;
 	t_exec		*exec;
 	t_cmd		*cmd;
