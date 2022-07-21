@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/21 13:06:46 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/21 15:18:10 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,28 @@ void	executer(t_parse *cmd)
 	t_cmd	*aux;
 	int		status;
 	pid_t	id;
-//	int		i;
+
 	aux = cmd->head_cmd;
 	if (!aux->next && !is_builtin(aux->argv))
-		execute_cmd(aux);
+		return(execute_cmd(aux), (void) 0);
 		//ejecutar un builtin normal
 	else
 	{
-//		g_sh.pid = create_pid_str(aux);
 		id = fork();
-//		g_sh.pid[0] = id;
 		if (id < 0)
 			perror("Fail doing fork.\n");
 		else if (id == 0)	
 			create_process(aux, NULL);
 		else
-		{
 			waitpid(-1, &status, 0);
 /*	i = 0;
 	while (g_sh.pid[i++]);
 	while(g_sh.pid[--i])
 			waitpid(g_sh.pid[i], &status, 0);
-*/		}
 			// Aquí tenemos usar waitpid para todos los id de cada proceso
-//			while (wait(&status) > 0);
+//			while (wait(&status) > 0);*/
 	}
+	waitpid(-1, &status, 0);
 //	exit(status);
 }
 /*
@@ -101,9 +98,9 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 			printf("aqui haceos dup stdin a prev->pipe y salida a own->pipe\n");
 	}
 	//close unused fd
-	//execute_cmd(cmd);
+	execute_cmd(cmd);
 	//free all, prepare exits
-	waitpid(0, &own->status, 0);
+//	waitpid(0, &own->status, 0);
 	return (own->pid);
 }
 
@@ -130,18 +127,16 @@ int	execute_cmd(t_cmd *cmd)
 	if (!is_builtin(cmd->argv))
 		return (builtin(cmd->argv), 0);
 	cmd->env = env_pointer();
-//	printf("split_cmd\n");
 	split_cmd = save_cmd_with_arguments(cmd);
-//	printf("cmd???	%s\n", split_cmd[0]);
 	cmd->cmd_path = fill_cmd_path(cmd->env, split_cmd[0]);
-//	printf("CMD PAHT: %s\n", cmd->cmd_path);
 	if (cmd->cmd_path)
 		execve(cmd->cmd_path, split_cmd, cmd->env);
-//	printf("no se ejecuta\n");
-//	printf("----------------------\n");
-//	printf("cmd path: %s\n", cmd->cmd_path);	
-//	execve(cmd->cmd_path, split_cmd, cmd->env);
+	else
+		separate_path_of_cmd(split_cmd, &cmd->path);
+		execve(NULL, split_cmd, cmd->env);
+	//exit(126);
 	return (-1);
+
 }
 
 /*	
