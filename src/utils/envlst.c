@@ -4,7 +4,7 @@ t_envlst	*new_envlst(char *env)
 {
 	t_envlst	*lst;
 
-	lst = malloc(sizeof(t_envlst));
+	lst = (t_envlst *)malloc(sizeof(t_envlst));
 	if (lst == NULL)
 		return (NULL);
 	lst->name = ft_substr(env, 0, strlen_env(env));
@@ -17,7 +17,7 @@ t_envlst	*new_envlst_only_name(char *env)
 {
 	t_envlst	*lst;
 
-	lst = malloc(sizeof(t_envlst));
+	lst = (t_envlst *)malloc(sizeof(t_envlst));
 	if (lst == NULL)
 		return (NULL);
 	lst->name = ft_substr(env, 0, ft_strlen(env));
@@ -30,12 +30,21 @@ t_envlst	*new_envlst_equal(char *env)
 {
 	t_envlst	*lst;
 
-	lst = malloc(sizeof(t_envlst));
+	lst = (t_envlst *)malloc(sizeof(t_envlst));
 	if (lst == NULL)
 		return (NULL);
 	lst->name = ft_substr(env, 0, strlen_env(env));
 	lst->value = "";
 	lst->next = NULL;
+	return (lst);
+}
+
+t_envlst	*envlst_last(t_envlst *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
 	return (lst);
 }
 
@@ -47,13 +56,4 @@ void	envlst_add_back(t_envlst **lst, t_envlst *new)
 		envlst_last(*lst)->next = new;
 	else
 		*lst = new;
-}
-
-t_envlst	*envlst_last(t_envlst *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
 }

@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 20:33:54 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/21 12:15:05 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/21 20:05:32 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*strtolow(char *str)
 
 	i = -1;
 
-	tmp = malloc(sizeof(char) * ft_strlen(str));
+	tmp = (char *)malloc(sizeof(char) * ft_strlen(str));
 	while (str[++i])
 		tmp[i] = (char)ft_tolower(str[i]);
 	return (tmp);

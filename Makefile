@@ -70,10 +70,11 @@ SRCS_PARSER =	parse.c			remove_quotes.c		parse_utils.c
 SRCS_BUILTIN =	builtin.c		cd.c			pwd.c \
 		env.c			unset.c			exit.c \
 		unset_utils.c		export.c		export_utils.c	\
-		error.c			utils_list.c		free_all.c \
-		init_shell.c		echo.c			signals.c \
+		error.c			echo.c \
 
-SRCS_UTILS =	utils.c			
+SRCS_UTILS =	utils.c			utils2.c		signals.c \
+		free_all.c		envlst.c 		envlst2.c \
+		init_shell.c		get_env.c \
 
 SRCS_NAME =	$(SRCS_MAIN) \
 		$(addprefix $(SRC_DIR_LEXER)/, $(SRCS_LEXER)) \

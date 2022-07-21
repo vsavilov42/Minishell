@@ -10,7 +10,7 @@ static void	signal_parent(int signal)
 		rl_on_new_line();
 		//rl_replace_line("", 0);
 		rl_redisplay();
-		g_sh.status = 130;
+		g_sh.status = SIG_ERROR;
 	}
 }
 

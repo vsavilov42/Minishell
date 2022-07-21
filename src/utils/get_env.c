@@ -2,30 +2,19 @@
 
 static void start_env(char *shell_lvl, char *pwd);
 static void	update_shlvl();
-static char	*ft_cplusic(char *num);
 
-void	init_minishell(void)
+static void start_env(char *shell_lvl, char *pwd)
 {
-	get_env();
-	manage_signal();
-}
-
-static char	*ft_cplusic(char *num)
-{
-	int	i;
-	int	n;
 	char	*tmp;
 
-	i = -1;
-	if (!num)
-		return (NULL);
-	while (num[++i])
-		if (!ft_isdigit(num[i]))
-			return ("1");
-	n = ft_atoi(num);
-	n += 1;
-	tmp = ft_itoa(n);
-	return (tmp);
+	tmp = NULL;
+	if (getcwd(pwd, PATH_MAX))
+	{
+		tmp = ft_strjoin("PWD=", pwd);
+		envlst_add_back(g_sh.env, new_envlst(tmp));
+	}
+	envlst_add_back(g_sh.env, new_envlst(shell_lvl));
+	free(tmp);
 }
 
 static void	update_shlvl()
@@ -65,18 +54,4 @@ void	get_env(void)
 		start_env(shell_lvl, pwd);
 	free(pwd);
 	free(shell_lvl);
-}
-
-static void start_env(char *shell_lvl, char *pwd)
-{
-	char	*tmp;
-
-	tmp = NULL;
-	if (getcwd(pwd, PATH_MAX))
-	{
-		tmp = ft_strjoin("PWD=", pwd);
-		envlst_add_back(g_sh.env, new_envlst(tmp));
-	}
-	envlst_add_back(g_sh.env, new_envlst(shell_lvl));
-	free(tmp);
 }
