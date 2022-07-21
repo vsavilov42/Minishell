@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 18:00:49 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/20 18:33:39 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/21 12:53:23 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ pid_t	*create_pid_str(t_cmd *cmd)
 	while (--num >= 0)
 		res[num] = 0;
 	return (res);
+}
+
+void	save_pid(pid_t id)
+{
+	pid_t	*aux;
+	int		i;
+
+	aux = g_sh.pid;
+	while (aux && (*aux++ != 0));
+	if (aux)
+		*aux = id;
+	i = -1;
+	while (g_sh.pid[++i])
+		printf("processo %d, con id-> %d\n", i, g_sh.pid[i]);
 }
 /*
 int	wait_process(void)

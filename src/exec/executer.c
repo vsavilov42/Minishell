@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/20 20:06:09 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/21 13:06:46 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,40 +29,31 @@ void	executer(t_parse *cmd)
 	t_cmd	*aux;
 	int		status;
 	pid_t	id;
-
+//	int		i;
 	aux = cmd->head_cmd;
 	if (!aux->next && !is_builtin(aux->argv))
 		execute_cmd(aux);
 		//ejecutar un builtin normal
 	else
 	{
-		g_sh.pid = create_pid_str(aux);
+//		g_sh.pid = create_pid_str(aux);
 		id = fork();
-		g_sh.pid[0] = id;
+//		g_sh.pid[0] = id;
 		if (id < 0)
 			perror("Fail doing fork.\n");
 		else if (id == 0)	
 			create_process(aux, NULL);
 		else
 		{
-	int i=-1;
-	//segfault in this line
-	while(g_sh.pid[++i])
-		printf("id %d del proceso %d\n", g_sh.pid[i], i);
-			waitpid(0, &status, 0);
-		}
+			waitpid(-1, &status, 0);
+/*	i = 0;
+	while (g_sh.pid[i++]);
+	while(g_sh.pid[--i])
+			waitpid(g_sh.pid[i], &status, 0);
+*/		}
 			// Aquí tenemos usar waitpid para todos los id de cada proceso
 //			while (wait(&status) > 0);
 	}
-/*
-	status = 0;
-	while (aux)
-	{
-		//create_process(g_sh.cmd);
-		printf("%s %d\n", *(aux->argv), status++);
-		aux = aux->next;
-	}
-*/
 //	exit(status);
 }
 /*
@@ -99,6 +90,7 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 		//	caso 1:	cmd | cmd --> primer comando con mas detrás
 		//	caso 2: cmd | cmd | cmd -->commando con uno delante y uno detrás
 		own->pid = fork();
+//		save_pid(own->pid);
 		if (own->pid < 0)
 			perror("Fail to fork.\n");
 		else if (own->pid == 0)

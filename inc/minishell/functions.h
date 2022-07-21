@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/20 18:23:04 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/21 12:43:23 by dexposit         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -47,6 +47,7 @@ char		*access_path_with_cmd(char *path, char *cmd);
 /* process.c */
 
 pid_t		*create_pid_str(t_cmd *cmd);
+void		save_pid(pid_t	id);
 
 /* quote_handlin.c */
 
