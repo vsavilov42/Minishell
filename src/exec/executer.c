@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/21 15:21:53 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/21 15:51:11 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,9 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 			printf("aqui haceos dup stdin a prev->pipe y salida a own->pipe\n");
 	}
 	//close unused fd
+	printf("test: %s\n", cmd->argv[1]);
 	execute_cmd(cmd);
+	printf("test: %s\n", cmd->argv[1]);
 	//free all, prepare exits
 //	waitpid(0, &own->status, 0);
 	return (own->pid);
@@ -132,8 +134,10 @@ int	execute_cmd(t_cmd *cmd)
 	if (cmd->cmd_path)
 		execve(cmd->cmd_path, split_cmd, cmd->env);
 	else
-		separate_path_of_cmd(split_cmd, &cmd->cmd_path);
-		execve(NULL, split_cmd, cmd->env);
+	{
+		//separate_path_of_cmd(split_cmd, &cmd->cmd_path);
+		//execve(NULL, split_cmd, cmd->env);
+	}
 	//exit(126);
 	return (-1);
 
