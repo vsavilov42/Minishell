@@ -22,7 +22,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIB_PATH)/inc
 
-CFLAGS += -fsanitize=address -g3
+#CFLAGS += -fsanitize=address -g3
 
 #################
 ###   Paths   ###
@@ -69,7 +69,8 @@ SRCS_BUILTIN =	builtin.c			cd.c				pwd.c			\
 				env.c				unset.c				exit.c			\
 				unset_utils.c		export.c			export_utils.c	\
 				error.c				utils.c				utils_list.c	\
-				init_shell.c		echo.c
+				init_shell.c		echo.c			signals.c \
+				free_all.c \
 
 SRCS_NAME =	$(SRCS_MAIN)												\
 			$(addprefix $(SRC_DIR_LEXER)/, $(SRCS_LEXER))				\

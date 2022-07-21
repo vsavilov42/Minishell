@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:59:59 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/16 22:53:53 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/21 12:25:11 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	leaks(void)
 {
 	system("leaks -q minishell");
 }
-/*	atexit(leaks);*/
 
 t_sh	g_sh;
 
@@ -24,7 +23,7 @@ int	main(void)
 {
 	char	*line;
 
-//	atexit(leaks);
+	atexit(leaks);
 	init_minishell();
 	while (1)
 	{
@@ -41,5 +40,6 @@ int	main(void)
 		}
 		free(line);
 	}
+	free(g_sh.env);
 	return (EXIT_SUCCESS);
 }

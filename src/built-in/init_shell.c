@@ -7,6 +7,7 @@ static char	*ft_cplusic(char *num);
 void	init_minishell(void)
 {
 	get_env();
+	manage_signal();
 }
 
 static char	*ft_cplusic(char *num)

@@ -39,8 +39,11 @@ int	ft_exit(char **arg)
 	else
 	{
 		while (arg[1][++i])
-			if (arg[1][0] != '-' && !ft_isdigit(arg[1][i]))
+			if (arg[1][0] != '+' && arg[1][0] != '-' && !ft_isdigit(arg[1][i]))
+			{
+				free_all();
 				exit(255);
+			}
 		status = ft_atoi(arg[1]);
 		if (status > 255 ||status < 0)
 			g_sh.status = minmax_status(status);
@@ -48,6 +51,7 @@ int	ft_exit(char **arg)
 			g_sh.status = status;
 	}
 	write(1, "exit\n", 5);
+	free_all();
 	exit(g_sh.status);
 	return(1);
 }

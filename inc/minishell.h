@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:10:23 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/17 14:23:51 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/21 12:16:47 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <minishell/structs.h>
 # include <minishell/functions.h>
 # include <minishell/builtin.h>
+# include <minishell/signals.h>
 
 # define PATH_MAX 4096
 
