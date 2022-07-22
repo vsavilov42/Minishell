@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/22 12:56:19 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/22 13:44:15 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 //	execute_cmd(cmd);
 	//printf("test: %s\n", cmd->argv[1]);
 	//free all, prepare exits
-	waitpid(-1, &own->status, 0);
+//	waitpid(-1, &own->status, 0);
 	return (own->pid);
 }
 
@@ -144,7 +144,7 @@ int	execute_cmd(t_cmd *cmd)
 		//execve(NULL, split_cmd, cmd->env);
 	}
 	//exit(126);
-	return (-1);
+	return (1);
 
 }
 
