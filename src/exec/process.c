@@ -6,12 +6,27 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 18:00:49 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/21 12:53:23 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/22 02:15:06 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+t_cmd	*last_cmd_exec(t_cmd *cmd)
+{
+	static t_cmd	**lst=NULL;
+	t_cmd			*aux;
+
+	if (cmd)
+	aux = g_sh.cmd;
+	//aux = g_sh.cmd;
+	while (aux && (aux->next != *lst))
+		aux = aux->next;
+	*lst = aux;
+	return (*lst);
+}
+/*
+UNUSED FUNCTIONS TO WAIT PROCESS*/
 pid_t	*create_pid_str(t_cmd *cmd)
 {
 	int		num;

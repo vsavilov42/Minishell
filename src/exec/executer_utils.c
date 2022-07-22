@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:35:18 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/21 15:31:12 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/22 00:43:41 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*access_path_with_cmd(char *path, char *cmd)
 int		separate_path_of_cmd(char **split, char **path)
 {
 		if (split && path)
-			printf("");	
+			printf("kdlf");	
 		return (0);
 }
 /*

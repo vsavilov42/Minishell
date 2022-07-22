@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/21 15:51:11 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/22 02:29:14 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,12 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 	own = initialize_exec_struct(cmd);
 	if (!cmd->next)
 		if (!prev)
+	execute_cmd(cmd);
 //			dup_in_out();
-			printf("este es un único commando.\n");
+//			printf("este es un único commando.\n");
 		else
-			printf("aqui hacemos dup de entrada a prev->pipe\n");
+	execute_cmd(cmd);
+//			printf("aqui hacemos dup de entrada a prev->pipe\n");
 //			dup_in_out();
 	else
 	//este son los casos en los que hay mas de un commando
@@ -93,16 +95,19 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 		else if (own->pid == 0)
 			create_process(cmd->next, own);
 		else if (!prev)
-			printf("aque hacemos dup de salida a own->pipe.\n");
-		else
-			printf("aqui haceos dup stdin a prev->pipe y salida a own->pipe\n");
+	execute_cmd(cmd);
+//			printf("aque hacemos dup de salida a own->pipe.\n");
+		else if (prev)
+	execute_cmd(cmd);
+//		printf("aqui haceos dup stdin a prev->pipe y salida a own->pipe\n");
 	}
 	//close unused fd
-	printf("test: %s\n", cmd->argv[1]);
-	execute_cmd(cmd);
-	printf("test: %s\n", cmd->argv[1]);
+//	printf("FUERA IF-ELSE\n");
+	//if (own->pid >= 0)
+//	execute_cmd(cmd);
+	//printf("test: %s\n", cmd->argv[1]);
 	//free all, prepare exits
-//	waitpid(0, &own->status, 0);
+	waitpid(-1, &own->status, 0);
 	return (own->pid);
 }
 
