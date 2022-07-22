@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/21 20:17:16 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/21 20:22:23 by Vsavilov         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -50,7 +50,6 @@ int	error_command(char **cmd);
 
 void	init_minishell(void);
 void	get_env(void);
-void	get_cmds(void);
 
 //reading.c
 void	get_lines(char *line);

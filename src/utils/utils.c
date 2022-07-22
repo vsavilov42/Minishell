@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 20:33:54 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/21 20:05:32 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/21 20:32:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,4 @@ int	strlen_env(char *env)
 	while (env[i] && env[i] != '=')
 		i++;
 	return (i);
-}
-
-void	free_split(char **split)
-{
-	int	i;
-
-	i = -1;
-	while (split[++i])
-		free(split[i]);
-	free(split);
 }
