@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/22 02:29:14 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/22 12:56:19 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 	own = initialize_exec_struct(cmd);
 	if (!cmd->next)
 		if (!prev)
-	execute_cmd(cmd);
+			pipes_selector(0, own, prev, cmd);
 //			dup_in_out();
 //			printf("este es un único commando.\n");
 		else
-	execute_cmd(cmd);
+			pipes_selector(1, own, prev, cmd);
 //			printf("aqui hacemos dup de entrada a prev->pipe\n");
 //			dup_in_out();
 	else
@@ -95,10 +95,10 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 		else if (own->pid == 0)
 			create_process(cmd->next, own);
 		else if (!prev)
-	execute_cmd(cmd);
+			pipes_selector(2, own, prev, cmd);
 //			printf("aque hacemos dup de salida a own->pipe.\n");
 		else if (prev)
-	execute_cmd(cmd);
+			pipes_selector(3, own, prev, cmd);
 //		printf("aqui haceos dup stdin a prev->pipe y salida a own->pipe\n");
 	}
 	//close unused fd

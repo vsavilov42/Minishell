@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/22 02:00:26 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/22 12:46:09 by dexposit         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -47,7 +47,7 @@ int			separate_path_of_cmd(char **split, char **path);
 
 /* process.c */
 
-t_cmd		*last_cmd_exec(t_cmd *cmd);
+//t_cmd		*last_cmd_exec(t_cmd *cmd);
 pid_t		*create_pid_str(t_cmd *cmd);
 void		save_pid(pid_t	id);
 
