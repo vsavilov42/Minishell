@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/22 21:43:00 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/07/22 21:46:20 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 void	replace_environ(char *arg)
@@ -10,10 +22,12 @@ void	replace_environ(char *arg)
 	while (lst)
 	{
 		if (!same_strcmp(lst->name, name))
-				lst->value = ft_substr(arg, strlen_env(arg) + 1, ft_strlen(arg));
+		{
+				lst->value = ft_substr(arg,
+					strlen_env(arg) + 1, ft_strlen(arg));
+		}
 		lst = lst->next;
 	}
-
 }
 
 void	add_environ(char *arg)
@@ -51,7 +65,7 @@ int	compare_lst(char *arg)
 
 void	print_lst(void)
 {
-	t_envlst *lst;
+	t_envlst	*lst;
 
 	lst = *g_sh.env;
 	if (lst == NULL)

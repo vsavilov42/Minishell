@@ -6,13 +6,17 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:27:11 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/05/23 11:58:43 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/22 20:44:49 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	verify_echo(char *arg)
+static int	verify_echo(char *arg);
+static void	write_echo(char **arg, int index, int n);
+static void	echo_iterator(char **arg, int i);
+
+static int	verify_echo(char *arg)
 {
 	int	i;
 
@@ -28,7 +32,7 @@ int	verify_echo(char *arg)
 	return (1);
 }
 
-void	write_echo(char **arg, int index, int n)
+static void	write_echo(char **arg, int index, int n)
 {
 	while (arg[++index])
 	{
@@ -40,10 +44,21 @@ void	write_echo(char **arg, int index, int n)
 		write(1, "\n", 1);
 }
 
+static void	echo_iterator(char **arg, int i)
+{
+	while (arg[i] && ft_strncmp(arg[i], "-n", 2) == 0)
+	{
+		if (verify_echo(arg[i]) == 0)
+			break ;
+		i++;
+	}
+	write_echo(arg, i - 1, 2);
+}
+
 int	ft_echo(char **arg)
 {
+	int		i;
 	char	*tmp;
-	int	i;
 
 	i = 1;
 	tmp = strtolow(arg[0]);
@@ -54,13 +69,7 @@ int	ft_echo(char **arg)
 		{
 			if (!ft_strncmp(arg[i], "-n", 2) && verify_echo(arg[i]))
 			{
-				while (arg[i] && ft_strncmp(arg[i], "-n", 2) == 0)
-				{
-					if (verify_echo(arg[i]) == 0)
-						break ;
-					i++;
-				}
-				write_echo(arg, i - 1, 2);
+				echo_iterator(arg, i);
 				return (0);
 			}
 			else

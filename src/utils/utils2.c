@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:31:38 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/21 20:31:54 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/22 20:15:15 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_cplusic(char *num)
 {
-	int	i;
-	int	n;
+	int		i;
+	int		n;
 	char	*tmp;
 
 	i = -1;

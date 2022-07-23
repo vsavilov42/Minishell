@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/22 21:38:30 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/07/22 21:39:59 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 int	ft_export(char **arg)
@@ -8,6 +20,7 @@ int	ft_export(char **arg)
 	if (!same_strcmp(arg[i], "export") && arg[1] == NULL)
 		print_lst();
 	else
+	{
 		while (arg[++i])
 		{
 			if (!bad_str(arg[i]))
@@ -18,6 +31,7 @@ int	ft_export(char **arg)
 					add_environ(arg[i]);
 			}
 		}
+	}
 	return (1);
 }
 

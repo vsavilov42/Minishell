@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/21 13:07:31 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/22 20:25:17 by Vsavilov         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:41:17 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -19,21 +19,21 @@
 //commands
 typedef struct s_cmd
 {
-	char		**argv;
-	char		*cmd_path;
-	char		**env;
-	int		*type_arr;
-	int		pos;
+	int				*type_arr;
+	int				pos;
+	char			**argv;
+	char			*cmd_path;
+	char			**env;
 	struct s_cmd	*next;
-}	t_cmd;
+}			t_cmd;
 
 typedef struct s_parse
 {
 	int				wc;
 	int				wc_aux;
 	struct s_cmd	*cmds;
-	struct	s_cmd	*head_cmd;
-}	t_parse;
+	struct s_cmd	*head_cmd;
+}			t_parse;
 
 //tokens
 typedef struct s_token
@@ -64,29 +64,29 @@ typedef struct s_reading
 //built-in
 typedef struct s_envlst
 {
-	char	*name;
-	char	*value;
-	struct s_envlst *next;
-}	t_envlst;
+	char			*name;
+	char			*value;
+	struct s_envlst	*next;
+}			t_envlst;
 
 //exec
 typedef struct s_exec
 {
-	int	fd_io[2];
-	int	pipe_fd[2];
+	int		fd_io[2];
+	int		pipe_fd[2];
 	pid_t	pid;
-}	t_exec;
+}		t_exec;
 
 //global
 typedef struct s_sh
 {
-	int		status;
+	int			status;
 	char		*line;
 	t_envlst	**env;
 	t_exec		*exec;
 	t_cmd		*cmd;
-}	t_sh;
+}			t_sh;
 
-extern	t_sh	g_sh;
+extern t_sh	g_sh;
 
 #endif

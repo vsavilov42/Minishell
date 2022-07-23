@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/22 21:46:41 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/07/22 21:51:05 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static int	minmax_status(int num);
+static void	exit_iterator(char **arg, int i);
 
 static int	minmax_status(int num)
 {
@@ -28,6 +41,21 @@ static int	minmax_status(int num)
 	return (n);
 }
 
+static void	exit_iterator(char **arg, int i)
+{
+	while (arg[1][++i])
+		if (arg[1][0] != '+' && arg[1][0] != '-' && !ft_isdigit(arg[1][i]))
+		{
+			free_all();
+			exit(255);
+		}
+	status = ft_atoi(arg[1]);
+	if (status > 255 ||status < 0)
+		g_sh.status = minmax_status(status);
+	else
+		g_sh.status = status;
+}
+
 int	ft_exit(char **arg)
 {
 	int	i;
@@ -37,19 +65,7 @@ int	ft_exit(char **arg)
 	if (!arg[1])
 		g_sh.status = 0;
 	else
-	{
-		while (arg[1][++i])
-			if (arg[1][0] != '+' && arg[1][0] != '-' && !ft_isdigit(arg[1][i]))
-			{
-				free_all();
-				exit(255);
-			}
-		status = ft_atoi(arg[1]);
-		if (status > 255 ||status < 0)
-			g_sh.status = minmax_status(status);
-		else
-			g_sh.status = status;
-	}
+		exit_iterator(arg, i);
 	write(1, "exit\n", 5);
 	free_all();
 	exit(g_sh.status);

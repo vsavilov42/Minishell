@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 11:36:16 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/19 19:49:47 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/22 21:38:06 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,33 +66,12 @@ static void	cd_last(void)
 		if (!same_strcmp("OLDPWD", lst->name))
 		{
 			if (chdir(lst->value))
-			{
-				write(2, "ShiTTYsh: cd: OLDPWD not set\n", 29);		
-			}
+				write(2, "ShiTTYsh: cd: OLDPWD not set\n", 29);
 			return ;
 		}
 		lst = lst->next;
 	}
-	write(2, "ShiTTYsh: cd: OLDPWD not set\n", 29);		
-}
-
-void	update_pwd()
-{
-	t_envlst	*lst;
-	char		*pwd;
-
-	pwd = (char *)malloc(sizeof(char) * (PATH_MAX + 1));
-	lst = *g_sh.env;
-	while (lst)
-	{
-		if (!same_strcmp("PWD", lst->name))
-		{
-			if (getcwd(pwd, PATH_MAX))
-				lst->value = ft_strdup(pwd);
-		}
-		lst = lst->next;
-	}
-	free(pwd);
+	write(2, "ShiTTYsh: cd: OLDPWD not set\n", 29);
 }
 
 void	cd_fromhome(char *arg)
@@ -111,7 +90,7 @@ void	cd_fromhome(char *arg)
 		while (lst)
 		{
 			if (!same_strcmp("HOME", lst->name))
-				dir = ft_strjoin(lst->value, tmp);	
+				dir = ft_strjoin(lst->value, tmp);
 			lst = lst->next;
 		}
 		if (chdir(dir))

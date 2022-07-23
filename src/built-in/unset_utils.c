@@ -1,18 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/22 20:44:57 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/07/22 20:56:03 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
+
+static void	remove_lst_exp(char *n, t_envlst *l, t_envlst *tmp, t_envlst *c);
 
 void	remove_lst(char *name)
 {
-	t_envlst *last;
-	t_envlst *current;
-	t_envlst *tmp;
+	t_envlst	*last;
+	t_envlst	*current;
+	t_envlst	*tmp;
 
 	if (!g_sh.env)
 		return ;
+	tmp = NULL;
 	last = *g_sh.env;
 	if (!same_strcmp(last->name, name))
 	{
 		tmp = last;
-		last = last->next;	
+		last = last->next;
 		free(tmp->name);
 		free(tmp->value);
 		free(tmp);
@@ -20,25 +35,30 @@ void	remove_lst(char *name)
 		return ;
 	}
 	current = last->next;
-	while (last && last->next)
+	remove_lst_exp(name, last, tmp, current);
+}
+
+static void	remove_lst_exp(char *n, t_envlst *l, t_envlst *tmp, t_envlst *c)
+{
+	while (l && l->next)
 	{
-		if (!same_strcmp(current->name, name))
+		if (!same_strcmp(c->name, n))
 		{
-			free(current->name);
-			free(current->value);
-			tmp = last->next;
-			if (last->next->next)
-				current = last->next->next;
-			if (!last->next->next)
-				last->next = NULL;
+			free(c->name);
+			free(c->value);
+			tmp = l->next;
+			if (l->next->next)
+				c = l->next->next;
+			if (!l->next->next)
+				l->next = NULL;
 			else
-				last->next = current;
+				l->next = c;
 			free(tmp);
 		}
-		if (last->next)
+		if (l->next)
 		{
-			current = current->next;
-			last = last->next;
+			c = c->next;
+			l = l->next;
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:06:09 by nortolan          #+#    #+#             */
-/*   Updated: 2022/04/28 13:17:23 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/07/22 20:18:08 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <minishell.h>
@@ -151,14 +151,6 @@ void	get_lines(char *line)
 		}
 		i = line_handler(&vars, line, i);
 	}
-	/*//TEST ANTES DE EXPANSION////////////////////
-	vars.token = vars.head;
-	while (vars.token)
-	{
-		printf("test pre exp: %s\n", vars.token->data);
-		vars.token = vars.token->next;
-	}
-	/////////////////////////////////////////////*/
 	break_check = check_pipes(&vars);
 	if (!break_check)
 	{
