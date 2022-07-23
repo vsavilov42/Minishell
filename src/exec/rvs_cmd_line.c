@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 15:19:06 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/23 16:08:39 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/23 16:39:57 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_list	*rev_cmd_line(t_cmd *cmd)
 	t_list	*res;
 	t_list	*safe;
 	t_cmd	*aux;
-	t_list	*imp;
 
 	res = ft_lstnew((void *) cmd);
 	aux = cmd->next;
@@ -43,6 +42,9 @@ t_list	*rev_cmd_line(t_cmd *cmd)
 		aux = aux->next;
 		safe = safe->next;
 	}
+/*
+ * ///IMPRESION
+	t_list	*imp;
 	imp = res;
 	printf("Nuestra lista al revés queda:\n");
 	while (imp)
@@ -50,6 +52,7 @@ t_list	*rev_cmd_line(t_cmd *cmd)
 		printf("%s\n",((t_cmd *)imp->content)->argv[1]);
 		imp = imp->next;
 	}
+*/
 	free_revlst(res);
 	return (res);
 }

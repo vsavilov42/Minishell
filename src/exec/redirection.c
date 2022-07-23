@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 13:46:15 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/22 13:50:57 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/23 16:30:13 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,28 @@ void	pipes_selector(int mode, t_exec *own, t_exec *prev, t_cmd *cmd)
 	}
 	execute_cmd(cmd);
 }
+
+/*
+ * HEREDOC:
+ * Aquí 
+ * crearemos un fichero temporal en ???, leyendo de la entrada estandar, hasta que se introduzca del
+ * luego haremos dup de entrada al fichero creado
+*/
+void	heredoc(char *del);
+
+/*
+ * INFILE:
+ * usaremos acces para comprobar si rute es valida  y existe
+ * si es válido lo abrimos  dup  de entrada y close
+ * si no mensaje error
+*/
+void	infile(char *rute);
+
+/*
+ * OUTFILE:
+ * diferenciar entre > y >>
+ * usaremos acces para revisar
+ * 	> si no existe se crea si tiene contenido se sobreescribe
+ * 	>> si no existe ses crea si tiene contenido se append
+ */
+void	outfile (char *rute, int type);

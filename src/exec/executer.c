@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/23 16:10:58 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/23 16:51:05 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	executer(t_parse *cmd)
 			// Aquí tenemos usar waitpid para todos los id de cada proceso
 //			while (wait(&status) > 0);*/
 	}
-	waitpid(-1, &status, 0);
+//	waitpid(-1, &status, 0);
 //	exit(status);
 }
 /*
@@ -132,7 +132,8 @@ int	execute_cmd(t_cmd *cmd)
 {
 	char **split_cmd;
 
-	perror(cmd->rvs->argv[1]);
+	//perror(cmd->rvs->argv[1]);
+//	perror(cmd->argv[1]);
 	if (!is_builtin(cmd->argv))
 		return (builtin(cmd->argv), 0);
 	cmd->env = env_pointer();
@@ -146,7 +147,7 @@ int	execute_cmd(t_cmd *cmd)
 		//execve(NULL, split_cmd, cmd->env);
 	}
 	//exit(126);
-	return (1);
+	return (0);
 
 }
 
