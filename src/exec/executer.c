@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/23 16:51:05 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/23 23:34:05 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	executer(t_parse *cmd)
 	int		status;
 	pid_t	id;
 
+//	g_sh.fd[0] = dup(0);
+//	g_sh.fd[1] = dup(1);
 	aux = cmd->head_cmd;
 	rev_cmd_line(aux);
 	if (!aux->next && !is_builtin(aux->argv))
@@ -51,7 +53,7 @@ void	executer(t_parse *cmd)
 			// Aquí tenemos usar waitpid para todos los id de cada proceso
 //			while (wait(&status) > 0);*/
 	}
-//	waitpid(-1, &status, 0);
+	waitpid(-1, &status, 0);
 //	exit(status);
 }
 /*
@@ -108,7 +110,9 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 //	execute_cmd(cmd);
 	//printf("test: %s\n", cmd->argv[1]);
 	//free all, prepare exits
-//	waitpid(-1, &own->status, 0);
+	waitpid(-1, &own->status, 0);
+	exit(own->status);
+	//exit(own->status);
 	return (own->pid);
 }
 

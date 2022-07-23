@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:12:34 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/23 16:05:10 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/23 23:23:45 by dexposit         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:41:17 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -95,6 +95,7 @@ typedef struct s_sh
 	t_exec		*exec;
 	t_cmd		*cmd;
 	pid_t		*pid;
+	int			fd[2];
 }	t_sh;
 
 extern t_sh	g_sh;

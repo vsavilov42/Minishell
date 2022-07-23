@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:59:59 by nortolan          #+#    #+#             */
-/*   Updated: 2022/05/30 12:54:41 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/23 23:05:36 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_sh	g_sh;
 int	main(void)
 {
 	char	*line;
-
-	atexit(leaks);
+//	int		status;
+//	atexit(leaks);
 	init_minishell();
 	while (1)
 	{
@@ -33,6 +33,7 @@ int	main(void)
 		{
 			add_history(line);
 			get_lines(line);
+//			waitpid(-1, &status, 0);
 		}
 		if (line == NULL)
 		{
