@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/22 13:44:15 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/23 16:10:58 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	executer(t_parse *cmd)
 	pid_t	id;
 
 	aux = cmd->head_cmd;
+	rev_cmd_line(aux);
 	if (!aux->next && !is_builtin(aux->argv))
 		return(execute_cmd(aux), (void) 0);
 		//ejecutar un builtin normal
@@ -131,6 +132,7 @@ int	execute_cmd(t_cmd *cmd)
 {
 	char **split_cmd;
 
+	perror(cmd->rvs->argv[1]);
 	if (!is_builtin(cmd->argv))
 		return (builtin(cmd->argv), 0);
 	cmd->env = env_pointer();

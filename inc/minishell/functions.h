@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:11:19 by nortolan          #+#    #+#             */
-/*   Updated: 2022/07/22 13:37:30 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/23 16:08:18 by dexposit         ###   ########.fr       */
 /*   Updated: 2022/03/17 14:55:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -55,6 +55,12 @@ void		save_pid(pid_t	id);
 
 int			dup_in_out(int *fin, int *fout);
 void		pipes_selector(int mode, t_exec *own, t_exec *prev, t_cmd *cmd);
+
+/* rvs_cm_line.c */
+
+t_list	*rev_cmd_line(t_cmd *cmd);
+void	free_revlst(t_list *lst);
+t_cmd	*get_cnt(t_list *node);
 
 /* quote_handlin.c */
 
