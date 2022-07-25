@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:44:57 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/22 20:56:03 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/25 20:01:01 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	remove_lst(char *name)
 		free(tmp->name);
 		free(tmp->value);
 		free(tmp);
-		g_sh.env = &last;
+		*g_sh.env = (*g_sh.env)->next;
 		return ;
 	}
 	current = last->next;
