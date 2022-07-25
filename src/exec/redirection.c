@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 13:46:15 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/23 23:31:51 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/25 17:56:54 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ int	dup_in_out(int *fin, int *fout)
 void	pipes_selector(int mode, t_exec *own, t_exec *prev, t_cmd *cmd)
 {
 	int	i;
-//	int	fd[2];
+	int	fd[2];
 
-/*	i = -1;
+	i = -1;
 	while (++i < 2)
 		fd[i] = dup(i);
-	i = -1;*/
+	i = -1;
 	if (mode == 1)
 		dup_in_out(&prev->pipe_fd[0], NULL);
 	else if (mode == 2)
@@ -57,13 +57,28 @@ void	pipes_selector(int mode, t_exec *own, t_exec *prev, t_cmd *cmd)
 			close(prev->pipe_fd[i]);
 		if (own)
 			close(own->pipe_fd[i]);
+//		close(g_sh.fd[i]);
 //		close(fd[i]);
 	}
 	execute_cmd(cmd);
+	i = -1;
+	while (++i < 2)
+	{
+		dup2(fd[i], i);
+		close(fd[i]);
+	}
+	if (own)
+	free(own);
+	if (prev)
+	free(prev);
+	//exit(0);
 /*	i = -1;
 	while (++i < 2)
-		dup2(g_sh.fd[i], i);
-		close(g_sh.fd[i]);
+	{
+		dup2(fd[i], i);
+		dup2(fd[i], g_sh.fd[i]);
+		close(fd[i]);
+	}
 */
 }
 
