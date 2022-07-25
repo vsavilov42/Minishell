@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 13:46:15 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/25 17:56:54 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:31:23 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	pipes_selector(int mode, t_exec *own, t_exec *prev, t_cmd *cmd)
 		if (own)
 			close(own->pipe_fd[i]);
 //		close(g_sh.fd[i]);
-//		close(fd[i]);
+		close(fd[i]);
 	}
 	execute_cmd(cmd);
 	i = -1;

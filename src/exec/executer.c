@@ -6,7 +6,7 @@
 /*   By: dexposit <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 13:23:23 by dexposit          #+#    #+#             */
-/*   Updated: 2022/07/25 17:24:00 by dexposit         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:37:41 by dexposit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,11 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 	if (!cmd->next)
 		if (!prev)
 			pipes_selector(0, own, prev, cmd);
-//			dup_in_out();
 //			printf("este es un único commando.\n");
 		else
 			pipes_selector(1, own, prev, cmd);
 //			printf("aqui hacemos dup de entrada a prev->pipe\n");
-//			dup_in_out();
 	else
-	//este son los casos en los que hay mas de un commando
 	{
 		//	caso 1:	cmd | cmd --> primer comando con mas detrás
 		//	caso 2: cmd | cmd | cmd -->commando con uno delante y uno detrás
@@ -101,20 +98,12 @@ pid_t	create_process(t_cmd *cmd, t_exec *prev)
 			create_process(cmd->next, own);
 		else if (!prev)
 			pipes_selector(2, own, prev, cmd);
-//			printf("aque hacemos dup de salida a own->pipe.\n");
 		else if (prev)
 			pipes_selector(3, own, prev, cmd);
-//		printf("aqui haceos dup stdin a prev->pipe y salida a own->pipe\n");
 		else
-			waitpid(-1, &own->status, 0);
+			waitpid(own->pid, &own->status, 0);
 	}
-	//close unused fd
-//	printf("FUERA IF-ELSE\n");
-	//if (own->pid >= 0)
-	//execute_cmd(cmd->rvs);
-	//printf("test: %s\n", cmd->argv[1]);
-	//free all, prepare exits
-	waitpid(-1, &own->status, 0);
+//	waitpid(-1, &own->status, 0);
 	exit(own->status);
 	//exit(own->status);
 	return (own->pid);
@@ -155,7 +144,8 @@ int	execute_cmd(t_cmd *cmd)
 		//separate_path_of_cmd(split_cmd, &cmd->cmd_path);
 		//execve(NULL, split_cmd, cmd->env);
 	}
-	//exit(126);
+	perror("Command not found...\n");
+	exit(1);
 	return (0);
 
 }
