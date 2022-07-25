@@ -135,7 +135,7 @@ $(NAME): $(LIBFT_NAME) $(OBJS)
 ###   Sanitize (Linux)   ###
 ############################
 ifeq ($(UNAME_S),Linux)
-sanitize: CFLAGS += -pedantic -g3 -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=bounds -fsanitize=null
+sanitize: CFLAGS += -lreadline -pedantic -g3 -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=bounds -fsanitize=null
 endif
 ifeq ($(UNAME_S),Darwin)
 sanitize: CFLAGS += -pedantic -g3 -fsanitize=address

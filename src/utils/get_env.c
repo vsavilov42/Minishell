@@ -6,16 +6,16 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:31:16 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/21 20:31:17 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/07/25 20:08:12 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void start_env(char *shell_lvl, char *pwd);
+static void	start_env(char *shell_lvl, char *pwd);
 static void	update_shlvl();
 
-static void start_env(char *shell_lvl, char *pwd)
+static void	start_env(char *shell_lvl, char *pwd)
 {
 	char	*tmp;
 
@@ -60,7 +60,6 @@ void	get_env(void)
 		while (environ[++i])
 			envlst_add_back(g_sh.env, new_envlst(environ[i]));
 		update_shlvl();
-		//update shell_lvl
 	}
 	else
 		start_env(shell_lvl, pwd);
