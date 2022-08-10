@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:31:16 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/25 20:08:12 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/08/10 22:13:23 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ static void	update_shlvl()
 	while (lst)
 	{
 		if (!same_strcmp(lst->name, "SHLVL"))
-			lst->value = ft_cplusic(lst->value);
+		{
+			free(lst->value);
+			lst->value = ft_strdup(ft_cplusic(lst->value));
+		}
 		lst = lst->next;
 	}
 }
