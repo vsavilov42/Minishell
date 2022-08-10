@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 21:40:22 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/22 21:40:50 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:43:28 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	update_pwd(void)
 		if (!same_strcmp("PWD", lst->name))
 		{
 			if (getcwd(pwd, PATH_MAX))
+			{
+				free(lst->value);
 				lst->value = ft_strdup(pwd);
+			}
 		}
 		lst = lst->next;
 	}

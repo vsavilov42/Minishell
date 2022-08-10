@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 11:36:16 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/22 21:38:06 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:50:20 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,18 @@ static void	ft_oldpwd(void)
 		if (!same_strcmp("OLDPWD", lst->name))
 		{
 			if (getcwd(oldpwd, PATH_MAX))
+			{
+				free(lst->value);
 				lst->value = oldpwd;
+			}
 			return ;
 		}
 		lst = lst->next;
 	}
 	tmp = ft_strjoin("OLDPWD=", (getcwd(oldpwd, PATH_MAX)));
 	envlst_add_back(g_sh.env, new_envlst(tmp));
+	free(oldpwd);
+	free(tmp);
 }
 
 static void	cd_home(void)
