@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:59:59 by nortolan          #+#    #+#             */
-/*   Updated: 2022/08/12 13:52:19 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/08/12 18:23:48 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 		{
 			add_history(line);
 			g_sh.line = line;
-			//ºget_lines(line);
+			get_line(line);
 		}
 		if (line == NULL)
 		{

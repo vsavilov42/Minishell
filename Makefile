@@ -62,7 +62,7 @@ SRCS_MAIN =		main.c
 
 SRCS_EXEC =
 
-SRCS_LEXER =
+SRCS_LEXER =	lexer.c			lexer_init.c		lextype.c
 
 SRCS_PARSER =	parse.c
 

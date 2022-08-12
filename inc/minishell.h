@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:10:23 by nortolan          #+#    #+#             */
-/*   Updated: 2022/08/12 14:20:31 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/08/12 18:34:45 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@
 # include <minishell/utils.h>
 # include <minishell/signals.h>
 # include <minishell/parser.h>
+# include <minishell/lexer.h>
+# include <minishell/ast.h>
 
 # define PATH_MAX 4096
+# define TRUE 1
+# define FALSE 0
+
 
 #endif

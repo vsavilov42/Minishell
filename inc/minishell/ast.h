@@ -12,6 +12,7 @@
 # define AST_DOLLAR "$"
 # define AST_QUEST "?"
 # define AST_COMT "#"
+# define AST_NULL "\0"
 
 struct s_ast {
 	char type;

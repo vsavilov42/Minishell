@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:16:12 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/08/12 14:32:23 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/08/12 17:46:46 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ void	get_line(char *line)
 {
 	if (valid_line(line))
 		return ;
+	lexer(line, ft_strlen(line));
 }
