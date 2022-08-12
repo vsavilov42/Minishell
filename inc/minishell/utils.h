@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:13:38 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/22 20:13:39 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/08/12 14:00:22 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,12 @@ void	free_split(char **split);
 char	*strtolow(char *str);
 
 char	*ft_cplusic(char *num);
+
+//init_shell
+void	init_minishell();
+void	flags_handle(int argc, char **argv);
+
+void	get_env();
+
 
 #endif

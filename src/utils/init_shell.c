@@ -6,11 +6,37 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:31:21 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/21 20:31:22 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/08/12 14:20:03 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+void	flags_handle(int argc, char **argv)
+{
+	if (argc > 1)
+	{
+		if (!same_strcmp(argv[1], "-c"))
+		{
+			if (argc > 3)
+			{
+				ft_putstr_fd("-c: option requires an argument\n", STDERR_FILENO);
+				exit(2);
+			}
+			else
+			{
+				get_line(argv[2]);
+				exit(g_sh.status);
+			}
+
+		}
+		else
+		{
+			ft_putstr_fd("error: no valid argument\n", STDERR_FILENO);
+			exit(127);
+		}
+	}
+}
 
 void	init_minishell(void)
 {

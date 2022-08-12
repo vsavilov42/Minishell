@@ -6,7 +6,7 @@
 #    By: vsavilov <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 16:56:48 by vsavilov          #+#    #+#              #
-#    Updated: 2021/11/16 11:39:26 by vsavilov         ###   ########.fr        #
+#    Updated: 2022/08/12 14:33:24 by Vsavilov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS_NAME = ft_isdigit.c \
 		ft_isascii.c \
 		ft_isprint.c \
 		ft_isalpha.c \
+		ft_isblank.c \
 		ft_strlen.c \
 		ft_memset.c \
 		ft_bzero.c \
