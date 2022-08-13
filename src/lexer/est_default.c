@@ -4,19 +4,13 @@ static int	tok_est_spc_tab(t_lextype *lt, int l_sz)
 {
 	if (lt->i > 0)
 	{
-		lt->tok->name[lt->i] = '\0';
+		lt->tok->name[lt->i] = 0;
 		lt->tok->next = (t_token *)malloc(sizeof(t_token));
 		lt->tok = lt->tok->next;
 		init_tok(lt->tok, l_sz + lt->j);
 		lt->i = 0;
 	}
-	lt->tok->name[0] = lt->type;
-	lt->tok->name[1] = '\0';
-	lt->tok->type = lt->type;
-	lt->tok->next = (t_token *)malloc(sizeof(t_token));
-	lt->tok = lt->tok->next;
-	init_tok(lt->tok, l_sz + lt->j);
-	return (0);
+	return (FALSE);
 }
 
 static void	tok_est_escseq(t_lextype *lt)
@@ -28,8 +22,28 @@ static void	tok_est_escseq(t_lextype *lt)
 	lt->tok->type = TOK_DEFAULT;
 }
 
+static int	tok_est_esp_char(t_lextype *lt, int l_sz)
+{
+	if (lt->i > 0)
+	{
+		lt->tok->name[lt->i] = '\0';
+		lt->tok->next = (t_token *)malloc(sizeof(t_token));
+		lt->tok = lt->tok->next;
+		init_tok(lt->tok, l_sz - lt->j);
+		lt->i = 0;
+	}
+	lt->tok->name[0] = lt->type;
+	lt->tok->name[1] = '\0';
+	lt->tok->type = lt->type;
+	lt->tok->next = (t_token *)malloc(sizeof(t_token));
+	lt->tok = lt->tok->next;
+	init_tok(lt->tok, l_sz + lt->j);
+	return (FALSE);
+}
+
 int	handle_dflt(t_lextype *lt, int l_sz)
 {
+	printf("i -> %d j -> %d\n", lt->i, lt->j);
 	if (lt->type == TOK_QUOTE || lt->type == TOK_DQUOTE
 		|| lt->type == TOK_LPBRK)
 		tok_est_quotes(lt);
@@ -45,5 +59,11 @@ int	handle_dflt(t_lextype *lt, int l_sz)
 		if (tok_est_spc_tab(lt, l_sz))
 			return (TRUE);
 	}
+	else if (lt->type == TOK_LESS || lt->type == TOK_GREAT
+		|| lt->type == TOK_PIPE || lt->type == TOK_SC
+		|| lt->type == TOK_LPRTH || lt->type == TOK_LPRTH
+		|| lt->type == TOK_AMPER)
+		if (tok_est_esp_char(lt, l_sz))
+			return (TRUE);
 	return (FALSE);
 }

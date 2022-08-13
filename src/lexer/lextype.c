@@ -53,5 +53,5 @@ int	handle_lextype(t_lextype *lt, int l_sz)
 	}
 	/*else
 		handle_ste(lt);
-*/	return 1;
+*/	return 0;
 }

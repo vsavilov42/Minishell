@@ -2,20 +2,23 @@
 
 int	lexer(char *line, int l_sz)
 {
-	int	i;
 	//int	tail;
 	t_lextype	*lt;
 
-	i = -1;
 	lt = (t_lextype *)malloc(sizeof(t_lextype));
 	if (l_sz <= 0 || init_lt(lt, l_sz))
 		return (0);
-	while (++i < l_sz || line[i] != '\0')
+	while (TRUE)
 	{
-		lt->c = line[i];
+		if (lt->j > l_sz)
+			break ;
+		lt->c = line[lt->j];
 		lt->type = get_lextype(lt->c);
 		if (handle_lextype(lt, l_sz))
 			return (0);
+		lt->j++;
+		if (lt->c == '\0')
+			break ;
 	}
 	return 0;
 }
