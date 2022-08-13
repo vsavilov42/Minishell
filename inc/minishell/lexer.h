@@ -31,7 +31,7 @@ enum {
 	STE_QUOTE = 0,
 	STE_DQUOTE,
 	STE_ESC,
-	STE_CURLY,
+	STE_PBRK,
 	STE_DFLT
 };
 
@@ -48,12 +48,19 @@ struct s_lexer {
 
 struct	s_lextype {
 	t_token	*tok;
+	char	c;
 	int	type;
 	int	ste;
+	int	i;
+	int	j;
 };
 
-void	lexer(char *line, int l_sz);
+int	lexer(char *line, int l_sz);
 int	init_lt(t_lextype *lt, int l_sz);
+void	init_tok(t_token *token, int l_sz);
 int	get_lextype(char c);
+int	handle_lextype(t_lextype *lt, int l_sz);
+int	handle_dflt(t_lextype *lt, int l_sz);
+void	tok_est_quotes(t_lextype *lt);
 
 #endif

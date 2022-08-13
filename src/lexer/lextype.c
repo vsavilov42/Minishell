@@ -14,6 +14,7 @@ static int	get_lextype2(char c)
 		return (TOK_RPBRK);
 	return (TOK_DEFAULT);
 }
+
 int	get_lextype(char c)
 {
 	if (c == '<')
@@ -41,4 +42,16 @@ int	get_lextype(char c)
 	else if (c == '&')
 		return (TOK_AMPER);
 	return (get_lextype2(c));
+}
+
+int	handle_lextype(t_lextype *lt, int l_sz)
+{
+	if (lt->ste == STE_DFLT)
+	{
+		if (handle_dflt(lt, l_sz))
+			return (TRUE);
+	}
+	/*else
+		handle_ste(lt);
+*/	return 1;
 }
