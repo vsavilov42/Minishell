@@ -43,7 +43,6 @@ static int	tok_est_esp_char(t_lextype *lt, int l_sz)
 
 int	handle_dflt(t_lextype *lt, int l_sz)
 {
-	printf("i -> %d j -> %d\n", lt->i, lt->j);
 	if (lt->type == TOK_QUOTE || lt->type == TOK_DQUOTE
 		|| lt->type == TOK_LPBRK)
 		tok_est_quotes(lt);

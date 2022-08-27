@@ -16,10 +16,12 @@ int	init_lt(t_lextype *lt, int l_sz)
 	lex->tok_lst = (t_token *)malloc(sizeof(t_token));
 	if (!lex || !lex->tok_lst)
 		return (TRUE);
-	init_tok(lex->tok_lst, l_sz);
 	lt->tok = lex->tok_lst;
+	init_tok(lex->tok_lst, l_sz);
+	lex->n_tk = 0;
 	lt->ste = STE_DFLT;
 	lt->i = 0;
 	lt->j = 0;
+	g_sh.lex = lex;
 	return (FALSE);
 }

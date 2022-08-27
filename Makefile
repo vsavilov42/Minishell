@@ -63,7 +63,7 @@ SRCS_MAIN =		main.c
 SRCS_EXEC =
 
 SRCS_LEXER =	lexer.c			lexer_init.c		lextype.c	\
-		est_default.c		tok_quotes.c
+		est_default.c		tok_quotes.c		tokenize.c	\
 
 SRCS_PARSER =	parse.c
 

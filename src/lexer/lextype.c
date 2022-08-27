@@ -44,6 +44,28 @@ int	get_lextype(char c)
 	return (get_lextype2(c));
 }
 
+static void	handle_ste(t_lextype *lt)
+{
+	if (lt->ste == STE_QUOTE)
+	{
+		lt->tok->name[lt->i++] = lt->c;
+		if (lt->type == TOK_QUOTE)
+			lt->ste = TOK_DEFAULT;
+	}
+	if (lt->ste == STE_DQUOTE)
+	{
+		lt->tok->name[lt->i++] = lt->c;
+		if (lt->type == TOK_DQUOTE)
+			lt->ste = TOK_DEFAULT;
+	}
+	if (lt->ste == STE_PBRK)
+	{
+		lt->tok->name[lt->i++] = lt->c;
+		if (lt->type == TOK_RPBRK)
+			lt->ste = TOK_DEFAULT;
+	}
+}
+
 int	handle_lextype(t_lextype *lt, int l_sz)
 {
 	if (lt->ste == STE_DFLT)
@@ -51,7 +73,15 @@ int	handle_lextype(t_lextype *lt, int l_sz)
 		if (handle_dflt(lt, l_sz))
 			return (TRUE);
 	}
-	/*else
+	else
 		handle_ste(lt);
-*/	return 0;
+	if (lt->type == TOK_NULL)
+	{
+		if (lt->i > 0)
+		{
+			lt->tok->name[lt->i] = '\0';
+			lt->i = 0;
+		}
+	}
+	return 0;
 }

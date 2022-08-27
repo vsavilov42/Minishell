@@ -2,7 +2,7 @@
 
 int	lexer(char *line, int l_sz)
 {
-	//int	tail;
+	int	n_tok;
 	t_lextype	*lt;
 
 	lt = (t_lextype *)malloc(sizeof(t_lextype));
@@ -20,5 +20,6 @@ int	lexer(char *line, int l_sz)
 		if (lt->c == '\0')
 			break ;
 	}
-	return 0;
+	n_tok = manage_tokenize();
+	return (n_tok);
 }

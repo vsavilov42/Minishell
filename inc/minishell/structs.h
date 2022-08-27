@@ -17,8 +17,10 @@ typedef struct s_sh
 	int			status;
 	char		*line;
 	int		fd_bio[2];
+	int		is_exp;
 	t_envlst	**env;
 	t_token		*tok;
+	t_lexer		*lex;
 }			t_sh;
 
 extern t_sh	g_sh;
