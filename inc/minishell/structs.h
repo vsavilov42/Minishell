@@ -18,8 +18,10 @@ typedef struct s_sh
 	char		*line;
 	int		fd_bio[2];
 	int		is_exp;
+	int		subtok;
 	t_envlst	**env;
 	t_token		*tok;
+	t_token		*last;
 	t_lexer		*lex;
 }			t_sh;
 

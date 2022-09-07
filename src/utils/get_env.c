@@ -6,14 +6,11 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:31:16 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/08/10 22:13:23 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:58:54 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static void	start_env(char *shell_lvl, char *pwd);
-static void	update_shlvl();
 
 static void	start_env(char *shell_lvl, char *pwd)
 {
@@ -29,7 +26,7 @@ static void	start_env(char *shell_lvl, char *pwd)
 	free(tmp);
 }
 
-static void	update_shlvl()
+static void	update_shlvl(void)
 {
 	t_envlst	*lst;
 
@@ -48,7 +45,7 @@ static void	update_shlvl()
 void	get_env(void)
 {
 	extern char	**environ;
-	int		i;
+	int			i;
 	char		*pwd;
 	char		*shell_lvl;
 

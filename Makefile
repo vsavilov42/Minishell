@@ -64,6 +64,7 @@ SRCS_EXEC =
 
 SRCS_LEXER =	lexer.c			lexer_init.c		lextype.c	\
 		est_default.c		tok_quotes.c		tokenize.c	\
+		handle_exp.c		expansion.c
 
 SRCS_PARSER =	parse.c
 
@@ -74,7 +75,7 @@ SRCS_BUILTIN =	builtin.c		cd.c			pwd.c \
 
 SRCS_UTILS =	utils.c			utils2.c		signals.c \
 		free_all.c		envlst.c 		envlst2.c \
-		init_shell.c		get_env.c \
+		init_shell.c		get_env.c 		error_msg.c \
 
 SRCS_NAME =	$(SRCS_MAIN) \
 		$(addprefix $(SRC_DIR_LEXER)/, $(SRCS_LEXER)) \
