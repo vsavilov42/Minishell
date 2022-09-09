@@ -6,7 +6,7 @@
 #    By: vsavilov <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 16:56:48 by vsavilov          #+#    #+#              #
-#    Updated: 2022/08/12 14:33:24 by Vsavilov         ###   ########.fr        #
+#    Updated: 2022/09/09 15:00:52 by Vsavilov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,9 +37,10 @@ SRCS_NAME = ft_isdigit.c \
 		ft_memmove.c \
 		ft_strlcpy.c \
 		ft_strlcat.c \
+		ft_strcat.c \
 		ft_toupper.c \
 		ft_tolower.c \
-		ft_strchr.c	 \
+		ft_strchr.c \
 		ft_strrchr.c \
 		ft_strncmp.c \
 		ft_memchr.c \
@@ -50,6 +51,7 @@ SRCS_NAME = ft_isdigit.c \
 		ft_strdup.c \
 		ft_strchr.c \
 		ft_strlcpy.c \
+		ft_strcpy.c \
 		ft_strjoin.c \
 		ft_strtrim.c \
 		ft_putchar_fd.c \

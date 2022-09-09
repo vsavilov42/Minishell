@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:13:38 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/07 18:12:07 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/07 20:57:18 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	flags_handle(int argc, char **argv);
 void	get_env();
 
 int	error_ret(const char *s, int code);
+int	perror_ret(const char *s, int code);
 
 #endif

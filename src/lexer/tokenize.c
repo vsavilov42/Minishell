@@ -62,7 +62,7 @@ static int	handle_tokdef_token(t_tknize *ltype)
 	if (g_sh.is_exp == FALSE)
 	{
 		trimed = (char *)malloc(ft_strlen(ltype->tmp->name) + 1);
-		//handle_trim_quotes(trimed, ltype->tmp->name);
+		handle_trim_quotes(trimed, ltype->tmp->name);
 		free(ltype->tmp->name);
 		ltype->tmp->name = trimed;
 	}

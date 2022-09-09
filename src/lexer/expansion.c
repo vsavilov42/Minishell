@@ -1,5 +1,27 @@
 #include <minishell.h>
 
+static void	change_name(t_expand *exp, t_token *tok)
+{
+	char	*name;
+	size_t	size;
+
+	if (exp->value == NULL)
+		exp->value = ft_strdup("");
+	size = ft_strlen(tok->name) - ft_strlen(exp->name) + ft_strlen(exp->value);
+	size -= (exp->braket * 2);
+	name = (char *)ft_calloc(sizeof(char), size);
+	if (!name)
+		perror_ret("malloc", 1);
+	ft_memcpy(name, tok->name, exp->start -1);
+	ft_strcat(name, exp->value);
+	ft_strcat(name, tok->name + exp->start + ft_strlen(exp->name)
+		+ (exp->braket * 2));
+	free(exp->name);
+	free(exp->value);
+	free(tok->name);
+	tok->name = name;
+}
+
 static int	is_braket(t_expand *exp, t_token *tok)
 {
 	int	brk;
@@ -71,5 +93,9 @@ int	expansion(t_token *tok, int *start, int ste)
 		else
 			exp.value = return_value(exp.name);
 	}
+	*start -= 2;
+	if (!exp.value)
+		*start += ft_strlen(exp.value);
+	change_name(&exp, tok);
 	return (0);
 }

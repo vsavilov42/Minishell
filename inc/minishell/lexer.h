@@ -6,6 +6,7 @@ typedef struct s_lexer		t_lexer;
 typedef struct s_lextype	t_lextype;
 typedef struct s_tknize		t_tknize;
 typedef struct s_expand		t_expand;
+typedef struct s_trim		t_trim;
 
 enum ascii_tk {
 	TOK_DEFAULT	= -1,
@@ -73,6 +74,13 @@ struct	s_expand {
 	char	*value;
 };
 
+struct s_trim {
+	int	i;
+	int	j;
+	int	len;
+	char	quote;
+};
+
 int	lexer(char *line, int l_sz);
 int	init_lt(t_lextype *lt, int l_sz);
 void	init_tok(t_token *token, int l_sz);
@@ -82,6 +90,7 @@ int	handle_dflt(t_lextype *lt, int l_sz);
 void	tok_est_quotes(t_lextype *lt);
 int	manage_tokenize(void);
 int	handle_expansion(t_token **tok, t_token **last, t_tknize *ltype);
+void	handle_trim_quotes(char *trim, char *name);
 int	expansion(t_token *tok, int *start, int ste);
 
 #endif
