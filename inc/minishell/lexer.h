@@ -81,15 +81,15 @@ struct s_trim {
 	char	quote;
 };
 
-int	lexer(char *line, int l_sz);
-int	init_lt(t_lextype *lt, int l_sz);
+int	lexer(char *line, int l_sz, t_lexer *lex);
+int	init_lt(t_lextype *lt, int l_sz, t_lexer *lex);
 void	init_tok(t_token *token, int l_sz);
 int	get_lextype(char c);
 int	handle_lextype(t_lextype *lt, int l_sz);
 int	handle_dflt(t_lextype *lt, int l_sz);
 void	tok_est_quotes(t_lextype *lt);
-int	manage_tokenize(void);
-int	handle_expansion(t_token **tok, t_token **last, t_tknize *ltype);
+int	manage_tokenize(t_lexer *lex);
+int	handle_expansion(t_lexer *lex, t_token **tok, t_token **last, t_tknize *ltype);
 void	handle_trim_quotes(char *trim, char *name);
 int	expansion(t_token *tok, int *start, int ste);
 

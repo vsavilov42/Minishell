@@ -1,12 +1,12 @@
 #include <minishell.h>
 
-int	lexer(char *line, int l_sz)
+int	lexer(char *line, int l_sz, t_lexer *lex)
 {
 	int	n_tok;
 	t_lextype	*lt;
 
 	lt = (t_lextype *)malloc(sizeof(t_lextype));
-	if (l_sz <= 0 || init_lt(lt, l_sz))
+	if (l_sz <= 0 || init_lt(lt, l_sz, lex))
 		return (0);
 	while (TRUE)
 	{
@@ -20,6 +20,6 @@ int	lexer(char *line, int l_sz)
 		if (lt->c == '\0')
 			break ;
 	}
-	n_tok = manage_tokenize();
+	n_tok = manage_tokenize(lex);
 	return (n_tok);
 }

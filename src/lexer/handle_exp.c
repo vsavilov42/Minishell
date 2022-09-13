@@ -1,5 +1,18 @@
 #include <minishell.h>
 
+static int	close_token(t_token **tok, t_token **last, t_tknize *ltype)
+{
+	if (ft_strlen((*tok)->name <= 0))
+	{
+		ltype->semaphore++;
+		return (0);
+	}
+	else
+	{
+		if (lexer())
+	}
+}
+
 static int	manage_ste(t_token *tok, int *i, int *len, int *ste)
 {
 	if (*ste == STE_QUOTE)
@@ -38,6 +51,7 @@ static int	manage_ste_dflt(t_token *tok, int *i, int *len, int *ste)
 
 int	handle_expansion(t_token **tok, t_token **last, t_tknize *ltype)
 {
+	int	cnt;
 	int	i;
 	int	len;
 	int	ste;
@@ -52,7 +66,6 @@ int	handle_expansion(t_token **tok, t_token **last, t_tknize *ltype)
 		else
 			manage_ste(*tok, &i, &len, &ste);
 	}
-	(void)last;
-	(void)ltype;
-	return (0);
+	cnt = close_token(tok, last, ltype);
+	return (cnt);
 }

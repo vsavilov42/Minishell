@@ -3,25 +3,22 @@
 void	init_tok(t_token *token, int l_sz)
 {
 	token->name = (char *)malloc(sizeof(char *) * (l_sz + 2));
+	if (!tok->name)
+		return (perror_ret("malloc", 1));
 	*token->name = '\0';
 	token->type = TOK_NULL;
 	token->next = NULL;
 }
 
-int	init_lt(t_lextype *lt, int l_sz)
+int	init_lt(t_lextype *lt, int l_sz, t_lexer *lex)
 {
-	t_lexer	*lex;
-
-	lex = (t_lexer *)malloc(sizeof(t_lexer));
 	lex->tok_lst = (t_token *)malloc(sizeof(t_token));
-	if (!lex || !lex->tok_lst)
-		return (TRUE);
+	if (!lex->tok_lst)
+		return (perror_ret("fatal error", 1));
 	lt->tok = lex->tok_lst;
-	init_tok(lex->tok_lst, l_sz);
-	lex->n_tk = 0;
+	init_tok(lt->tok, l_sz);
 	lt->ste = STE_DFLT;
 	lt->i = 0;
 	lt->j = 0;
-	g_sh.lex = lex;
 	return (FALSE);
 }

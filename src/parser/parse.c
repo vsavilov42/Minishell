@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:16:12 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/07 20:42:38 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:21:16 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@ static int	valid_line(char *line)
 void	get_line(char *line)
 {
 	int	a_tok;
+	t_lexer	lex;
 
 	if (valid_line(line))
 		return ;
-	a_tok = lexer(line, ft_strlen(line));
+	a_tok = lexer(line, ft_strlen(line), &lex);
 //	printf("%d\n", a_tok);
 	(void)a_tok;
 }

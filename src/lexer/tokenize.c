@@ -1,6 +1,6 @@
 #include <minishell.h>
 
-static int	tok_checker(t_token **tok, t_token *last)
+static int	tok_checker(t_lexer *lex, t_token **tok, t_token *last)
 {
 	if (!*tok)
 		return (1);
@@ -13,7 +13,7 @@ static int	tok_checker(t_token **tok, t_token *last)
 		free((*tok)->name);
 		free(*tok);
 		if (!last)
-			*tok = g_sh.lex->tok_lst;
+			*tok = lex->tok_lst;
 		else
 			*tok = last->next;
 		return (1);
@@ -21,7 +21,7 @@ static int	tok_checker(t_token **tok, t_token *last)
 	return (0);
 }
 
-static int	handle_exp(t_tknize *ltype)
+static int	handle_exp(t_lexer *lex, t_tknize *ltype)
 {
 	int	cnt = 0;
 
@@ -29,11 +29,11 @@ static int	handle_exp(t_tknize *ltype)
 	{
 		g_sh.is_exp = TRUE;
 		g_sh.last = ltype->last;
-		cnt = handle_expansion(&ltype->tmp, &ltype->last, ltype);
+		cnt = handle_expansion(lex, &ltype->tmp, &ltype->last, ltype);
 		g_sh.is_exp = FALSE;
 		if (cnt == 1)
 			return (-1);
-		if (tok_checker(&ltype->tmp, ltype->last))
+		if (tok_checker(lex, &ltype->tmp, ltype->last))
 		{
 			g_sh.subtok = TRUE;
 			return (1);
@@ -48,14 +48,14 @@ static int	handle_exp(t_tknize *ltype)
 	return (2);
 }
 
-static int	handle_tokdef_token(t_tknize *ltype)
+static int	handle_tokdef_token(t_lexer *lex, t_tknize *ltype)
 {
 	int		cnt;
 	char	*trimed;
 
 	if (ltype->heredoc == 0)
 	{
-		cnt = handle_exp(ltype);
+		cnt = handle_exp(lex, ltype);
 		if (cnt != 2)
 			return (cnt);
 	}
@@ -70,7 +70,7 @@ static int	handle_tokdef_token(t_tknize *ltype)
 	return (1);
 }
 
-static void	parse_tok(t_tknize *ltype, t_token *tok, t_token *last)
+static int	parse_tok(t_lexer *lex, t_tknize *ltype, t_token *tok, t_token *last)
 {
 	int	sbool;
 
@@ -83,9 +83,9 @@ static void	parse_tok(t_tknize *ltype, t_token *tok, t_token *last)
 	{
 		if (ltype->tmp->type == TOK_DEFAULT)
 		{
-			sbool = handle_tokdef_token(ltype);
+			sbool = handle_tokdef_token(lex, ltype);
 			if (sbool <= 0)
-				break ;
+				return (sbool);
 		}
 		if (ltype->last && ltype->last->type == TOK_LESS
 			&& ltype->tmp->type == TOK_LESS)
@@ -95,19 +95,22 @@ static void	parse_tok(t_tknize *ltype, t_token *tok, t_token *last)
 		ltype->last = ltype->tmp;
 		ltype->tmp = ltype->tmp->next;
 	}
+	return (ltype->n_tok);
 }
 
-int	manage_tokenize(void)
+int	manage_tokenize(t_lexer *lex)
 {
 	t_tknize	*ltype;
 	t_token		*tok;
 	t_token		*last;
+	int		tokens;
 
 	ltype = (t_tknize *)malloc(sizeof(t_tknize));
 	if (!ltype)
-		return (0);
-	tok = g_sh.lex->tok_lst;
+		return (perror_ret("malloc", 1));
+	tok = lex->tok_lst;
 	last = NULL;
-	parse_tok(ltype, tok, last);
-	return (ltype->n_tok);
+	tokens = parse_tok(lex, ltype, tok, last);
+	//printf("%d\n", tokens);
+	return (tokens);
 }
