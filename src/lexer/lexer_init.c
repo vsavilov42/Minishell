@@ -1,13 +1,14 @@
 #include <minishell.h>
 
-void	init_tok(t_token *token, int l_sz)
+int	init_tok(t_token *token, int l_sz)
 {
 	token->name = (char *)malloc(sizeof(char *) * (l_sz + 2));
-	if (!tok->name)
+	if (!token->name)
 		return (perror_ret("malloc", 1));
 	*token->name = '\0';
 	token->type = TOK_NULL;
 	token->next = NULL;
+	return (0);
 }
 
 int	init_lt(t_lextype *lt, int l_sz, t_lexer *lex)

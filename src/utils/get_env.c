@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:31:16 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/07 18:58:54 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/13 21:54:36 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,20 @@ static void	start_env(char *shell_lvl, char *pwd)
 static void	update_shlvl(void)
 {
 	t_envlst	*lst;
+	char		*tmp;
 
 	lst = *g_sh.env;
 	while (lst)
 	{
 		if (!same_strcmp(lst->name, "SHLVL"))
 		{
+			tmp = ft_strdup(ft_cplusic(lst->value));
 			free(lst->value);
-			lst->value = ft_strdup(ft_cplusic(lst->value));
+			lst->value = tmp;
 		}
 		lst = lst->next;
 	}
+	free(tmp);
 }
 
 void	get_env(void)

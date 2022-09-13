@@ -2,12 +2,13 @@
 
 static int	tok_checker(t_lexer *lex, t_token **tok, t_token *last)
 {
-	if (!*tok)
+	printf("tok-> %s\n", (*tok)->name);
+	if (*tok == NULL)
 		return (1);
 	if (ft_strlen((*tok)->name) <= 0)
 	{
 		if (!last)
-			g_sh.lex->tok_lst = (*tok)->next;
+			lex->tok_lst = (*tok)->next;
 		else
 			last->next = (*tok)->next;
 		free((*tok)->name);
@@ -23,13 +24,16 @@ static int	tok_checker(t_lexer *lex, t_token **tok, t_token *last)
 
 static int	handle_exp(t_lexer *lex, t_tknize *ltype)
 {
-	int	cnt = 0;
+	int	cnt;
 
+	cnt = 0;
 	if (ltype->semaphore == 0 && g_sh.is_exp == FALSE)
 	{
+		printf("tok into handle-------> %s\n", ltype->tmp->name);
 		g_sh.is_exp = TRUE;
 		g_sh.last = ltype->last;
 		cnt = handle_expansion(lex, &ltype->tmp, &ltype->last, ltype);
+		printf("tok into handle-------> %s\n", ltype->tmp->name);
 		g_sh.is_exp = FALSE;
 		if (cnt == 1)
 			return (-1);
