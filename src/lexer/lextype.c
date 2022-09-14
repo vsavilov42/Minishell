@@ -52,13 +52,13 @@ static void	handle_ste(t_lextype *lt)
 		if (lt->type == TOK_QUOTE)
 			lt->ste = TOK_DEFAULT;
 	}
-	if (lt->ste == STE_DQUOTE)
+	else if (lt->ste == STE_DQUOTE)
 	{
 		lt->tok->name[lt->i++] = lt->c;
 		if (lt->type == TOK_DQUOTE)
 			lt->ste = TOK_DEFAULT;
 	}
-	if (lt->ste == STE_PBRK)
+	else if (lt->ste == STE_PBRK)
 	{
 		lt->tok->name[lt->i++] = lt->c;
 		if (lt->type == TOK_RPBRK)
