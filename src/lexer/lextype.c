@@ -83,5 +83,5 @@ int	handle_lextype(t_lextype *lt, int l_sz)
 			lt->i = 0;
 		}
 	}
-	return 0;
+	return (0);
 }

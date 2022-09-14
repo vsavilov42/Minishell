@@ -46,7 +46,7 @@ int	handle_dflt(t_lextype *lt, int l_sz)
 	if (lt->type == TOK_QUOTE || lt->type == TOK_DQUOTE
 		|| lt->type == TOK_LPBRK)
 		tok_est_quotes(lt);
-	else if (lt->type == TOK_SPACE)
+	else if (lt->type == TOK_ESCSEQ)
 		tok_est_escseq(lt);
 	else if (lt->type == TOK_DEFAULT)
 	{
