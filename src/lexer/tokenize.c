@@ -2,7 +2,7 @@
 
 static int	tok_checker(t_lexer *lex, t_token **tok, t_token *last)
 {
-	printf("tok-> %s\n", (*tok)->name);
+//	printf("tok-> %s\n", (*tok)->name);
 	if (*tok == NULL)
 		return (1);
 	if (ft_strlen((*tok)->name) <= 0)
@@ -29,11 +29,9 @@ static int	handle_exp(t_lexer *lex, t_tknize *ltype)
 	cnt = 0;
 	if (ltype->semaphore == 0 && g_sh.is_exp == FALSE)
 	{
-		printf("tok into handle-------> %s\n", ltype->tmp->name);
 		g_sh.is_exp = TRUE;
 		g_sh.last = ltype->last;
 		cnt = handle_expansion(lex, &ltype->tmp, &ltype->last, ltype);
-		printf("tok into handle-------> %s\n", ltype->tmp->name);
 		g_sh.is_exp = FALSE;
 		if (cnt == 1)
 			return (-1);
@@ -115,6 +113,6 @@ int	manage_tokenize(t_lexer *lex)
 	tok = lex->tok_lst;
 	last = NULL;
 	tokens = parse_tok(lex, ltype, tok, last);
-	//printf("%d\n", tokens);
+//	printf("%d\n", tokens);
 	return (tokens);
 }

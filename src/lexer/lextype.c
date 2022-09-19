@@ -35,8 +35,6 @@ int	get_lextype(char c)
 		return (TOK_TAB);
 	else if (c == ' ')
 		return (TOK_SPACE);
-	else if (c == '$')
-		return (TOK_DOLLAR);
 	else if (c == '?')
 		return (TOK_QUEST);
 	else if (c == '&')

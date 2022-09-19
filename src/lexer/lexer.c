@@ -5,6 +5,7 @@ int	lexer(char *line, int l_sz, t_lexer *lex)
 	int			n_tok;
 	t_lextype	lt;
 
+//	printf("la len es: EN LEXER %d\n", l_sz);
 	lex->n_tk = 0;
 	if (g_sh.is_exp == FALSE)
 		g_sh.subtok = FALSE;
@@ -16,6 +17,7 @@ int	lexer(char *line, int l_sz, t_lexer *lex)
 			break ;
 		lt.c = line[lt.j];
 		lt.type = get_lextype(lt.c);
+		//printf(":P %d\n", lt.type);
 		if (handle_lextype(&lt, l_sz))
 			return (0);
 		lt.j++;

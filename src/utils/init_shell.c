@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:31:21 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/08/16 16:44:09 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/17 21:14:28 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,18 @@ void	flags_handle(int argc, char **argv)
 	}
 }
 
+static void	init_vars(void)
+{
+	g_sh.status = 0;
+	dup2(g_sh.fd_bio[0], STDIN_FILENO);
+	dup2(g_sh.fd_bio[1], STDOUT_FILENO);
+	g_sh.is_exp = FALSE;
+	g_sh.subtok = FALSE;
+}
+
 void	init_minishell(void)
 {
 	get_env();
+	init_vars();
 	manage_signal();
 }

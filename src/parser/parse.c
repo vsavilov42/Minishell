@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:16:12 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/14 16:21:20 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:24:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	get_line(char *line)
 	if (valid_line(line))
 		return ;
 	a_tok = lexer(line, ft_strlen(line), &lex);
-	printf("%d\n", a_tok);
+	printf("----> Numero de tokens totales: [%d]\n", a_tok);
 //	(void)a_tok;
 }

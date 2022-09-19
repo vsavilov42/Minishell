@@ -16,6 +16,7 @@ static void	change_name(t_expand *exp, t_token *tok)
 	ft_strcat(name, exp->value);
 	ft_strcat(name, tok->name + exp->start + ft_strlen(exp->name)
 		+ (exp->braket * 2));
+//	printf("EXPANSION: tok->name-> %s\n", tok->name);
 	free(exp->name);
 	free(exp->value);
 	free(tok->name);
@@ -78,6 +79,7 @@ int	expansion(t_token *tok, int *start, int ste)
 {
 	t_expand	exp;
 
+	(*start)++;
 	exp = (t_expand){(*start), (*start), 0, NULL, NULL};
 	if (tok->name[*start] == TOK_QUEST || tok->name[*start] == '=')
 		special_chars(tok->name[*start], &exp.name, &exp.value);
@@ -94,7 +96,7 @@ int	expansion(t_token *tok, int *start, int ste)
 			exp.value = return_value(exp.name);
 	}
 	*start -= 2;
-	if (!exp.value)
+	if (exp.value != NULL)
 		*start += ft_strlen(exp.value);
 	change_name(&exp, tok);
 	return (0);
