@@ -69,18 +69,14 @@ static int	handle_tokdef_token(t_lexer *lex, t_tknize *ltype)
 		ltype->tmp->name = trimed;
 	}
 	ltype->n_tok++;
-	return (1);
+	return (2);
 }
 
 static int	parse_tok(t_lexer *lex, t_tknize *ltype, t_token *tok, t_token *last)
 {
 	int	sbool;
 
-	ltype->n_tok = 0;
-	ltype->heredoc = 0;
-	ltype->semaphore = 0;
-	ltype->tmp = tok;
-	ltype->last = last;
+	*ltype = (t_tknize){0, 0, 0, tok, last};
 	while (ltype->tmp)
 	{
 		if (ltype->tmp->type == TOK_DEFAULT)
@@ -88,6 +84,8 @@ static int	parse_tok(t_lexer *lex, t_tknize *ltype, t_token *tok, t_token *last)
 			sbool = handle_tokdef_token(lex, ltype);
 			if (sbool <= 0)
 				return (sbool);
+			else if (sbool == 1)
+				continue ;
 		}
 		if (ltype->last && ltype->last->type == TOK_LESS
 			&& ltype->tmp->type == TOK_LESS)
@@ -113,6 +111,5 @@ int	manage_tokenize(t_lexer *lex)
 	tok = lex->tok_lst;
 	last = NULL;
 	tokens = parse_tok(lex, ltype, tok, last);
-//	printf("%d\n", tokens);
 	return (tokens);
 }
