@@ -2,7 +2,6 @@
 
 static int	tok_checker(t_lexer *lex, t_token **tok, t_token *last)
 {
-//	printf("tok-> %s\n", (*tok)->name);
 	if (*tok == NULL)
 		return (1);
 	if (ft_strlen((*tok)->name) <= 0)
@@ -100,16 +99,13 @@ static int	parse_tok(t_lexer *lex, t_tknize *ltype, t_token *tok, t_token *last)
 
 int	manage_tokenize(t_lexer *lex)
 {
-	t_tknize	*ltype;
+	t_tknize	ltype;
 	t_token		*tok;
 	t_token		*last;
 	int		tokens;
 
-	ltype = (t_tknize *)malloc(sizeof(t_tknize));
-	if (!ltype)
-		return (perror_ret("malloc", 1));
 	tok = lex->tok_lst;
 	last = NULL;
-	tokens = parse_tok(lex, ltype, tok, last);
+	tokens = parse_tok(lex, &ltype, tok, last);
 	return (tokens);
 }
