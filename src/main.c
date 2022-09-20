@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:59:59 by nortolan          #+#    #+#             */
-/*   Updated: 2022/09/20 16:18:32 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:04:28 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int argc, char **argv)
 			write(STDOUT_FILENO, "exit\n", 5);
 			exit(EXIT_SUCCESS);
 		}
+		free(line);
 	}
 	free(g_sh.env);
 	return (EXIT_SUCCESS);

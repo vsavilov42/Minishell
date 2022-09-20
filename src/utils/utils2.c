@@ -6,11 +6,12 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:31:38 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/13 21:50:17 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:56:49 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <stdlib.h>
 
 char	*ft_cplusic(char *num)
 {

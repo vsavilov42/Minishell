@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:31:21 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/17 21:14:28 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:03:04 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	flags_handle(int argc, char **argv)
 				get_line(argv[2]);
 				exit(g_sh.status);
 			}
-
 		}
 		else
 		{
