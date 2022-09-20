@@ -6,7 +6,7 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:59:59 by nortolan          #+#    #+#             */
-/*   Updated: 2022/09/14 15:54:13 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:18:32 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 {
 	char	*line;
 
-//	atexit(leaks);
+	atexit(leaks);
 	init_minishell();
 	flags_handle(argc, argv);
 	while (1)
@@ -41,7 +41,6 @@ int	main(int argc, char **argv)
 			write(STDOUT_FILENO, "exit\n", 5);
 			exit(EXIT_SUCCESS);
 		}
-		free(line);
 	}
 	free(g_sh.env);
 	return (EXIT_SUCCESS);

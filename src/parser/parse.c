@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:16:12 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/19 17:24:04 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:18:14 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,13 @@ void	get_line(char *line)
 		return ;
 	a_tok = lexer(line, ft_strlen(line), &lex);
 	printf("----> Numero de tokens totales: [%d]\n", a_tok);
-//	(void)a_tok;
+	if (a_tok <= 0)
+	{
+		printf("entra\n");
+		printf("subtok %d\n", g_sh.subtok);
+		if (a_tok == FALSE && g_sh.subtok == FALSE)
+			perror("error: syntax error\n");
+		free(g_sh.line);
+		free_lexer(&lex);
+	}
 }
