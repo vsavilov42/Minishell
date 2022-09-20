@@ -16,7 +16,6 @@ static void	change_name(t_expand *exp, t_token *tok)
 	ft_strcat(name, exp->value);
 	ft_strcat(name, tok->name + exp->start + ft_strlen(exp->name)
 		+ (exp->braket * 2));
-//	printf("EXPANSION: tok->name-> %s\n", tok->name);
 	free(exp->name);
 	free(exp->value);
 	free(tok->name);

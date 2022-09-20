@@ -2,7 +2,7 @@
 
 int	init_tok(t_token *token, int l_sz)
 {
-	token->name = (char *)malloc(sizeof(char *) * (l_sz + 2));
+	token->name = (char *)malloc(sizeof(char) * (l_sz + 2));
 	if (!token->name)
 		return (perror_ret("malloc", 1));
 	*token->name = '\0';

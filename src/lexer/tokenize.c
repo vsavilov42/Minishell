@@ -71,11 +71,10 @@ static int	handle_tokdef_token(t_lexer *lex, t_tknize *ltype)
 	return (2);
 }
 
-static int	parse_tok(t_lexer *lex, t_tknize *ltype, t_token *tok, t_token *last)
+static int	parse_tok(t_lexer *lex, t_tknize *ltype)
 {
 	int	sbool;
 
-	*ltype = (t_tknize){0, 0, 0, tok, last};
 	while (ltype->tmp)
 	{
 		if (ltype->tmp->type == TOK_DEFAULT)
@@ -106,6 +105,7 @@ int	manage_tokenize(t_lexer *lex)
 
 	tok = lex->tok_lst;
 	last = NULL;
-	tokens = parse_tok(lex, &ltype, tok, last);
+	ltype = (t_tknize){0, 0, 0, tok, last};
+	tokens = parse_tok(lex, &ltype);
 	return (tokens);
 }
