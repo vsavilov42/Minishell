@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:32:24 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/22 14:40:00 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:20:11 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,14 @@ struct s_ast {
 	struct t_ast	*left;
 	struct t_ast	*right;
 };
+
+//ASTreeBinBranch
+//ASTreeSetType
+//ASTreeSetData
+//ASTreeDelNode
+
+void	create_tree(t_ast **ast, t_lexer *lex);
+
+
 
 #endif

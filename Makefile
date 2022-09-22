@@ -45,11 +45,13 @@ SRC_DIR_EXEC =	exec
 SRC_DIR_PARSER = parser
 SRC_DIR_BUILTIN = built-in
 SRC_DIR_UTILS = utils
+SRC_DIR_AST = ast
 
 OBJ_DIR_ALL =	$(SRC_DIR_LEXER) \
 		$(SRC_DIR_PARSER) \
 		$(SRC_DIR_EXEC) \
 		$(SRC_DIR_BUILTIN) \
+		$(SRC_DIR_AST) \
 		$(SRC_DIR_UTILS)
 
 OBJ_DIR = $(addprefix $(OBJ_PATH)/, $(OBJ_DIR_ALL))
@@ -77,11 +79,14 @@ SRCS_UTILS =	utils.c			utils2.c		signals.c \
 		free_all.c		envlst.c 		envlst2.c \
 		init_shell.c		get_env.c 		error_msg.c \
 
+SRCS_AST =	create_tree.c \
+
 SRCS_NAME =	$(SRCS_MAIN) \
 		$(addprefix $(SRC_DIR_LEXER)/, $(SRCS_LEXER)) \
 		$(addprefix $(SRC_DIR_EXEC)/, $(SRCS_EXEC)) \
 		$(addprefix $(SRC_DIR_PARSER)/, $(SRCS_PARSER)) \
 		$(addprefix $(SRC_DIR_BUILTIN)/, $(SRCS_BUILTIN)) \
+		$(addprefix $(SRC_DIR_AST)/, $(SRCS_AST)) \
 		$(addprefix $(SRC_DIR_UTILS)/, $(SRCS_UTILS))
 
 ######################

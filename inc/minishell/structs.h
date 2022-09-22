@@ -2,6 +2,7 @@
 # define STRUCTS_H
 
 # include "lexer.h"
+# include "astree.h"
 
 //built-in
 typedef struct s_envlst
@@ -23,6 +24,7 @@ typedef struct s_sh
 	t_token		*tok;
 	t_token		*last;
 	t_lexer		*lex;
+	t_ast		**astree;
 }			t_sh;
 
 extern t_sh	g_sh;
