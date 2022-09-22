@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 08:27:29 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/08/29 08:27:30 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/22 14:39:32 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <minishell/signals.h>
 # include <minishell/parser.h>
 # include <minishell/lexer.h>
-# include <minishell/ast.h>
+# include <minishell/astree.h>
 
 # define PATH_MAX 4096
 # define TRUE 1
