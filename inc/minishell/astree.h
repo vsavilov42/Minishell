@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:32:24 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/22 15:20:11 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:01:58 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,31 @@ struct s_ast {
 //ASTreeSetType
 //ASTreeSetData
 //ASTreeDelNode
+
+//Create cmdline (test all command line production)
+//cmdline1 <job> ; cmdline
+//cmdline2 <job> ;
+//cmdline3 <job> & cmdline
+//cmdline4 <job> &
+//cmdline5 <job>
+
+//Create job (test all jobs) implementing "()"
+//job1 (<cmd>) | <job>
+//job2 <cmd> | <job>
+//job3 (<cmd>)
+//job4 <cmd>
+
+//Create cmd (test cmd)
+//cmd1 <simple cmd> < filename
+//cmd2 <simple cmd> > filename
+//cmd3 <simple cmd>
+
+//Create <simple cmd>
+//simplecmd1 = pathname + <tok_lst>
+
+//Create <tok_lst>
+//tokenlist1 <token> + tok_lst
+//tokenlist2 <EMPTY>
 
 void	create_tree(t_ast **ast, t_lexer *lex);
 
