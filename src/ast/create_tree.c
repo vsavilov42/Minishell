@@ -43,6 +43,6 @@ static void	print_ast(t_ast *ast)
 void	create_tree(t_ast **ast, t_lexer *lex)
 {
 	g_sh.tok = lex->tok_lst;
-	*ast = cmd_line(&g_sh.tok); // create every case
+	*ast = cmd_line(); // create every case
 	print_ast(*ast);
 }
