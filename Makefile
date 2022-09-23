@@ -79,7 +79,8 @@ SRCS_UTILS =	utils.c			utils2.c		signals.c \
 		free_all.c		envlst.c 		envlst2.c \
 		init_shell.c		get_env.c 		error_msg.c \
 
-SRCS_AST =	create_tree.c \
+SRCS_AST =	create_tree.c		ast_core.c		ast_cmd.c \
+		ast_cmdline.c		ast_job.c \
 
 SRCS_NAME =	$(SRCS_MAIN) \
 		$(addprefix $(SRC_DIR_LEXER)/, $(SRCS_LEXER)) \

@@ -6,17 +6,19 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:32:24 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/23 13:29:07 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/23 14:47:14 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASTREE_H
 # define ASTREE_H
 
+# define SETDATATYPE(a) (a & (~(NODE_DATA)))
+
 typedef struct s_ast	t_ast;
 typedef enum e_nodetype	t_nodetype;
 
-// '|' '\' '>' '<' '<<'
+// '|' ';' 'redir' '<' '<<' '>' '>>' 'cmd' 'arg' 'default'
 
 enum e_nodetype{
 	NODE_PIPE =	(1 << 0),
@@ -34,9 +36,35 @@ enum e_nodetype{
 struct s_ast {
 	int				type;
 	char			*data;
-	struct t_ast	*left;
-	struct t_ast	*right;
+	t_ast			*left;
+	t_ast			*right;
 };
+
+void	astree_root_branch(t_ast *root, t_ast *left, t_ast *right);
+void	astree_set_type(t_ast *ast, t_nodetype type);
+int	astree_get_type(t_ast *ast);
+void	astree_set_data(t_ast *ast, char *data);
+void	astree_del_node(t_ast *ast);
+
+//cmdline ->
+
+t_ast	*cmd_line(void);
+
+//and_or ->
+
+t_ast	*and_or(void);
+
+//job ->
+
+t_ast	*job(void);
+
+//simple_cmd ->
+
+t_ast	*simple_cmd(void);
+
+//token_list ->
+
+t_ast	*token_list(t_ast **ast);
 
 /* ASTREE core */
 
