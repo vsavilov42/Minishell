@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:32:24 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/22 17:01:58 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:29:07 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,29 @@ struct s_ast {
 	struct t_ast	*right;
 };
 
+/* ASTREE core */
+
 //ASTreeBinBranch
 //ASTreeSetType
 //ASTreeSetData
 //ASTreeDelNode
 
+/* ---------- */
+
 //Create cmdline (test all command line production)
-//cmdline1 <job> ; cmdline
-//cmdline2 <job> ;
-//cmdline3 <job> & cmdline
-//cmdline4 <job> &
-//cmdline5 <job>
+//cmdline1 <and/or> ; cmdline
+//cmdline2 <and/or> ;
+//cmdline3 <and/or & cmdline
+//cmdline4 <and/or> &
+//cmdline5 <and/or>
+
+//Create <and/or>
+//and_or1 <job> && <and/or>
+//and_or2 <job> || <and/or>
+//and_or3 <job>
+//and_or4 (<cmdline>) && <and/or>
+//and_or5 (<cmdline>) || <and/or>
+//and_or6 (<cmdline>)
 
 //Create job (test all jobs) implementing "()"
 //job1 (<cmd>) | <job>
@@ -57,16 +69,26 @@ struct s_ast {
 //job4 <cmd>
 
 //Create cmd (test cmd)
-//cmd1 <simple cmd> < filename
-//cmd2 <simple cmd> > filename
+//cmd1 <simple cmd> < <filename>
+//cmd2 <simple cmd> > <filename>
 //cmd3 <simple cmd>
 
 //Create <simple cmd>
 //simplecmd1 = pathname + <tok_lst>
 
+//Create <redir>
+//redir1 <redir-in>
+//redir2 <redir-out>
+
+//Create <redir-in>
+//redirIn1 << + <filename>
+//redirIn2 < + <filename>
+
 //Create <tok_lst>
-//tokenlist1 <token> + tok_lst
-//tokenlist2 <EMPTY>
+//tokenlist1 <data> + tok_lst
+//tokenlist2 <redir> + tok_lst
+//tokenlist3 <token> + tok_lst
+//tokenlist4 <EMPTY>
 
 void	create_tree(t_ast **ast, t_lexer *lex);
 
