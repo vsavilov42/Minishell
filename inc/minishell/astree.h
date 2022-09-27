@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:32:24 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/23 14:47:14 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/27 11:46:08 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ enum e_nodetype{
 	NODE_HEREDOC =	(1 << 4),
 	NODE_TRUNC =	(1 << 5),
 	NODE_APPEND =	(1 << 6),
-	NODE_CMD =	(1 << 7),
-	NODE_ARG =	(1 << 8),
-	NODE_DATA =	(1 << 9)
+	NODE_AND =	(1 << 7),
+	NODE_OR =	(1 << 8),
+	NODE_CMD =	(1 << 9),
+	NODE_ARG =	(1 << 10),
+	NODE_DATA =	(1 << 11)
 };
 
 struct s_ast {
