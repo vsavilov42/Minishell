@@ -25,6 +25,7 @@ typedef struct s_sh
 	t_token		*last;
 	t_lexer		*lex;
 	t_ast		**astree;
+	t_ast		*command;
 }			t_sh;
 
 extern t_sh	g_sh;

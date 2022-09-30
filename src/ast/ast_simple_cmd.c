@@ -8,6 +8,12 @@ t_ast	*simple_cmd(void)
 	astree_root_branch(result, NULL, NULL);
 	astree_set_type(result, NODE_CMD);
 	result->data = NULL;
-	token_list(&result);
+	g_sh.command = result;
+	token_list();
+	if (result && !result->data && !result->left && !result->right)
+	{
+		free(result);
+		return (NULL);
+	}
 	return (result);
 }

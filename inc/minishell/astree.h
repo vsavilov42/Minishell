@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:32:24 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/30 14:31:26 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:00:55 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_ast	*simple_cmd(void);
 
 //token_list ->
 
-t_ast	*token_list(t_ast **ast);
+t_ast	*token_list();
 
 /* ASTREE core */
 
