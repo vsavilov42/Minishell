@@ -22,7 +22,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIB_PATH)/inc
 
-#CFLAGS += -fsanitize=address -g3
+CFLAGS += -fsanitize=address -g3
 
 #################
 ###   Paths   ###
@@ -81,7 +81,8 @@ SRCS_UTILS =	utils.c			utils2.c		signals.c \
 
 SRCS_AST =	create_tree.c		ast_core.c		ast_cmd.c \
 		ast_cmdline.c		ast_job.c 		ast_and_or.c \
-		ast_token_list.c	ast_simple_cmd.c \
+		ast_token_list.c	ast_simple_cmd.c 	ast_utils.c \
+		ast_core2.c 		ast_and_or2.c \
 
 SRCS_NAME =	$(SRCS_MAIN) \
 		$(addprefix $(SRC_DIR_LEXER)/, $(SRCS_LEXER)) \

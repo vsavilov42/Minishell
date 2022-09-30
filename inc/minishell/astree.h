@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:32:24 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/27 11:46:08 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/09/30 14:31:26 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,17 @@ struct s_ast {
 	t_ast			*right;
 };
 
+//utils ->
+
+int	ast_valid_char(char **data, int type);
+
 void	astree_root_branch(t_ast *root, t_ast *left, t_ast *right);
 void	astree_set_type(t_ast *ast, t_nodetype type);
 int	astree_get_type(t_ast *ast);
 void	astree_set_data(t_ast *ast, char *data);
 void	astree_del_node(t_ast *ast);
+void	astree_add_branch(t_ast *root, t_ast *node, int state);
+void	astree_add_and_or(t_ast **astree, t_ast *ast, int state);
 
 //cmdline ->
 
@@ -55,6 +61,8 @@ t_ast	*cmd_line(void);
 //and_or ->
 
 t_ast	*and_or(void);
+t_ast	*and_or_node(int type, t_ast *cmd_line_node);
+t_ast	*hate_norm_and_or(t_token *save);
 
 //job ->
 
