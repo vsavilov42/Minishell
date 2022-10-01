@@ -1,5 +1,26 @@
 #include <minishell.h>
 
+static t_ast	*token_list4(void)
+{
+	return (NULL);
+}
+
+static t_ast	*token_list3(void)
+{
+	char	*arg;
+	t_ast	*result;
+
+	arg = NULL;
+	if (!ast_valid_char(NULL, TOK_DEFAULT))
+		return (NULL);
+	result = (t_ast *)malloc(sizeof(t_ast));
+	astree_set_type(result, NODE_ARG);
+	astree_set_data(result, arg);
+	token_list();
+	astree_add_branch(g_sh.command, result, 1);
+	return (result);
+}
+
 static t_ast	*token_list2(void)
 {
 	t_ast	*result;

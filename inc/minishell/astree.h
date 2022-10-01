@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:32:24 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/30 15:00:55 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/01 18:48:52 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ t_ast	*job(void);
 
 t_ast	*simple_cmd(void);
 
+//redir ->
+
+t_ast	*redir(void);
+t_ast	*redir_in(void);
+t_ast	*redir_out(void);
+
 //token_list ->
 
 t_ast	*token_list();
@@ -121,6 +127,10 @@ t_ast	*token_list();
 //Create <redir-in>
 //redirIn1 << + <filename>
 //redirIn2 < + <filename>
+
+//Create <redir-out>
+//redirOut1 >> + <filename>
+//redirOut2 > + <filename>
 
 //Create <tok_lst>
 //tokenlist1 <data> + tok_lst
