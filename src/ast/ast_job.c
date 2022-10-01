@@ -2,10 +2,7 @@
 
 static t_ast	*job4(void)
 {
-	t_ast	*result;
-
-	result = simple_cmd();
-	return (result);
+	return (simple_cmd());
 }
 
 static t_ast	*job3(void)
@@ -57,10 +54,23 @@ static t_ast	*job1(void)
 	t_ast	*cmd_node;
 	t_ast	*result;
 
+	if (!ast_valid_char(NULL, TOK_LPRTH))
+		return (NULL);
 	cmd_node = simple_cmd();
 	if (!cmd_node)
 		return (NULL);
+	if (!ast_valid_char(NULL, TOK_RPRTH)
+		|| !ast_valid_char(NULL, TOK_PIPE))
+	{
+		astree_del_node(cmd_node);
+		return (NULL);
+	}
 	job_node = job();
+	if (!job_node)
+	{
+		astree_del_node(job_node);
+		return (NULL);
+	}
 	result = (t_ast *)malloc(sizeof(t_ast));
 	astree_set_type(result, NODE_PIPE);
 	astree_root_branch(result, cmd_node, job_node);
