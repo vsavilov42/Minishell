@@ -31,7 +31,7 @@ static t_ast	*job2(void)
 	cmd_node = simple_cmd();
 	if (!cmd_node)
 		return (NULL);
-	if (ast_valid_char(NULL, TOK_PIPE))
+	if (!ast_valid_char(NULL, TOK_PIPE))
 	{
 		astree_del_node(cmd_node);
 		return (NULL);
@@ -39,7 +39,7 @@ static t_ast	*job2(void)
 	job_node = job();
 	if (!job_node)
 	{
-		astree_del_node(job_node);
+		astree_del_node(cmd_node);
 		return (NULL);
 	}
 	result = (t_ast *)malloc(sizeof(t_ast));
