@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ast_redir_out.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 20:48:33 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/10/03 20:49:08 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static t_ast	*redir_out2(void)
@@ -6,7 +18,7 @@ static t_ast	*redir_out2(void)
 	t_ast	*result;
 
 	file = NULL;
-	if(!ast_valid_char(NULL, TOK_GREAT))
+	if (!ast_valid_char(NULL, TOK_GREAT))
 		return (NULL);
 	if (!ast_valid_char(&file, TOK_DEFAULT))
 	{

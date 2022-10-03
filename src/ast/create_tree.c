@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_tree.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 20:55:39 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/10/03 20:56:48 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static void	print_ast(t_ast *ast, int j)
 {
-	int	node;
+	int		node;
 	char	*type;
 
 	if (!ast)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ast_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 20:51:46 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/10/03 20:53:23 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 void	astree_add_and_or(t_ast **astree, t_ast *ast, int state)
@@ -27,8 +39,8 @@ int	ast_valid_char(char **data, int type)
 	{
 		if (data)
 		{
-			*data = (char *)malloc(sizeof(char) *
-				ft_strlen(g_sh.tok->name) + 1);
+			*data = (char *)malloc(sizeof(char)
+					* ft_strlen(g_sh.tok->name) + 1);
 			if (!*data)
 				perror_ret("malloc", 0);
 			ft_strcpy(*data, g_sh.tok->name);

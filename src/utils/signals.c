@@ -6,13 +6,11 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:31:26 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/21 20:31:26 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/03 21:02:07 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static void	signal_parent(int signal);
 
 static void	signal_parent(int signal)
 {

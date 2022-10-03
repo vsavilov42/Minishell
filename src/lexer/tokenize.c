@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenize.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 20:44:26 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/10/03 20:45:12 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static int	tok_checker(t_lexer *lex, t_token **tok, t_token *last)
@@ -101,7 +113,7 @@ int	manage_tokenize(t_lexer *lex)
 	t_tknize	ltype;
 	t_token		*tok;
 	t_token		*last;
-	int		tokens;
+	int			tokens;
 
 	tok = lex->tok_lst;
 	last = NULL;

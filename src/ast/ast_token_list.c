@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ast_token_list.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 20:54:17 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/10/03 20:54:27 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static t_ast	*token_list4(void)
@@ -48,7 +60,7 @@ static t_ast	*token_list1(void)
 	return (NULL);
 }
 
-t_ast	*token_list()
+t_ast	*token_list(void)
 {
 	t_token	*save;
 	t_ast	*new_node;

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_exp.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 20:43:16 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/10/03 20:44:15 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static void	add_toklst(t_token **tok, t_token **last,
 		t_lexer *lex, t_token *tmp)
 {
-	int	i;
+	int		i;
 	t_token	*aux;
 
 	i = 1;

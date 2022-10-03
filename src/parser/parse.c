@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:16:12 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/22 15:14:27 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/03 21:14:00 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	valid_line(char *line)
 {
 	if (line == NULL || *line == '\n' || *line == '\0' || is_cmt(line))
 		return (1);
-	while(*line)
+	while (*line)
 	{
 		if (!ft_isblank(*line))
 			break ;
@@ -48,9 +48,10 @@ static int	parser_astree(t_lexer *lex)
 	}
 	return (0);
 }
+
 void	get_line(char *line)
 {
-	int	a_tok;
+	int		a_tok;
 	t_lexer	lex;
 
 	if (valid_line(line))

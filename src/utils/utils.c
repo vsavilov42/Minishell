@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 20:33:54 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/25 14:29:29 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:39:07 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	bad_str(char *str)
 {
-	if (*str == '_' || (*str >= 'A' && *str <= 'Z') || (*str >= 'a' && *str <= 'z'))
+	if (*str == '_' || (*str >= 'A' && *str <= 'Z')
+		|| (*str >= 'a' && *str <= 'z'))
 		return (0);
 	ft_putstr_fd("ShiTTYsh: export: ", 2);
 	ft_putstr_fd(str, 2);
@@ -31,18 +32,17 @@ int	error_msg(char *str)
 int	same_strcmp(char *str1, char *str2)
 {
 	if (!ft_strncmp(str1, str2, ft_strlen(str1))
-			&& ft_strlen(str1) == ft_strlen(str2))
+		&& ft_strlen(str1) == ft_strlen(str2))
 		return (0);
 	return (1);
 }
 
 char	*strtolow(char *str)
 {
-	char *tmp;
-	int i;
+	char	*tmp;
+	int		i;
 
 	i = -1;
-
 	tmp = (char *)malloc(sizeof(char) * ft_strlen(str));
 	while (str[++i])
 		tmp[i] = (char)ft_tolower(str[i]);

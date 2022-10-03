@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ast_and_or.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 20:50:29 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/10/03 20:51:20 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
-static t_ast	*and_or4()
+static t_ast	*and_or4(void)
 {
 	t_ast	*cmd_line_node;
 	t_ast	*save;
@@ -26,7 +38,7 @@ static t_ast	*and_or4()
 	return (result);
 }
 
-static t_ast	*and_or3()
+static t_ast	*and_or3(void)
 {
 	t_ast	*result;
 
@@ -37,7 +49,7 @@ static t_ast	*and_or3()
 	return (result);
 }
 
-static t_ast	*and_or2()
+static t_ast	*and_or2(void)
 {
 	t_ast	*job_node;
 	t_ast	*result;
@@ -59,7 +71,7 @@ static t_ast	*and_or2()
 	return (result);
 }
 
-static t_ast	*and_or1()
+static t_ast	*and_or1(void)
 {
 	t_ast	*job_node;
 	t_ast	*result;
