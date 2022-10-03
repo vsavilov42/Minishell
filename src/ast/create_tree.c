@@ -41,7 +41,7 @@ static void	print_ast(t_ast *ast, int j)
 	else
 		printf("Type: [%s]\n", type);
 	free(type);
-	print_ast(ast->left, 10);
+	print_ast(ast->left, j + 10);
 }
 
 void	create_tree(t_ast **ast, t_lexer *lex)
