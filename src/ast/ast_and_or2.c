@@ -17,7 +17,7 @@ static t_ast	*and_or6(void)
 		astree_del_node(result);
 		return (NULL);
 	}
-	astree_add_and_or(g_sh.astree, result, 1);
+	astree_add_and_or(g_sh.astree, result, TRUE);
 	return (result);
 }
 
@@ -34,7 +34,9 @@ static t_ast	*and_or5(void)
 	*g_sh.astree = save;
 	if (!cmd_line_node)
 		return (NULL);
-	if (!ast_valid_char(NULL, TOK_RPRTH))
+	if (!ast_valid_char(NULL, TOK_RPRTH)
+		|| !ast_valid_char(NULL, TOK_PIPE)
+		|| !ast_valid_char(NULL, TOK_PIPE))
 	{
 		astree_del_node(cmd_line_node);
 		return (NULL);
@@ -52,7 +54,7 @@ t_ast	*and_or_node(int type, t_ast *cmd_line_node)
 	result = (t_ast *)malloc(sizeof(t_ast));
 	astree_set_type(result, type);
 	astree_root_branch(result, cmd_line_node, NULL);
-	astree_add_and_or(g_sh.astree, result, 0);
+	astree_add_and_or(g_sh.astree, result, FALSE);
 	return (result);
 }
 

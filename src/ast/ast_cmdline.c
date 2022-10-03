@@ -4,6 +4,7 @@ static t_ast	*cmd_line3(void)
 {
 	t_ast	*and_or_node;
 
+	*g_sh.astree = NULL;
 	and_or();
 	and_or_node = *g_sh.astree;
 	if (!and_or_node)
@@ -16,6 +17,7 @@ static t_ast	*cmd_line2(void)
 	t_ast	*and_or_node;
 	t_ast	*result;
 
+	*g_sh.astree = NULL;
 	and_or();
 	and_or_node = *g_sh.astree;
 	if (!and_or_node)
@@ -37,6 +39,7 @@ static t_ast	*cmd_line1(void)
 	t_ast	*cmd_line_node;
 	t_ast	*result;
 
+	*g_sh.astree = NULL;
 	and_or();
 	and_or_node = *g_sh.astree;
 	if (!and_or_node)

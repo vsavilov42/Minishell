@@ -25,6 +25,10 @@ static void	print_ast(t_ast *ast)
 		type = ft_strdup(">");
 	else if (node & NODE_APPEND)
 		type = ft_strdup(">>");
+	else if (node & NODE_AND)
+		type = ft_strdup("&&");
+	else if (node & NODE_OR)
+		type = ft_strdup("||");
 	else if (node & NODE_CMD)
 		type = ft_strdup("command");
 	else if (node & NODE_ARG)
@@ -42,6 +46,10 @@ static void	print_ast(t_ast *ast)
 
 void	create_tree(t_ast **ast, t_lexer *lex)
 {
+	g_sh.astree = (t_ast **)malloc(sizeof(t_ast *));
+	if (!g_sh.astree)
+		ft_putstr_fd("malloc", 1);
+	*g_sh.astree = NULL;
 	g_sh.tok = lex->tok_lst;
 	*ast = cmd_line(); // create every case
 	print_ast(*ast);

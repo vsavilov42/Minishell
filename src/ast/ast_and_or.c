@@ -14,6 +14,7 @@ static t_ast	*and_or4()
 	if (!cmd_line_node)
 		return (NULL);
 	if (!ast_valid_char(NULL, TOK_RPRTH)
+		|| !ast_valid_char(NULL, TOK_AMPER)
 		|| !ast_valid_char(NULL, TOK_AMPER))
 	{
 		astree_del_node(cmd_line_node);
@@ -32,7 +33,7 @@ static t_ast	*and_or3()
 	result = job();
 	if (!result)
 		return (NULL);
-	astree_add_and_or(g_sh.astree, result, 1);
+	astree_add_and_or(g_sh.astree, result, TRUE);
 	return (result);
 }
 

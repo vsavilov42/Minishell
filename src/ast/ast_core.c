@@ -34,7 +34,7 @@ void	astree_del_node(t_ast *ast)
 		return ;
 	if (ast->type & NODE_DATA)
 		free(ast->data);
-	astree_del_node(ast->right);
 	astree_del_node(ast->left);
+	astree_del_node(ast->right);
 	free(ast);
 }
