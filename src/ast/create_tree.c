@@ -6,19 +6,21 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:55:39 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/03 20:56:48 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/04 14:03:48 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	print_ast(t_ast *ast, int j)
+void	print_ast(t_ast *ast, int j)
 {
 	int		node;
 	char	*type;
 
 	if (!ast)
 		return ;
+	print_ast(ast->right, j + 10);
+	printf("\n");
 	int i = -1;
 	while (++i < j + 10)
 		printf(" ");
@@ -64,5 +66,4 @@ void	create_tree(t_ast **ast, t_lexer *lex)
 	*g_sh.astree = NULL;
 	g_sh.tok = lex->tok_lst;
 	*ast = cmd_line(); // create every case
-	print_ast(*ast, 0);
 }

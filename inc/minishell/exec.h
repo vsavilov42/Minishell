@@ -6,12 +6,14 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:30:11 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/04 12:44:42 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/04 13:50:39 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
+
+void	print_ast(t_ast *ast, int j);
 
 int	exec_heredoc(t_ast *ast);
 int	exec_astree(t_ast *ast);
