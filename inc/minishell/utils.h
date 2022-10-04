@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:13:38 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/09/20 16:16:28 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:12:43 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,9 @@ void	get_env();
 int	error_ret(const char *s, int code);
 int	perror_ret(const char *s, int code);
 
+/* tmp files */
+
+char	*new_file_name(char *file);
+char	*tmp_from_home(void);
+char	*tmp_from_current(void);
 #endif

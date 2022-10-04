@@ -79,6 +79,7 @@ SRCS_BUILTIN =	builtin.c		cd.c			pwd.c \
 SRCS_UTILS =	utils.c			utils2.c		signals.c \
 		free_all.c		envlst.c 		envlst2.c \
 		init_shell.c		get_env.c 		error_msg.c \
+		tmp_files.c \
 
 SRCS_AST =	create_tree.c		ast_core.c		ast_redir.c \
 		ast_cmdline.c		ast_job.c 		ast_and_or.c \

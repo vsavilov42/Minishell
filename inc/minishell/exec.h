@@ -6,12 +6,14 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:30:11 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/04 16:22:24 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:55:57 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
+
+# define EXTERNTMPDIR "/tmp"
 
 void	print_ast(t_ast *ast, int j);
 
@@ -23,6 +25,11 @@ int	into_heredoc(t_ast *ast);
 /* exec */
 
 int	exec_astree(t_ast *ast);
+
+/* utils */
+
+char	*new_file(char	*file);
+
 
 // heredoc ->
 // check <cmdline> -> <and_or> <--> <cmdline>
