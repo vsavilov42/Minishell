@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:16:12 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/03 21:14:00 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:27:53 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static int	parser_astree(t_lexer *lex)
 		ft_putstr_fd("error: sysntax error near: ", STDERR_FILENO);
 		return (perror_ret(g_sh.tok->name, 1));
 	}
+	if (!exec_heredoc(ast))
+		exec_astree(ast);
 	return (0);
 }
 
