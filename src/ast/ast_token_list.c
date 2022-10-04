@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:54:17 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/03 20:54:27 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/04 13:24:16 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ static t_ast	*token_list3(void)
 	char	*arg;
 	t_ast	*result;
 
-	arg = NULL;
-	if (!ast_valid_char(NULL, TOK_DEFAULT))
+	if (!ast_valid_char(&arg, TOK_DEFAULT))
 		return (NULL);
 	result = (t_ast *)malloc(sizeof(t_ast));
 	astree_set_type(result, NODE_ARG);
 	astree_set_data(result, arg);
 	token_list();
-	astree_add_branch(g_sh.command, result, 1);
+	astree_add_branch(g_sh.command, result, TRUE);
 	return (result);
 }
 
@@ -41,7 +40,7 @@ static t_ast	*token_list2(void)
 	if (!result)
 		return (NULL);
 	token_list();
-	astree_add_branch(g_sh.command, result, 0);
+	astree_add_branch(g_sh.command, result, FALSE);
 	return (result);
 }
 

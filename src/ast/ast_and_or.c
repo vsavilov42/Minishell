@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:50:29 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/03 20:51:20 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/04 13:31:35 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static t_ast	*and_or2(void)
 	job_node = job();
 	if (!job_node)
 		return (NULL);
-	if (!ast_valid_char(NULL, TOK_PIPE))
+	if (!ast_valid_char(NULL, TOK_PIPE) || !ast_valid_char(NULL, TOK_PIPE))
 	{
 		astree_del_node(job_node);
 		return (NULL);
@@ -79,7 +79,7 @@ static t_ast	*and_or1(void)
 	job_node = job();
 	if (!job_node)
 		return (NULL);
-	if (!ast_valid_char(NULL, TOK_AMPER))
+	if (!ast_valid_char(NULL, TOK_AMPER) || !ast_valid_char(NULL, TOK_AMPER))
 	{
 		astree_del_node(job_node);
 		return (NULL);
@@ -102,18 +102,30 @@ t_ast	*and_or(void)
 	g_sh.tok = save;
 	new_node = and_or1();
 	if (new_node)
+	{
+		printf("and_or1 ");
 		return (new_node);
+	}
 	g_sh.tok = save;
 	new_node = and_or2();
 	if (new_node)
+	{
+		printf("and_or2 ");
 		return (new_node);
+	}
 	g_sh.tok = save;
 	new_node = and_or3();
 	if (new_node)
+	{
+		printf("and_or3 ");
 		return (new_node);
+	}
 	g_sh.tok = save;
 	new_node = and_or4();
 	if (new_node)
+	{
+		printf("and_or4 ");
 		return (new_node);
+	}
 	return (hate_norm_and_or(save));
 }

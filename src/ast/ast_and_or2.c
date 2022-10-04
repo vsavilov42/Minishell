@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:54:00 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/03 20:54:01 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/04 13:32:05 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,16 @@ t_ast	*hate_norm_and_or(t_token *save)
 	g_sh.tok = save;
 	new_node = and_or5();
 	if (new_node)
+	{
+		printf("and_or5 ");
 		return (new_node);
+	}
 	g_sh.tok = save;
 	new_node = and_or6();
 	if (new_node)
+	{
+		printf("and_or6 ");
 		return (new_node);
+	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:56:20 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/04 12:32:27 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:56:49 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 int	exec_astree(t_ast *ast)
 {
-	
+	(void)ast;
+	return (0);
 }
