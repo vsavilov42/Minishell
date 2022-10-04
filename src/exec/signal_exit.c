@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 14:18:58 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/08/11 14:19:22 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:22:09 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ int	status_exit(int status)
 	ext_status = (WTERMSIG(status) + 128);
 	error_msg = get_status_error_msg(ext_status);
 	ft_putstr_fd(error_msg, STDERR_FILENO);
-	if (WCOREDUP(status))
+	if (WCOREDUMP(status))
 		ft_putstr_fd("(core dumped)\n", STDERR_FILENO);
 	else
-		write(STDERR_FILENO, '\n', 1);
+		write(STDERR_FILENO, "\n", 1);
 	free(error_msg);
 	return (ext_status);
 }
