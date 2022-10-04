@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:54:17 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/04 13:24:16 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/04 13:36:06 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,30 @@ t_ast	*token_list(void)
 	g_sh.tok = save;
 	new_node = token_list1();
 	if (new_node)
+	{
+		printf("tok_lst1 ");
 		return (new_node);
+	}
 	g_sh.tok = save;
 	new_node = token_list2();
 	if (new_node)
+	{
+		printf("tok_lst2 ");
 		return (new_node);
+	}
 	g_sh.tok = save;
 	new_node = token_list3();
 	if (new_node)
+	{
+		printf("tok_lst3 ");
 		return (new_node);
+	}
 	g_sh.tok = save;
 	new_node = token_list4();
 	if (new_node)
+	{
+		printf("tok_lst4 ");
 		return (new_node);
+	}
 	return (NULL);
 }
