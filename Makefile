@@ -62,7 +62,8 @@ OBJ_DIR = $(addprefix $(OBJ_PATH)/, $(OBJ_DIR_ALL))
 
 SRCS_MAIN =		main.c
 
-SRCS_EXEC =	exec_heredoc.c		exec_astree.c		signal_exit.c \
+SRCS_EXEC =	exec_heredoc.c		into_heredoc.c		exec_astree.c \
+		signal_exit.c \
 
 SRCS_LEXER =	lexer.c			lexer_init.c		lextype.c	\
 		est_default.c		tok_quotes.c		tokenize.c	\

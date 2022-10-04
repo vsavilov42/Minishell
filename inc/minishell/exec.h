@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:30:11 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/04 13:50:39 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:22:24 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,13 @@
 
 void	print_ast(t_ast *ast, int j);
 
+/* heredoc */
+
 int	exec_heredoc(t_ast *ast);
+int	into_heredoc(t_ast *ast);
+
+/* exec */
+
 int	exec_astree(t_ast *ast);
 
 // heredoc ->
