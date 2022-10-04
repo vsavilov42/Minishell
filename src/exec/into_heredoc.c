@@ -4,7 +4,7 @@ static void	read_heredoc(char *del, int fd)
 {
 	char	*line;
 
-	line = readline("ShTTyDoc> ");
+	line = readline("\033[0;36mShTTyDoc> ");
 	while (line)
 	{
 		if (!same_strcmp(line, del))
@@ -13,6 +13,9 @@ static void	read_heredoc(char *del, int fd)
 			free(line);
 			exit(EXIT_SUCCESS);
 		}
+		ft_putchar_fd('\n', fd);
+		free(line);
+		line = readline("\033[0;36mShTTyDoc> ");
 	}
 	ft_putstr_fd("Heredoc_error: heredoc finish by del\n", STDERR_FILENO);
 	close(fd);
