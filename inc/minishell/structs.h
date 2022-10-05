@@ -20,6 +20,7 @@ typedef struct s_sh
 	int		fd_bio[2];
 	int		is_exp;
 	int		subtok;
+	pid_t		gpid;
 	t_envlst	**env;
 	t_token		*tok;
 	t_token		*last;
