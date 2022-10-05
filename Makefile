@@ -64,7 +64,7 @@ SRCS_MAIN =		main.c
 
 SRCS_EXEC =	exec_heredoc.c		into_heredoc.c		exec_astree.c \
 		signal_exit.c 		into_exec.c 		exec_utils.c \
-		exec_redir.c \
+		exec_redir.c 		exec_redir_types.c 	into_exec2.c \
 
 SRCS_LEXER =	lexer.c			lexer_init.c		lextype.c	\
 		est_default.c		tok_quotes.c		tokenize.c	\

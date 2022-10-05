@@ -6,12 +6,14 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:30:11 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/05 15:57:24 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:06:13 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
+
+# include "astree.h"
 
 # define EXTERNTMPDIR "/tmp"
 
@@ -31,6 +33,12 @@ void	print_ast(t_ast *ast, int j);
 int	exec_heredoc(t_ast *ast);
 int	into_heredoc(t_ast *ast);
 
+
+/* redir */
+
+int	redir_cmd(t_cmd *cmd, int root);
+int	redir_node(t_ast *redir, int io[2], t_nodetype type);
+
 /* exec */
 
 int	exec_astree(t_ast *ast);
@@ -38,7 +46,8 @@ int	exec_cmd(t_ast *ast, t_pipe *sfd);
 void	free_exec_cmd(t_cmd *cmd);
 int	exec_pipe(t_ast	*ast);
 int	into_exec_cmd(t_cmd *cmd);
-int	redir_cmd(t_cmd *cmd, int root);
+void	execve_cmd(t_cmd *cmd);
+int	builtin_inpipes(t_cmd *cmd);
 
 /* utils */
 

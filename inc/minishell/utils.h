@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:13:38 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/05 13:01:25 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:54:15 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*ft_cplusic(char *num);
 //init_shell
 void	init_minishell();
 void	flags_handle(int argc, char **argv);
+t_builtin	*init_builtin(void);
 
 void	get_env();
 

@@ -12,8 +12,21 @@ static int	redir_inout(t_cmd *cmd, int child)
 	while (redir)
 	{
 		type = astree_get_type(redir);
+		if (redir_node(redir, io, type))
+			return (1);
 		redir = redir->left;
 	}
+	if (io[FD_IN] >= 0 && !child)
+	{
+		dup2(io[FD_IN], STDIN_FILENO);
+		close(io[FD_IN]);
+	}
+	if (io[FD_OUT] >= 0)
+	{
+		dup2(io[FD_OUT], STDIN_FILENO);
+		close(io[FD_OUT]);
+	}
+	return (0);
 }
 
 static int	redir_pipe(t_cmd *cmd, int child)
@@ -23,7 +36,7 @@ static int	redir_pipe(t_cmd *cmd, int child)
 	if (cmd->sfd->in_out[FD_OUT])
 		dup2(cmd->sfd->fd_pipe[WRITE_END], STDOUT_FILENO);
 	if (!child && (cmd->sfd->in_out[FD_IN]
-		|| cmd->sfd->in_out[FD_OUT]))
+		|| cmd->sfd->in_out[FD_OUT]))
 	{
 		close(cmd->sfd->fd_pipe[READ_END]);
 		close(cmd->sfd->fd_pipe[WRITE_END]);

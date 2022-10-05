@@ -17,6 +17,7 @@ static int	exec_child_process(t_cmd *cmd)
 	{
 		signal_child();
 		g_sh.child = TRUE;
+		builtin_inpipes(cmd);
 		if (redir_cmd(cmd, 0))
 			exit(EXIT_FAILURE);
 		execve_cmd(cmd);

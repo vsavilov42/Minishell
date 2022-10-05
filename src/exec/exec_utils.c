@@ -54,6 +54,28 @@ void	init_cmd(t_cmd *cmd, t_pipe *sfd, t_ast *ast)
 	cmd->sfd = sfd;
 }
 
+int	builtin_inpipes(t_cmd *cmd)
+{
+	t_builtin	*bt;
+	int		status;
+
+	bt = g_sh.builtin;
+	while (bt)
+	{
+		if (!same_strcmp(cmd->cmd[0], bt->name))
+		{
+			if (redir_cmd(cmd, TRUE))
+				exit(EXIT_FAILURE);
+			status = bt->f(cmd->cmd);
+			dup2(g_sh.fd_bio[0], STDIN_FILENO);
+			dup2(g_sh.fd_bio[1], STDOUT_FILENO);
+			exit(status);
+		}
+		bt = bt->next;
+	}
+	return (FALSE);
+}
+
 void	free_exec_cmd(t_cmd *cmd)
 {
 	int	i;
