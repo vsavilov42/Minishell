@@ -70,7 +70,7 @@ t_pipe	*init_sfd(int rd, int wr, int pipe[2], int fd_rd)
 {
 	t_pipe	*sfd;
 
-	sfd = (t_pipe *)malloc(sizeof(sfd));
+	sfd = (t_pipe *)malloc(sizeof(t_pipe));
 	sfd->in_out[READ_END] = rd;
 	sfd->in_out[WRITE_END] = wr;
 	if (rd || wr)
