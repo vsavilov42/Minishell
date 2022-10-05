@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:56:20 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/05 13:17:39 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:00:42 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,19 @@ static void	zombies_process()
 	}
 }
 
-static int	exec_cmd(t_ast	*ast)
+int	exec_cmd(t_ast	*ast, t_pipe *sfd)
 {
-	t_pipe		*sfd;
 	t_cmd		cmd;
 	t_nodetype	type;
 
 	if (!ast)
 		return (FALSE);
-	sfd = init_sfd(FALSE, FALSE, FALSE, FALSE);
 	type = astree_get_type(ast);
 	if (type == NODE_CMD)
 	{
 		sfd->redir = ast->left;
 		init_cmd(&cmd, sfd, ast);
+		into_exec_cmd(&cmd);
 		free_exec_cmd(&cmd);
 	}
 	return (FALSE);
@@ -54,12 +53,15 @@ static int	exec_cmd(t_ast	*ast)
 
 static int	exec_job(t_ast *ast)
 {
+	t_pipe *sfd;
+
+	sfd = init_sfd(FALSE, FALSE, FALSE, FALSE);
 	if (!ast)
 		return (FALSE);
 	if (astree_get_type(ast) == NODE_PIPE)
 		exec_pipe(ast);
 	else
-		exec_cmd(ast);
+		exec_cmd(ast, sfd);
 	zombies_process();
 	return (FALSE);
 }

@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:31:21 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/03 13:48:53 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:30:18 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	flags_handle(int argc, char **argv)
 static void	init_vars(void)
 {
 	g_sh.status = 0;
+	init_builtin(g_sh.builtin);
 	dup2(g_sh.fd_bio[0], STDIN_FILENO);
 	dup2(g_sh.fd_bio[1], STDOUT_FILENO);
 	g_sh.is_exp = FALSE;

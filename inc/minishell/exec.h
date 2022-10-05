@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:30:11 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/05 13:14:24 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:57:24 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ int	into_heredoc(t_ast *ast);
 /* exec */
 
 int	exec_astree(t_ast *ast);
+int	exec_cmd(t_ast *ast, t_pipe *sfd);
 void	free_exec_cmd(t_cmd *cmd);
 int	exec_pipe(t_ast	*ast);
+int	into_exec_cmd(t_cmd *cmd);
+int	redir_cmd(t_cmd *cmd, int root);
 
 /* utils */
 
@@ -64,6 +67,7 @@ struct	s_pipe {
 //into <child_process> -> pid->fork; manage_signals; <manage_zombies> <is_builtin> in pipe;
 //into <is_builtin> -> exec builtin / check is in pipes do other funct;
 //verify <blanck> -> check cmd is blanck
+//if process is TRUE = parent / FALSE = child
 
 //NOTE: <child_process> -> if the parent decides not to wait the child's termination and executes its subsequence task, then the termination of the task do not read the exit status code. This state is known as zombie state.
 

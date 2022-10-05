@@ -4,7 +4,16 @@
 # include "lexer.h"
 # include "astree.h"
 
+typedef struct s_builtin	t_builtin;
+
 //built-in
+struct s_builtin
+{
+	char	*name;
+	int	(*f)(char **);
+	t_builtin	*next;
+};
+
 typedef struct s_envlst
 {
 	char			*name;
@@ -20,7 +29,9 @@ typedef struct s_sh
 	int		fd_bio[2];
 	int		is_exp;
 	int		subtok;
+	int		child;
 	pid_t		gpid;
+	t_builtin	*builtin;
 	t_envlst	**env;
 	t_token		*tok;
 	t_token		*last;
