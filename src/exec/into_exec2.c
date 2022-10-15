@@ -28,9 +28,9 @@ static char	**env_in_char(void)
 		tmp = ft_strjoin(lst->name, "=");
 		env[i] = ft_strjoin(tmp, lst->value);
 		i++;
-		free(tmp);
 		lst = lst->next;
 	}
+	env[i] = NULL;
 	return (env);
 }
 

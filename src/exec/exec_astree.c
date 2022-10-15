@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:56:20 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/14 16:11:18 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/15 14:51:33 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,12 @@ int	exec_cmd(t_ast	*ast, t_pipe *sfd)
 
 static int	exec_job(t_ast *ast)
 {
-	t_pipe *sfd;
-
-	sfd = init_sfd(FALSE, FALSE, FALSE, FALSE);
 	if (!ast)
 		return (FALSE);
 	if (astree_get_type(ast) == NODE_PIPE)
 		exec_pipe(ast);
 	else
-		exec_cmd(ast, sfd);
+		exec_cmd(ast, init_sfd(FALSE, FALSE, FALSE, FALSE));
 	zombies_process();
 	return (FALSE);
 }
