@@ -56,9 +56,9 @@ void	execve_cmd(t_cmd *cmd)
 	char	*cpath;
 	char	*path;
 
-	if (*cmd->cmd[0] == '/' || !same_strcmp(cmd->cmd[0], "~/")
-		|| !same_strcmp(cmd->cmd[0], "./")
-		|| !same_strcmp(cmd->cmd[0], "../"))
+	if (*cmd->cmd[0] == '/' || !ft_strncmp(cmd->cmd[0], "~/", 2)
+		|| !ft_strncmp(cmd->cmd[0], "./", 2)
+		|| !ft_strncmp(cmd->cmd[0], "../", 3))
 		cpath = cmd->cmd[0];
 	else
 	{
@@ -70,10 +70,7 @@ void	execve_cmd(t_cmd *cmd)
 			exit(CMD_NOTFOUND);
 		}
 		cpath = get_path(cmd->cmd[0], path);
-//		printf("%s\n", path);
 	}
-//		printf("%s\n", cpath);
-//		printf("%s\n", cmd->cmd[0]);
 	execve(cpath, cmd->cmd, env_in_char());
 	exit(perror_ret(cpath, 127));
 }

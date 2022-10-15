@@ -10,7 +10,7 @@ static int	exec_child_process(t_cmd *cmd)
 	if (pid > 0)
 	{
 		signal_ignore();
-		if (cmd->sfd->in_out[WRITE_END])
+		if (!cmd->sfd->in_out[WRITE_END])
 			g_sh.gpid = pid;
 	}
 	else
