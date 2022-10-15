@@ -111,7 +111,7 @@ int	exec_pipe(t_ast *ast)
 	{
 		close(io_pipe[WRITE_END]);
 		if (pipe(fd) == -1)
-			perror_ret("malloc", 1);
+			perror_ret("pipe", 1);
 		io_pipe[WRITE_END] = fd[WRITE_END];
 		exec_cmd(ast->left, init_sfd(1, 1, fd, io_pipe[READ_END]));
 		close(io_pipe[READ_END]);

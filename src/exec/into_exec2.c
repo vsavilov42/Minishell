@@ -72,9 +72,8 @@ void	execve_cmd(t_cmd *cmd)
 		cpath = get_path(cmd->cmd[0], path);
 //		printf("%s\n", path);
 	}
-		printf("%s\n", cpath);
-		printf("%s\n", cmd->cmd[0]);
-		printf("%s\n", *env_in_char());
+//		printf("%s\n", cpath);
+//		printf("%s\n", cmd->cmd[0]);
 	execve(cpath, cmd->cmd, env_in_char());
 	exit(perror_ret(cpath, 127));
 }

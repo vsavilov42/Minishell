@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:54:42 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/04 13:30:44 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:12:50 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,23 +82,14 @@ t_ast	*cmd_line(void)
 	g_sh.tok = save;
 	new_node = cmd_line1();
 	if (new_node)
-	{
-		printf("cmd_line1 ");
 		return (new_node);
-	}
 	g_sh.tok = save;
 	new_node = cmd_line2();
 	if (new_node)
-	{
-		printf("cmd_line2 ");
 		return (new_node);
-	}
 	g_sh.tok = save;
 	new_node = cmd_line3();
 	if (new_node)
-	{
-		printf("cmd_line3 ");
 		return (new_node);
-	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:56:20 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/05 14:00:42 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:11:18 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	exec_and_or(t_ast *ast)
 	else if (type == NODE_OR)
 	{
 		exec_and_or(ast->left);
-		if (g_sh.status == 0)
+		if (g_sh.status != 0)
 			exec_and_or(ast->right);
 	}
 	else if (type == NODE_SEQ)

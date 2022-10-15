@@ -1,14 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/14 16:42:21 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/10/15 14:11:39 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
-static int	init_subcmd(t_cmd *cmd, t_ast *ast)
+static int	init_subcmd(t_cmd *cmd, t_ast *ast, t_ast *tmp, int i)
 {
-	int	i;
 	int	ln;
-	t_ast	*tmp;
 
-	tmp = ast;
-	i = 0;
-	while (tmp && (astree_get_type(tmp) == NODE_ARG || astree_get_type(tmp) == NODE_CMD))
+	while (tmp && (astree_get_type(tmp) == NODE_ARG
+		|| astree_get_type(tmp) == NODE_CMD))
 	{
 		tmp = tmp->right;
 		i++;
@@ -22,7 +31,7 @@ static int	init_subcmd(t_cmd *cmd, t_ast *ast)
 		|| astree_get_type(tmp) == NODE_CMD))
 	{
 		ln = ft_strlen(tmp->data);
-		cmd->cmd[i] = (char *)malloc(sizeof(char *) * (ln + 1));
+		cmd->cmd[i] = (char *)malloc(sizeof(char) * (ln + 1));
 		ft_strcpy(cmd->cmd[i], tmp->data);
 		tmp = tmp->right;
 		i++;
@@ -49,7 +58,7 @@ void	init_cmd(t_cmd *cmd, t_pipe *sfd, t_ast *ast)
 		cmd->sfd = sfd;
 		return ;
 	}
-	if (init_subcmd(cmd, ast))
+	if (init_subcmd(cmd, ast, ast, 0))
 		return ;
 	cmd->sfd = sfd;
 }
@@ -101,6 +110,6 @@ t_pipe	*init_sfd(int rd, int wr, int pipe[2], int fd_rd)
 		sfd->fd_pipe[WRITE_END] = pipe[WRITE_END];
 		sfd->fd_rd = fd_rd;
 	}
-	sfd->redir = NULL;
+	sfd->redir = 0;
 	return (sfd);
 }

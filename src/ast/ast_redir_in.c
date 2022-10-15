@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:53:42 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/04 13:34:30 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:13:47 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,10 @@ t_ast	*redir_in(void)
 	g_sh.tok = save;
 	new_node = redir_in1();
 	if (new_node)
-	{
-		printf("redir_in1 ");
 		return (new_node);
-	}
 	g_sh.tok = save;
 	new_node = redir_in2();
 	if (new_node)
-	{
-		printf("redir_in2 ");
 		return (new_node);
-	}
 	return (NULL);
 }

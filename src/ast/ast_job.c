@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:50:08 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/04 13:30:30 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:13:16 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,30 +98,18 @@ t_ast	*job(void)
 	g_sh.tok = save;
 	new_node = job1();
 	if (new_node)
-	{
-		printf("job1 ");
 		return (new_node);
-	}
 	g_sh.tok = save;
 	new_node = job2();
 	if (new_node)
-	{
-		printf("job2 ");
 		return (new_node);
-	}
 	g_sh.tok = save;
 	new_node = job3();
 	if (new_node)
-	{
-		printf("job3 ");
 		return (new_node);
-	}
 	g_sh.tok = save;
 	new_node = job4();
 	if (new_node)
-	{
-		printf("job4 ");
 		return (new_node);
-	}
 	return (NULL);
 }
