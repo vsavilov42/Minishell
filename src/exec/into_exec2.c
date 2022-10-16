@@ -37,15 +37,26 @@ static char	**env_in_char(void)
 static char	*get_path(char *cmd, char *path)
 {
 	char	**envtmp;
+	char	*res;
 	char	*tmp;
 	int	i;
 
+	res = NULL;
 	envtmp = ft_split(path, ':');
 	tmp = ft_strjoin("/", cmd);
 	i = -1;
 	while (envtmp[++i])
-		if (access(ft_strjoin(envtmp[i], tmp), X_OK) == 0)
-			return (ft_strjoin(envtmp[i], tmp));
+	{
+		free(res);
+		res = ft_strjoin(envtmp[i], tmp);
+		if (access(res, X_OK) == 0)
+			break ;
+	}
+	free(tmp);
+	free_split(envtmp);
+	if (access(res, X_OK) == 0)
+		return (res);
+	free(res);
 	ft_putstr_fd("Error: Command not found\n", STDERR_FILENO);
 	exit(CMD_NOTFOUND);
 	return (NULL);
