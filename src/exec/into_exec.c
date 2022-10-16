@@ -105,7 +105,7 @@ int	exec_pipe(t_ast *ast)
 		perror_ret("pipe", 1);
 	io_pipe[WRITE_END] = fd[WRITE_END];
 	io_pipe[READ_END] = fd[READ_END];
-	exec_cmd(ast, init_sfd(0, 1, fd, io_pipe[READ_END]));
+	exec_cmd(ast->left, init_sfd(0, 1, fd, io_pipe[READ_END]));
 	ast = ast->right;
 	while (ast && astree_get_type(ast) == NODE_PIPE)
 	{
