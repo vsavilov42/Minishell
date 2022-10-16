@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tmp_files.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/16 14:13:40 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/10/16 14:13:49 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 char	*tmp_from_current(void)
@@ -42,7 +54,7 @@ char	*new_file_name(char *file)
 {
 	char	*name;
 	char	*tmp;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (++i < 100)
