@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:31:26 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/03 21:02:07 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/21 11:59:32 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	signal_parent(int signal)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_redisplay();
 		g_sh.status = SIG_ERROR;
 	}

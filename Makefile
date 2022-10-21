@@ -22,11 +22,15 @@ CFLAGS = -Wall -Wextra -Werror
 
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIB_PATH)/inc
 
+CFLAGS += -I $(RLREADLINE)
+
 CFLAGS += -fsanitize=address -g
 
 #################
 ###   Paths   ###
 #################
+
+RLREADLINE = /opt/homebrew/opt/readline/include
 
 SRC_PATH = src
 
@@ -60,7 +64,7 @@ OBJ_DIR = $(addprefix $(OBJ_PATH)/, $(OBJ_DIR_ALL))
 ###   Source items   ###
 ########################
 
-SRCS_MAIN =		main.c
+SRCS_MAIN =	main.c
 
 SRCS_EXEC =	exec_heredoc.c		into_heredoc.c		exec_astree.c \
 		signal_exit.c 		into_exec.c 		exec_utils.c \
@@ -80,7 +84,7 @@ SRCS_BUILTIN =	builtin.c		cd.c			pwd.c \
 SRCS_UTILS =	utils.c			utils2.c		signals.c \
 		free_all.c		envlst.c 		envlst2.c \
 		init_shell.c		get_env.c 		error_msg.c \
-		tmp_files.c \
+		tmp_files.c  \
 
 SRCS_AST =	create_tree.c		ast_core.c		ast_redir.c \
 		ast_cmdline.c		ast_job.c 		ast_and_or.c \

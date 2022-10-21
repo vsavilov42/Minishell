@@ -6,13 +6,26 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:44:57 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/25 20:01:01 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/21 10:54:50 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 static void	remove_lst_exp(char *n, t_envlst *l, t_envlst *tmp, t_envlst *c);
+
+static int	lst_first_element(t_envlst *lst, char *name)
+{
+	if (!same_strcmp(lst->name, name))
+	{
+		free(lst->name);
+		free(lst->value);
+		*g_sh.env = lst->next;
+		free(lst);
+		return (1);
+	}
+	return (0);
+}
 
 void	remove_lst(char *name)
 {
@@ -24,6 +37,8 @@ void	remove_lst(char *name)
 		return ;
 	tmp = NULL;
 	last = *g_sh.env;
+	if (!same_strcmp(name, "PWD") || lst_first_element(last, name))
+		return ;
 	if (!same_strcmp(last->name, name))
 	{
 		tmp = last;

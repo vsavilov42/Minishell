@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 12:27:11 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/07/22 20:44:49 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/10/18 12:35:47 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	ft_echo(char **arg)
 	tmp = strtolow(arg[0]);
 	if (!same_strcmp(tmp, "echo"))
 	{
-		free(tmp);
 		if (arg[i] != NULL)
 		{
 			if (!ft_strncmp(arg[i], "-n", 2) && verify_echo(arg[i]))
