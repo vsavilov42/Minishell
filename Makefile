@@ -24,7 +24,8 @@ CFLAGS += -I ./$(INC_PATH) -I ./$(LIB_PATH)/inc
 
 CFLAGS += -fsanitize=address -g
 
-RDL = -I /opt/homebrew/opt/readline/include -L /opt/homebrew/opt/readline/lib -lft -lreadline
+RDI = -I /opt/homebrew/opt/readline/include
+RDL = -L /opt/homebrew/opt/readline/lib
 
 #################
 ###   Paths   ###
@@ -124,7 +125,7 @@ all: $(NAME)
 ## Object dir
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_DIR)
-		$(CC) $(CFLAGS) -c $< -o $@
+		$(CC) $(CFLAGS) $(RDI) -c $< -o $@
 
 $(OBJ_DIR): | $(OBJ_PATH)
 	mkdir -p $(OBJ_DIR)
@@ -145,7 +146,7 @@ $(LIBFT_NAME):
 ######################
 
 $(NAME): $(LIBFT_NAME) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_NAME) $(RDL)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_NAME) $(RDI) $(RDL) -lreadline
 
 ############################
 ###   Sanitize (Linux)   ###
