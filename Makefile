@@ -22,15 +22,14 @@ CFLAGS = -Wall -Wextra -Werror
 
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIB_PATH)/inc
 
-CFLAGS += -I $(RLREADLINE)
-
 CFLAGS += -fsanitize=address -g
+
+RDL = -I /opt/homebrew/opt/readline/include -L /opt/homebrew/opt/readline/lib -lft -lreadline
 
 #################
 ###   Paths   ###
 #################
 
-RLREADLINE = /opt/homebrew/opt/readline/include
 
 SRC_PATH = src
 
@@ -146,7 +145,7 @@ $(LIBFT_NAME):
 ######################
 
 $(NAME): $(LIBFT_NAME) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_NAME) -lreadline
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_NAME) $(RDL)
 
 ############################
 ###   Sanitize (Linux)   ###
