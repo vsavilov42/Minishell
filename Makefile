@@ -24,8 +24,8 @@ CFLAGS += -I ./$(INC_PATH) -I ./$(LIB_PATH)/inc
 
 #CFLAGS += -fsanitize=address -g
 
-RDI = -I ./readline/include
-RDL = -L ./readline/lib
+RDI = -I /opt/homebrew/opt/readline/include
+RDL = -L /opt/homebrew/opt/readline/lib
 
 #################
 ###   Paths   ###
