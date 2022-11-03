@@ -105,7 +105,7 @@ int	exec_pipe(t_ast *ast)
 		perror_ret("pipe", 1);
 	io_pipe[WRITE_END] = fd[WRITE_END];
 	io_pipe[READ_END] = fd[READ_END];
-	exec_cmd(ast->left, init_sfd(0, 1, fd, io_pipe[READ_END]));
+	exec_cmd(ast->left, init_sfd(FALSE, TRUE, fd, io_pipe[READ_END]));
 	ast = ast->right;
 	while (ast && astree_get_type(ast) == NODE_PIPE)
 	{
@@ -113,12 +113,12 @@ int	exec_pipe(t_ast *ast)
 		if (pipe(fd) == -1)
 			perror_ret("pipe", 1);
 		io_pipe[WRITE_END] = fd[WRITE_END];
-		exec_cmd(ast->left, init_sfd(1, 1, fd, io_pipe[READ_END]));
+		exec_cmd(ast->left, init_sfd(TRUE, TRUE, fd, io_pipe[READ_END]));
 		close(io_pipe[READ_END]);
 		ast = ast->right;
 	}
 	io_pipe[READ_END] = fd[READ_END];
-	exec_cmd(ast, init_sfd(1, 0, fd, io_pipe[READ_END]));
+	exec_cmd(ast, init_sfd(TRUE, FALSE, fd, io_pipe[READ_END]));
 	close(io_pipe[WRITE_END]);
 	close(io_pipe[READ_END]);
 	return (FALSE);

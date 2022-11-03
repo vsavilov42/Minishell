@@ -23,7 +23,7 @@ static int	redir_inout(t_cmd *cmd, int child)
 	}
 	if (io[FD_OUT] >= 0)
 	{
-		dup2(io[FD_OUT], STDIN_FILENO);
+		dup2(io[FD_OUT], STDOUT_FILENO);
 		close(io[FD_OUT]);
 	}
 	return (FALSE);
