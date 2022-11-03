@@ -22,11 +22,15 @@ CFLAGS = -Wall -Wextra -Werror
 
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIB_PATH)/inc
 
-#CFLAGS += -fsanitize=address -g3
+#CFLAGS += -fsanitize=address -g
+
+RDI = -I /opt/homebrew/opt/readline/include
+RDL = -L /opt/homebrew/opt/readline/lib
 
 #################
 ###   Paths   ###
 #################
+
 
 SRC_PATH = src
 
@@ -40,15 +44,19 @@ LIB_PATH = libft
 ###   Directories   ###
 #######################
 
-SRC_DIR_LEXER =		lexer
-SRC_DIR_PARSER =	parser
-SRC_DIR_BUILTIN =	built-in
-SRC_DIR_EXEC =		exec
+SRC_DIR_LEXER =	lexer
+SRC_DIR_EXEC =	exec
+SRC_DIR_PARSER = parser
+SRC_DIR_BUILTIN = built-in
+SRC_DIR_UTILS = utils
+SRC_DIR_AST = ast
 
-OBJ_DIR_ALL =	$(SRC_DIR_LEXER)										\
-				$(SRC_DIR_PARSER)										\
-				$(SRC_DIR_BUILTIN)										\
-				$(SRC_DIR_EXEC)
+OBJ_DIR_ALL =	$(SRC_DIR_LEXER) \
+		$(SRC_DIR_PARSER) \
+		$(SRC_DIR_EXEC) \
+		$(SRC_DIR_BUILTIN) \
+		$(SRC_DIR_AST) \
+		$(SRC_DIR_UTILS)
 
 OBJ_DIR = $(addprefix $(OBJ_PATH)/, $(OBJ_DIR_ALL))
 
@@ -56,26 +64,41 @@ OBJ_DIR = $(addprefix $(OBJ_PATH)/, $(OBJ_DIR_ALL))
 ###   Source items   ###
 ########################
 
-SRCS_MAIN =		main.c
+SRCS_MAIN =	main.c
 
-SRCS_LEXER =	reading.c			reading_utils.c		quote_handling.c\
-				expansions.c
+SRCS_EXEC =	exec_heredoc.c		into_heredoc.c		exec_astree.c \
+		signal_exit.c 		into_exec.c 		exec_utils.c \
+		exec_redir.c 		exec_redir_types.c 	into_exec2.c \
 
-SRCS_PARSER =	parse.c				remove_quotes.c		parse_utils.c
+SRCS_LEXER =	lexer.c			lexer_init.c		lextype.c	\
+		est_default.c		tok_quotes.c		tokenize.c	\
+		handle_exp.c		expansion.c
 
-SRCS_BUILTIN =	builtin.c			cd.c				pwd.c			\
-				env.c				unset.c				exit.c			\
-				utils_unset.c		export.c			utils_export.c	\
-				error.c				utils.c				utils_list.c	\
-				init_shell.c		echo.c
+SRCS_PARSER =	parse.c
 
-SRCS_EXEC =		command_analyze.c
+SRCS_BUILTIN =	builtin.c		cd.c			pwd.c \
+		env.c			unset.c			exit.c \
+		unset_utils.c		export.c		export_utils.c	\
+		error.c			echo.c \
 
-SRCS_NAME =	$(SRCS_MAIN)												\
-			$(addprefix $(SRC_DIR_LEXER)/, $(SRCS_LEXER))				\
-			$(addprefix $(SRC_DIR_PARSER)/, $(SRCS_PARSER))				\
-			$(addprefix $(SRC_DIR_BUILTIN)/, $(SRCS_BUILTIN))			\
-			$(addprefix $(SRC_DIR_EXEC)/, $(SRCS_EXEC))
+SRCS_UTILS =	utils.c			utils2.c		signals.c \
+		free_all.c		envlst.c 		envlst2.c \
+		init_shell.c		get_env.c 		error_msg.c \
+		tmp_files.c  \
+
+SRCS_AST =	create_tree.c		ast_core.c		ast_redir.c \
+		ast_cmdline.c		ast_job.c 		ast_and_or.c \
+		ast_token_list.c	ast_simple_cmd.c 	ast_utils.c \
+		ast_core2.c 		ast_and_or2.c 		ast_redir_in.c \
+		ast_redir_out.c \
+
+SRCS_NAME =	$(SRCS_MAIN) \
+		$(addprefix $(SRC_DIR_LEXER)/, $(SRCS_LEXER)) \
+		$(addprefix $(SRC_DIR_EXEC)/, $(SRCS_EXEC)) \
+		$(addprefix $(SRC_DIR_PARSER)/, $(SRCS_PARSER)) \
+		$(addprefix $(SRC_DIR_BUILTIN)/, $(SRCS_BUILTIN)) \
+		$(addprefix $(SRC_DIR_AST)/, $(SRCS_AST)) \
+		$(addprefix $(SRC_DIR_UTILS)/, $(SRCS_UTILS))
 
 ######################
 ###   Make rules   ###
@@ -102,7 +125,7 @@ all: $(NAME)
 ## Object dir
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c | $(OBJ_DIR)
-		$(CC) $(CFLAGS) -c $< -o $@
+		$(CC) $(CFLAGS) $(RDI) -c $< -o $@
 
 $(OBJ_DIR): | $(OBJ_PATH)
 	mkdir -p $(OBJ_DIR)
@@ -123,13 +146,13 @@ $(LIBFT_NAME):
 ######################
 
 $(NAME): $(LIBFT_NAME) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_NAME) -lreadline
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT_NAME) $(RDI) $(RDL) -lreadline
 
 ############################
 ###   Sanitize (Linux)   ###
 ############################
 ifeq ($(UNAME_S),Linux)
-sanitize: CFLAGS += -pedantic -g3 -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=bounds -fsanitize=null
+sanitize: CFLAGS += -lreadline -pedantic -g3 -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=bounds -fsanitize=null
 endif
 ifeq ($(UNAME_S),Darwin)
 sanitize: CFLAGS += -pedantic -g3 -fsanitize=address
@@ -150,4 +173,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re sanitize

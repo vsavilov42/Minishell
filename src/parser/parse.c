@@ -3,125 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 18:44:27 by nortolan          #+#    #+#             */
-/*   Updated: 2022/05/23 11:58:03 by nortolan         ###   ########.fr       */
+/*   Created: 2022/08/12 14:16:12 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/10/14 16:18:16 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	cmd_checks(t_cmd *temp_cmd, t_parse *parse)
+static int	is_cmt(char *line)
 {
-	if (parse->cmds)
-	{
-		parse->cmds = last_cmd(parse->cmds);
-		temp_cmd = parse->cmds;
-		parse->cmds = parse->cmds->next;
-	}
-	parse->cmds = malloc(sizeof(t_cmd));
-	if (parse->cmds == NULL)
-		exit (1);
-	if (temp_cmd)
-		temp_cmd->next = parse->cmds;
-	parse->cmds->argv = malloc(sizeof(char *) * (parse->wc + 1));
-	if (parse->cmds->argv == NULL)
-		exit (1);
-	parse->cmds->type_arr = malloc(sizeof(int) * parse->wc);
-	if (parse->cmds->type_arr == NULL)
-		exit (1);
-	if (temp_cmd == NULL)
-		parse->head_cmd = parse->cmds;
+	while (ft_isblank(*line))
+		line++;
+	if (*line == '#')
+		return (1);
+	return (0);
 }
 
-void	create_cmd(t_reading *vars, t_parse *parse)
+static int	valid_line(char *line)
 {
-	int		i;
-	t_cmd	*temp_cmd;
-	t_token	*temp_token;
-
-	i = -1;
-	temp_cmd = NULL;
-	temp_token = vars->head;
-	cmd_checks(temp_cmd, parse);
-	while (++i < parse->wc_aux)
+	if (line == NULL || *line == '\n' || *line == '\0' || is_cmt(line))
+		return (1);
+	while (*line)
 	{
-		temp_token = temp_token->next;
-		if (temp_token->type == 2)
-			temp_token = temp_token->next;
+		if (!ft_isblank(*line))
+			break ;
+		line++;
 	}
-	i = -1;
-	while (++i < parse->wc)
-	{
-		parse->cmds->argv[i] = ft_strdup(temp_token->data);
-		parse->cmds->type_arr[i] = temp_token->type;
-		parse->cmds->pos = 1;
-		temp_token = temp_token->next;
-	}
-	parse->cmds->argv[i] = NULL;
-	parse->cmds->next = NULL;
-	/*////////////TESTING//////////////
-	i = -1;
-	while (++i < parse->wc)
-	{
-		printf("cmds: %s\n", parse->cmds->argv[i]);
-		printf("type: %d\n", parse->cmds->type_arr[i]);
-		//printf("pos:  %d\n", parse->cmds->pos);
-//		printf("cmds: %p\n", parse->cmds->argv[i]);
-	}
-	printf("cmds: %s\n", parse->cmds->argv[i]);
-	printf(">>>>>>>>>>>><<<<<<<<<<<<<\n");
-	///////////TESTING//////////////*/
+	return (0);
 }
 
-void	get_cmd(t_reading *vars, t_parse *parse)
+static int	parser_astree(t_lexer *lex)
 {
-	vars->token = vars->head;
-	while (vars->token)
+	t_ast	*ast;
+
+	if (lex->n_tk <= 0)
+		return (1);
+	create_tree(&ast, lex);
+	if (g_sh.tok && g_sh.tok->type != 0)
 	{
-		if (vars->token->type == 2 || (vars->token->next == NULL
-				&& vars->token->type != 2 && ++parse->wc))
-		{
-			create_cmd(vars, parse);
-			parse->wc_aux += parse->wc;
-			parse->wc = -1;
-		}
-		parse->wc++;
-		vars->token = vars->token->next;
+		ft_putstr_fd("error: sysntax error near: ", STDERR_FILENO);
+		return (perror_ret(g_sh.tok->name, 1));
 	}
-	parse->head_cmd->pos = 0;
-	if (parse->cmds->pos != 0)
-		parse->cmds->pos = 2;
-	/*///////////TESTING////////////////////////////
-	parse->cmds = parse->head_cmd;
-	while (parse->cmds)
-	{
-		printf("pos: %d\n", parse->cmds->pos);
-		parse->cmds = parse->cmds->next;
-	}
-	//////////////////////////////////////////////*/
+//	print_ast(ast, 0);
+	if (!exec_heredoc(ast))
+		exec_astree(ast);
+	return (0);
 }
 
-void	parse(t_reading *vars)
+void	get_line(char *line)
 {
-	t_parse	parse;
+	int		a_tok;
+	t_lexer	lex;
 
-	remove_quotes(vars);
-	/*//TEST DESPUES DE COMILLAS////////////////////
-	vars->token = vars->head;
-	while (vars->token)
+	g_sh.child = FALSE;
+	if (valid_line(line))
+		return ;
+	a_tok = lexer(line, ft_strlen(line), &lex);
+	if (a_tok <= 0)
 	{
-		printf("test post comillas: %s\n", vars->token->data);
-		printf("type: %d\n", vars->token->type);
-		vars->token = vars->token->next;
+		if (a_tok == FALSE && g_sh.subtok == FALSE)
+			perror("error: syntax error\n");
+		free_lexer(&lex);
+		return ;
 	}
-	printf("---------------------------------\n");
-	/////////////////////////////////////////////*/
-	parse_init(&parse);
-	get_cmd(vars, &parse);
-	//builtin(parse.cmds->argv);
-	parse.cmds = parse.head_cmd;
-	command_analyze(parse.cmds, parse.head_cmd);
-	cmds_clear(&parse);
+	if (parser_astree(&lex))
+	{
+		free_lexer(&lex);
+		return ;
+	}
+	free(g_sh.astree);
+	free_lexer(&lex);
 }

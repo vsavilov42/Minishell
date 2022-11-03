@@ -1,30 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/22 21:40:07 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/10/05 14:28:53 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
-void	add_bt(t_bt_lst *bt, char *name, int (*f)(char **))
+static void	add_builtin(t_builtin **bt, char *name, int (*f)(char **))
 {
-	t_bt_lst	*new;
-	t_bt_lst	*tmp;
+	t_builtin	*new;
+	t_builtin	*tmp;
 
-	new = (t_bt_lst *)malloc(sizeof(t_bt_lst));
+	new = (t_builtin *)malloc(sizeof(t_builtin));
 	if (!new)
-		return ;
-	new->cmd = name;
+		perror_ret("malloc", 1);
+	new->name = name;
 	new->f = f;
 	new->next = NULL;
-	if (!bt)
+	if (*bt)
 	{
-		tmp = bt;
+		tmp = *bt;
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
 	else
-		bt = new;
+		*bt = new;
+}
+
+t_builtin	*init_builtin(void)
+{
+	t_builtin	*bt;
+
+	bt = NULL;
+	add_builtin(&bt, "echo", ft_echo);
+	add_builtin(&bt, "pwd", ft_pwd);
+	add_builtin(&bt, "cd", ft_cd);
+	add_builtin(&bt, "export", ft_export);
+	add_builtin(&bt, "unset", ft_unset);
+	add_builtin(&bt, "env", ft_env);
+	add_builtin(&bt, "exit", ft_exit);
+	return (bt);
 }
 
 void	builtin(char **arg)
 {
-	int	i;
+	int		i;
 	char	**cmds;
 
 	i = -1;

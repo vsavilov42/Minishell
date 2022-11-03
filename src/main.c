@@ -6,32 +6,35 @@
 /*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:59:59 by nortolan          #+#    #+#             */
-/*   Updated: 2022/05/24 20:33:45 by nortolan         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:48:18 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-/*void	leaks(void)
+void	leaks(void)
 {
 	system("leaks -q minishell");
-}*/
-/*	atexit(leaks);*/
+}
 
 t_sh	g_sh;
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	char	*line;
 
+	//atexit(leaks);
 	init_minishell();
+	flags_handle(argc, argv);
 	while (1)
 	{
-		line = readline("ShiTTYsh: ");
+		manage_signal();
+		line = readline("\033[0;37mShiTTYsh: ");
 		if (line && *line)
 		{
 			add_history(line);
-			get_lines(line);
+			g_sh.line = line;
+			get_line(line);
 		}
 		if (line == NULL)
 		{
@@ -40,5 +43,6 @@ int	main(void)
 		}
 		free(line);
 	}
+	free(g_sh.env);
 	return (EXIT_SUCCESS);
 }

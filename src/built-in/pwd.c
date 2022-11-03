@@ -1,11 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pwd.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/22 21:40:22 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/08/10 21:43:28 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
+
+void	update_pwd(void)
+{
+	t_envlst	*lst;
+	char		*pwd;
+
+	pwd = (char *)malloc(sizeof(char) * (PATH_MAX + 1));
+	lst = *g_sh.env;
+	while (lst)
+	{
+		if (!same_strcmp("PWD", lst->name))
+		{
+			if (getcwd(pwd, PATH_MAX))
+			{
+				free(lst->value);
+				lst->value = ft_strdup(pwd);
+			}
+		}
+		lst = lst->next;
+	}
+	free(pwd);
+}
 
 int	ft_pwd(char **arg)
 {
-	(void)arg;
 	char	*pwd;
 
 	pwd = malloc(sizeof(char) * PATH_MAX);
+	(void)arg;
 	if (!pwd)
 		return (0);
 	if (getcwd(pwd, PATH_MAX) == NULL)

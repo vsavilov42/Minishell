@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/22 21:42:48 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/10/20 18:03:31 by Vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 int	ft_env(char **arg)
 {
 	t_envlst	*envlst;
 
-	envlst = g_sh.env;
+	envlst = *g_sh.env;
 	if (arg[1] != NULL)
 		return (1);
 	while (envlst)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nortolan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 17:10:23 by nortolan          #+#    #+#             */
-/*   Updated: 2022/03/17 14:23:51 by Vsavilov         ###   ########.fr       */
+/*   Created: 2022/08/29 08:27:29 by Vsavilov          #+#    #+#             */
+/*   Updated: 2022/10/04 12:30:43 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,17 @@
 # include <minishell/structs.h>
 # include <minishell/functions.h>
 # include <minishell/builtin.h>
+# include <minishell/envlst.h>
+# include <minishell/utils.h>
+# include <minishell/signals.h>
+# include <minishell/parser.h>
+# include <minishell/lexer.h>
+# include <minishell/astree.h>
+# include <minishell/exec.h>
 
 # define PATH_MAX 4096
+# define TRUE 1
+# define FALSE 0
+
 
 #endif
