@@ -6,13 +6,13 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:55:39 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/11/03 16:38:12 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/03 19:42:23 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-/*void	print_ast(t_ast *ast, int j)
+void	print_ast(t_ast *ast, int j)
 {
 	int		node;
 	char	*type;
@@ -56,7 +56,7 @@
 		printf("Type: [%s]\n", type);
 	free(type);
 	print_ast(ast->left, j + 10);
-}*/
+}
 
 void	create_tree(t_ast **ast, t_lexer *lex)
 {

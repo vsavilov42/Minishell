@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:43:08 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/03 20:43:09 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:44:23 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int	get_lextype(char c)
 		return (TOK_TAB);
 	else if (c == ' ')
 		return (TOK_SPACE);
-	else if (c == '?')
-		return (TOK_QUEST);
 	else if (c == '&')
 		return (TOK_AMPER);
 	return (get_lextype2(c));
