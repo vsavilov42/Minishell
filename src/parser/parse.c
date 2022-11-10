@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:16:12 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/11/03 19:42:04 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:00:39 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	parser_astree(t_lexer *lex)
 	print_ast(ast, 0);
 	if (!exec_heredoc(ast))
 		exec_astree(ast);
+	astree_del_node(ast);
 	return (0);
 }
 
