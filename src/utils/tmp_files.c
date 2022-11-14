@@ -6,13 +6,18 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 14:13:40 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/16 14:13:49 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/14 10:53:10 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*tmp_from_current(void)
+static char	*tmp_from_user(void);
+static char	*get_file_name(char *file);
+static char	*tmp_from_current(void);
+
+
+static char	*tmp_from_current(void)
 {
 	char	*name;
 	char	*tmp;
@@ -22,7 +27,7 @@ char	*tmp_from_current(void)
 	if (getcwd(tmp, PATH_MAX))
 	{
 		if (access(tmp, R_OK | W_OK) == 0)
-			name = new_file_name(tmp);
+			name = get_file_name(tmp);
 		free(tmp);
 		if (name)
 			return (name);
@@ -30,7 +35,7 @@ char	*tmp_from_current(void)
 	return (NULL);
 }
 
-char	*tmp_from_home(void)
+static char	*tmp_from_user(void)
 {
 	char	*name;
 	char	*tmp;
@@ -40,17 +45,16 @@ char	*tmp_from_home(void)
 	if (tmp)
 	{
 		if (access(tmp, R_OK | W_OK) == 0)
-			name = new_file_name(tmp);
+			name = get_file_name(tmp);
 		free(tmp);
 		if (name)
 			return (name);
-		else
-			name = tmp_from_current();
 	}
+	name = tmp_from_current();
 	return (name);
 }
 
-char	*new_file_name(char *file)
+static char	*get_file_name(char *file)
 {
 	char	*name;
 	char	*tmp;
@@ -70,4 +74,19 @@ char	*new_file_name(char *file)
 		free(name);
 	}
 	return (NULL);
+}
+
+char	*new_file_name(void)
+{
+	char	*name;
+
+	name = NULL;
+	if (access(EXTERNTMPDIR, R_OK | W_OK) == 0)
+	{
+		name = get_file_name(EXTERNTMPDIR);
+		if (name)
+			return (name);
+	}
+	name = tmp_from_user();
+	return (name);
 }
