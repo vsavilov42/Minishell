@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:41:19 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/03 20:41:20 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/03 22:17:46 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	lexer(char *line, int l_sz, t_lexer *lex)
 			break ;
 	}
 	n_tok = manage_tokenize(lex);
+	printf("numero de tokens [%d]\n", n_tok);
 	if (n_tok == -1)
 		return (-1);
 	lex->n_tk += n_tok;

@@ -13,6 +13,7 @@ static void	read_heredoc(char *del, int fd)
 			free(line);
 			exit(EXIT_SUCCESS);
 		}
+		ft_putstr_fd(line, fd);
 		ft_putchar_fd('\n', fd);
 		free(line);
 		line = readline("\033[0;36mShTTyDoc> ");
@@ -55,7 +56,7 @@ int	into_heredoc(t_ast *ast)
 	int	fd;
 	char	*file;
 
-	file = new_file_name(EXTERNTMPDIR);
+	file = new_file_name();
 	if (!file)
 		return (perror_ret("error: heredoc file creation.", TRUE));
 	fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0644);

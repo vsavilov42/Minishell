@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:13:38 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/21 12:40:04 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/14 10:38:26 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int	perror_ret(const char *s, int code);
 
 /* tmp files */
 
-char	*new_file_name(char *file);
-char	*tmp_from_home(void);
-char	*tmp_from_current(void);
+char	*new_file_name(void);
 
 #endif

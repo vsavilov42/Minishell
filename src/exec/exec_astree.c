@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:56:20 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/15 14:51:33 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/03 19:19:21 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	zombies_process()
 	int	status;
 
 	status = 0;
-	while(TRUE)
+	while (TRUE)
 	{
 		pid = waitpid(-1, &status, 0);
 		if (pid <= 0)
@@ -58,7 +58,7 @@ static int	exec_job(t_ast *ast)
 	if (astree_get_type(ast) == NODE_PIPE)
 		exec_pipe(ast);
 	else
-		exec_cmd(ast, init_sfd(FALSE, FALSE, FALSE, FALSE));
+		exec_cmd(ast, init_sfd(FALSE, FALSE, 0, 0));
 	zombies_process();
 	return (FALSE);
 }
