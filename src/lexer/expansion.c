@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:42:52 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/24 18:46:56 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/14 13:43:12 by vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	change_name(t_expand *exp, t_token *tok)
 	ft_strcat(name, exp->value);
 	ft_strcat(name, tok->name + exp->start + ft_strlen(exp->name)
 		+ (exp->braket * 2));
+	free(exp->name);
 	free(tok->name);
 	tok->name = name;
 }
