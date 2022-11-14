@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 14:13:40 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/11/14 10:53:10 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:37:01 by vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static char	*tmp_from_user(void);
 static char	*get_file_name(char *file);
 static char	*tmp_from_current(void);
-
 
 static char	*tmp_from_current(void)
 {

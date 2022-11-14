@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:43:16 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/03 20:44:15 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:57:56 by vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ static int	manage_ste_dflt(t_token *tok, int *i, int *len, int *ste)
 	return (0);
 }
 
-int	handle_expansion(t_lexer *lex, t_token **tok,
-		t_token **last, t_tknize *ltype)
+int	hdl_exp(t_lexer *lex, t_token **tok, t_token **last, t_tknize *ltype)
 {
 	int	cnt;
 	int	i;

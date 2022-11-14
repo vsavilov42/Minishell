@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:42:21 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/11/03 18:55:05 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:43:15 by vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	init_subcmd(t_cmd *cmd, t_ast *ast, t_ast *tmp, int i)
 	int	ln;
 
 	while (tmp && (astree_get_type(tmp) == NODE_ARG
-		|| astree_get_type(tmp) == NODE_CMD))
+			|| astree_get_type(tmp) == NODE_CMD))
 	{
 		tmp = tmp->right;
 		i++;
@@ -28,7 +28,7 @@ static int	init_subcmd(t_cmd *cmd, t_ast *ast, t_ast *tmp, int i)
 	tmp = ast;
 	i = 0;
 	while (tmp && (astree_get_type(tmp) == NODE_ARG
-		|| astree_get_type(tmp) == NODE_CMD))
+			|| astree_get_type(tmp) == NODE_CMD))
 	{
 		ln = ft_strlen(tmp->data);
 		cmd->cmd[i] = (char *)malloc(sizeof(char) * (ln + 1));
@@ -66,7 +66,7 @@ void	init_cmd(t_cmd *cmd, t_pipe *sfd, t_ast *ast)
 int	builtin_inpipes(t_cmd *cmd)
 {
 	t_builtin	*bt;
-	int		status;
+	int			status;
 
 	bt = g_sh.builtin;
 	while (bt)

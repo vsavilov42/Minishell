@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   into_heredoc.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsavilov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 12:39:21 by vsavilov          #+#    #+#             */
+/*   Updated: 2022/11/14 12:39:47 by vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static void	read_heredoc(char *del, int fd)
@@ -27,7 +39,7 @@ static void	read_heredoc(char *del, int fd)
 static int	child_heredoc(char *del, int fd)
 {
 	pid_t	pid;
-	int	s_error;
+	int		s_error;
 
 	pid = fork();
 	if (pid < 0)
@@ -53,7 +65,7 @@ static int	child_heredoc(char *del, int fd)
 
 int	into_heredoc(t_ast *ast)
 {
-	int	fd;
+	int		fd;
 	char	*file;
 
 	file = new_file_name();

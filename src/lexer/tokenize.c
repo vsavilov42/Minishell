@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:44:26 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/03 20:45:12 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:58:46 by vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	handle_exp(t_lexer *lex, t_tknize *ltype)
 	{
 		g_sh.is_exp = TRUE;
 		g_sh.last = ltype->last;
-		cnt = handle_expansion(lex, &ltype->tmp, &ltype->last, ltype);
+		cnt = hdl_exp(lex, &ltype->tmp, &ltype->last, ltype);
 		g_sh.is_exp = FALSE;
 		if (cnt == 1)
 			return (-1);

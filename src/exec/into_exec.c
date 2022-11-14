@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   into_exec.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsavilov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 12:43:21 by vsavilov          #+#    #+#             */
+/*   Updated: 2022/11/14 12:43:38 by vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static int	exec_child_process(t_cmd *cmd)
@@ -93,7 +105,7 @@ int	into_exec_cmd(t_cmd *cmd)
 			return (TRUE);
 	}
 	exec_child_process(cmd);
-	return (FALSE);	
+	return (FALSE);
 }
 
 int	exec_pipe(t_ast *ast)

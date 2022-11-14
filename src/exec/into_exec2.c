@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   into_exec2.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsavilov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 12:39:52 by vsavilov          #+#    #+#             */
+/*   Updated: 2022/11/14 12:40:32 by vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static int	count_env(t_envlst *envlst)
@@ -16,9 +28,9 @@ static int	count_env(t_envlst *envlst)
 static char	**env_in_char(void)
 {
 	t_envlst	*lst;
-	char	**env;
-	char	*tmp;
-	int	i;
+	char		**env;
+	char		*tmp;
+	int			i;
 
 	lst = *g_sh.env;
 	env = (char **)malloc(sizeof(char *) * (count_env(lst) + 1));
@@ -39,7 +51,7 @@ static char	*get_path(char *cmd, char *path)
 	char	**envtmp;
 	char	*res;
 	char	*tmp;
-	int	i;
+	int		i;
 
 	res = NULL;
 	envtmp = ft_split(path, ':');

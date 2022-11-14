@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:30:11 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/05 17:06:13 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:54:34 by vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,31 +23,30 @@
 # define FD_IN 0
 # define FD_OUT 1
 
-typedef struct	s_cmd	t_cmd;
-typedef struct	s_pipe	t_pipe;
+typedef struct s_cmd	t_cmd;
+typedef struct s_pipe	t_pipe;
 
 void	print_ast(t_ast *ast, int j);
 
 /* heredoc */
 
-int	exec_heredoc(t_ast *ast);
-int	into_heredoc(t_ast *ast);
-
+int		exec_heredoc(t_ast *ast);
+int		into_heredoc(t_ast *ast);
 
 /* redir */
 
-int	redir_cmd(t_cmd *cmd, int root);
-int	redir_node(t_ast *redir, int io[2], t_nodetype type);
+int		redir_cmd(t_cmd *cmd, int root);
+int		redir_node(t_ast *redir, int io[2], t_nodetype type);
 
 /* exec */
 
-int	exec_astree(t_ast *ast);
-int	exec_cmd(t_ast *ast, t_pipe *sfd);
+int		exec_astree(t_ast *ast);
+int		exec_cmd(t_ast *ast, t_pipe *sfd);
 void	free_exec_cmd(t_cmd *cmd);
-int	exec_pipe(t_ast	*ast);
-int	into_exec_cmd(t_cmd *cmd);
+int		exec_pipe(t_ast	*ast);
+int		into_exec_cmd(t_cmd *cmd);
 void	execve_cmd(t_cmd *cmd);
-int	builtin_inpipes(t_cmd *cmd);
+int		builtin_inpipes(t_cmd *cmd);
 
 /* utils */
 
@@ -61,9 +60,9 @@ struct	s_cmd {
 };
 
 struct	s_pipe {
-	int	in_out[2];
-	int	fd_pipe[2];
-	int	fd_rd;
+	int		in_out[2];
+	int		fd_pipe[2];
+	int		fd_rd;
 	t_ast	*redir;
 };
 
@@ -73,12 +72,16 @@ struct	s_pipe {
 //into <job> -> identify pipe -> : <pipe> ? <child's>
 //into <pipe> -> open fd[2] -> : in pipe <cmd> ? <cmd>
 //into <cmd> -> <is_builtin> : inpipe ? <child_process>
-//into <child_process> -> pid->fork; manage_signals; <manage_zombies> <is_builtin> in pipe;
+//into <child_process> -> pid->fork; manage_signals;
+//<manage_zombies> <is_builtin> in pipe;
 //into <is_builtin> -> exec builtin / check is in pipes do other funct;
 //verify <blanck> -> check cmd is blanck
 //if process is TRUE = parent / FALSE = child
 
-//NOTE: <child_process> -> if the parent decides not to wait the child's termination and executes its subsequence task, then the termination of the task do not read the exit status code. This state is known as zombie state.
+//NOTE: <child_process> -> if the parent decides not to wait the child's 
+//termination and executes its subsequence task, then the termination of
+//the task do not read the exit status code. This state is known as zombie
+//state.
 
 // heredoc ->
 // check <cmdline> -> <and_or> <--> <cmdline>
@@ -86,8 +89,10 @@ struct	s_pipe {
 // into <job> -> identify pipe -> : <pipe> ? <cmd>
 // into <pipe> -> handle <cmd> in pipe
 // into <cmd> -> add redir name to <hrd> && do <hrd>
-// into <hrd> -> create file / int fd to file / flags -> O_RDWR | O_TRUNC | O_CREAT, 0644 / <read>
+// into <hrd> -> create file / int fd to file / flags ->
+// -> O_RDWR | O_TRUNC | O_CREAT, 0644 / <read>
 // NOTE: error in << del << del2 << del3 -> <read> should be in child process
-// into <read> -> pid->fork; manage signals; get del to stop reading. swap error status.
+// into <read> -> pid->fork; manage signals; get del to stop reading.
+// swap error status.
 
 #endif

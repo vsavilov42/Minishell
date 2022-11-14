@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 08:27:29 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/04 12:30:43 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:45:38 by vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@
 # define PATH_MAX 4096
 # define TRUE 1
 # define FALSE 0
-
 
 #endif

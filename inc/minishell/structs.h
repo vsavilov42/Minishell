@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsavilov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 13:00:14 by vsavilov          #+#    #+#             */
+/*   Updated: 2022/11/14 13:07:12 by vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
@@ -5,31 +17,34 @@
 # include "astree.h"
 
 typedef struct s_builtin	t_builtin;
+typedef struct s_envlst		t_envlst;
+typedef struct s_sh			t_sh;
+extern t_sh					g_sh;
 
 //built-in
 struct s_builtin
 {
-	char	*name;
-	int	(*f)(char **);
+	char		*name;
+	int			(*f)(char **);
 	t_builtin	*next;
 };
 
-typedef struct s_envlst
+struct s_envlst
 {
 	char			*name;
 	char			*value;
 	struct s_envlst	*next;
-}			t_envlst;
+};
 
 //global
-typedef struct s_sh
+struct s_sh
 {
 	int			status;
 	char		*line;
-	int		fd_bio[2];
-	int		is_exp;
-	int		subtok;
-	int		child;
+	int			fd_bio[2];
+	int			is_exp;
+	int			subtok;
+	int			child;
 	pid_t		gpid;
 	t_builtin	*builtin;
 	t_envlst	**env;
@@ -38,8 +53,6 @@ typedef struct s_sh
 	t_lexer		*lex;
 	t_ast		**astree;
 	t_ast		*command;
-}			t_sh;
-
-extern t_sh	g_sh;
+};
 
 #endif

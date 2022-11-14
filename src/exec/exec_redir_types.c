@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_redir_types.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsavilov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 12:42:05 by vsavilov          #+#    #+#             */
+/*   Updated: 2022/11/14 12:42:29 by vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static int	redir_node_heredoc(t_ast *redir, int io[2])
@@ -9,7 +21,7 @@ static int	redir_node_heredoc(t_ast *redir, int io[2])
 		return (perror_ret(redir->data, 1));
 	if (unlink(redir->data) == -1)
 		perror_ret("unlink", -1);
-	return (FALSE);	
+	return (FALSE);
 }
 
 static int	redir_node_infile(t_ast *redir, int io[2])
@@ -19,7 +31,7 @@ static int	redir_node_infile(t_ast *redir, int io[2])
 	io[FD_IN] = open(redir->data, O_RDONLY);
 	if (io[FD_IN] == -1)
 		return (perror_ret(redir->data, 1));
-	return (FALSE);	
+	return (FALSE);
 }
 
 static int	redir_node_append(t_ast *redir, int io[2])

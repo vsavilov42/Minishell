@@ -6,19 +6,15 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:32:24 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/01 18:48:52 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:51:20 by vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASTREE_H
 # define ASTREE_H
 
-# define SETDATATYPE(a) (a & (~(NODE_DATA)))
-
 typedef struct s_ast	t_ast;
 typedef enum e_nodetype	t_nodetype;
-
-// '|' ';' 'redir' '<' '<<' '>' '>>' 'cmd' 'arg' 'default'
 
 enum e_nodetype{
 	NODE_PIPE =	(1 << 0),
@@ -42,13 +38,11 @@ struct s_ast {
 	t_ast			*right;
 };
 
-//utils ->
-
-int	ast_valid_char(char **data, int type);
-
+void	create_tree(t_ast **ast, t_lexer *lex);
+int		ast_valid_char(char **data, int type);
 void	astree_root_branch(t_ast *root, t_ast *left, t_ast *right);
 void	astree_set_type(t_ast *ast, t_nodetype type);
-int	astree_get_type(t_ast *ast);
+int		astree_get_type(t_ast *ast);
 void	astree_set_data(t_ast *ast, char *data);
 void	astree_del_node(t_ast *ast);
 void	astree_add_branch(t_ast *root, t_ast *node, int state);
@@ -80,7 +74,7 @@ t_ast	*redir_out(void);
 
 //token_list ->
 
-t_ast	*token_list();
+t_ast	*token_list(void);
 
 /* ASTREE core */
 
@@ -137,9 +131,5 @@ t_ast	*token_list();
 //tokenlist2 <redir> + tok_lst
 //tokenlist3 <token> + tok_lst
 //tokenlist4 <EMPTY>
-
-void	create_tree(t_ast **ast, t_lexer *lex);
-
-
 
 #endif

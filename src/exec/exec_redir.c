@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_redir.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsavilov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 12:41:31 by vsavilov          #+#    #+#             */
+/*   Updated: 2022/11/14 12:41:59 by vsavilov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static int	redir_inout(t_cmd *cmd, int child)
 {
-	int		io[2];
+	int			io[2];
 	t_nodetype	type;
 	t_ast		*redir;
 
@@ -36,7 +48,7 @@ static int	redir_pipe(t_cmd *cmd, int child)
 	if (cmd->sfd->in_out[FD_OUT])
 		dup2(cmd->sfd->fd_pipe[WRITE_END], STDOUT_FILENO);
 	if (!child && (cmd->sfd->in_out[FD_IN]
-		|| cmd->sfd->in_out[FD_OUT]))
+			|| cmd->sfd->in_out[FD_OUT]))
 	{
 		close(cmd->sfd->fd_pipe[READ_END]);
 		close(cmd->sfd->fd_pipe[WRITE_END]);

@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:49:31 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/10/03 20:49:39 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:49:24 by vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	astree_set_type(t_ast *ast, t_nodetype type)
 
 int	astree_get_type(t_ast *ast)
 {
-	return (SETDATATYPE(ast->type));
+	return (ast->type & (~(NODE_DATA)));
 }
 
 void	astree_set_data(t_ast *ast, char *data)

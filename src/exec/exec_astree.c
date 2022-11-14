@@ -6,16 +6,16 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:56:20 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/11/03 19:19:21 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:41:20 by vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	zombies_process()
+static void	zombies_process(void)
 {
 	pid_t	pid;
-	int	status;
+	int		status;
 
 	status = 0;
 	while (TRUE)
