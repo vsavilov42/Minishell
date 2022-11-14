@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:32:24 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/11/14 12:51:20 by vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/14 13:46:17 by vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define ASTREE_H
 
 typedef struct s_ast	t_ast;
-typedef enum e_nodetype	t_nodetype;
 
 enum e_nodetype{
 	NODE_PIPE =	(1 << 0),
@@ -30,6 +29,8 @@ enum e_nodetype{
 	NODE_ARG =	(1 << 10),
 	NODE_DATA =	(1 << 11)
 };
+
+typedef enum e_nodetype	t_nodetype;
 
 struct s_ast {
 	int				type;

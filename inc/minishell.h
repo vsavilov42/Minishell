@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 08:27:29 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/11/14 12:45:38 by vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/14 13:44:36 by vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdlib.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <signal.h>
+# include <sys/wait.h>
 
 # include <readline/readline.h>
 # include <readline/history.h>
