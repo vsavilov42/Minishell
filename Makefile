@@ -22,7 +22,7 @@ CFLAGS = -Wall -Wextra -Werror -g3
 
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIB_PATH)/inc
 
-CFLAGS += -fsanitize=address -g
+#CFLAGS += -fsanitize=address -g
 
 RDI = -I /opt/homebrew/opt/readline/include
 RDL = -L /opt/homebrew/opt/readline/lib

@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:16:12 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/11/10 14:00:39 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/11/17 18:13:44 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int	valid_line(char *line)
 			break ;
 		line++;
 	}
+	if (*line == '\0')
+		return (1);
 	return (0);
 }
 
