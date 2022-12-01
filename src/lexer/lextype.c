@@ -6,7 +6,7 @@
 /*   By: Vsavilov <Vsavilov@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:43:08 by Vsavilov          #+#    #+#             */
-/*   Updated: 2022/11/07 15:44:23 by Vsavilov         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:40:08 by Vsavilov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,19 @@ static void	handle_ste(t_lextype *lt)
 	{
 		lt->tok->name[lt->i++] = lt->c;
 		if (lt->type == TOK_QUOTE)
-			lt->ste = TOK_DEFAULT;
+			lt->ste = STE_DFLT;
 	}
 	else if (lt->ste == STE_DQUOTE)
 	{
 		lt->tok->name[lt->i++] = lt->c;
 		if (lt->type == TOK_DQUOTE)
-			lt->ste = TOK_DEFAULT;
+			lt->ste = STE_DFLT;
 	}
 	else if (lt->ste == STE_PBRK)
 	{
 		lt->tok->name[lt->i++] = lt->c;
 		if (lt->type == TOK_RPBRK)
-			lt->ste = TOK_DEFAULT;
+			lt->ste = STE_DFLT;
 	}
 }
 
